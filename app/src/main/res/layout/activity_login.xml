@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/background_design">
+
+    <ImageView
+        android:id="@+id/imageView_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.049"
+        app:srcCompat="@drawable/icon_main"
+        android:contentDescription="@string/app_icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.46">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/rounded_corner">
+
+            <EditText
+                android:id="@+id/edittext_login_phone"
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:layout_weight="0.95"
+                android:autofillHints="Mobile number"
+                android:background="@drawable/rounded_corner"
+                android:hint="@string/phone"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:paddingHorizontal="10dp"
+                android:textColor="@color/secondary"
+                android:textColorHint="@color/primary"
+                android:textSize="17sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_login_phone_verify"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.05"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/ic_baseline_check_24"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/rounded_corner">
+
+            <EditText
+                android:id="@+id/edittext_login_pin"
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:layout_weight="0.95"
+                android:autofillHints="Mobile number"
+                android:background="@drawable/rounded_corner"
+                android:hint="@string/pin"
+                android:inputType="number"
+                android:maxLength="4"
+                android:paddingHorizontal="10dp"
+                android:textColor="@color/secondary"
+                android:textColorHint="@color/primary"
+                android:textSize="17sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_login_pin_verify"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.05"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/ic_baseline_invalid_24"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/signin"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_corner_button"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="@color/secondary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgotpin"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white_secondary"
+            android:onClick="forgotPin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:onClick="signUp"
+            android:text="@string/newuser"
+            android:textColor="@color/white_secondary" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

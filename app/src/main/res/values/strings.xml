@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Bhadama</string>
+    <string name="bhadama">भाडामा</string>
+    <string name="app_icon">app_icon</string>
+    <string name="register">REGISTER</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="signup_login_hint">Already have an account? Sign In</string>
+    <string name="login_signup_hint">Don\'t have an account? Sign Up</string>
+    <string name="login_name_hint">Name</string>
+    <string name="login_mobile_number_hint">Mobile Number</string>
+    <string name="login">Login</string>
+    <string name="phone">Phone</string>1
+    <string name="pin">Pin</string>
+    <string name="reenterpin">Confirm Pin</string>
+    <string name="signin">Sign in</string>
+    <string name="forgotpin"><u>Forgot Pin?</u></string>
+    <string name="newuser"><u>New User? Sign up</u></string>
+    <string name="name">Name</string>
+    <string name="proceed">Proceed</string>
+    <string name="otp">OTP</string>
+    <string name="verify">Verify</string>
+</resources>
