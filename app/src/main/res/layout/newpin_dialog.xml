@@ -31,37 +31,71 @@
             android:background="@drawable/ic_baseline_close_24"/>
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/edittext_newpin_pin"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
-        android:autofillHints="Pin"
-        android:background="@drawable/rounded_corner"
-        android:hint="@string/pin"
-        android:inputType="number"
-        android:maxLength="4"
-        android:paddingHorizontal="10dp"
-        android:textColor="@color/secondary"
-        android:textColorHint="@color/primary"
-        android:textSize="17sp" />
+        android:background="@drawable/rounded_corner">
 
-    <EditText
-        android:id="@+id/edittext_newpin_confirmpin"
+        <EditText
+            android:id="@+id/edittext_newpin_pin"
+            android:layout_width="0dp"
+            android:layout_height="?actionBarSize"
+            android:layout_weight="0.95"
+            android:autofillHints="Mobile number"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/pin"
+            android:inputType="number"
+            android:maxLength="4"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/secondary"
+            android:textColorHint="@color/primary"
+            android:textSize="17sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_newpin_pin_verify"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="0.05"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_baseline_invalid_24"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
-        android:autofillHints="Pin"
-        android:background="@drawable/rounded_corner"
-        android:hint="@string/reenterpin"
-        android:inputType="number"
-        android:maxLength="4"
-        android:paddingHorizontal="10dp"
-        android:textColor="@color/secondary"
-        android:textColorHint="@color/primary"
-        android:textSize="17sp" />
+        android:background="@drawable/rounded_corner">
+
+        <EditText
+            android:id="@+id/edittext_newpin_reenterpin"
+            android:layout_width="0dp"
+            android:layout_height="?actionBarSize"
+            android:layout_weight="0.95"
+            android:autofillHints="Mobile number"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/reenterpin"
+            android:inputType="number"
+            android:maxLength="4"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/secondary"
+            android:textColorHint="@color/primary"
+            android:textSize="17sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_newpin_reenterpin_verify"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="0.05"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_baseline_invalid_24"
+            android:visibility="invisible" />
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_newpin_proceed"
