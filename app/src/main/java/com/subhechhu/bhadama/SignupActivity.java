@@ -92,7 +92,7 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (verifyPin(edittext_signup_pin, edittext_signup_reenterpin, button_signup_reenterpin_verify )) {
+                if (verifyPin(edittext_signup_pin, edittext_signup_reenterpin, button_signup_reenterpin_verify)) {
                     button_signup_pin_verify.setVisibility(View.INVISIBLE);
                 } else {
                     button_signup_pin_verify.setVisibility(View.VISIBLE);
@@ -127,7 +127,7 @@ public class SignupActivity extends AppCompatActivity {
                 if (!edittext_signup_name.getText().toString().isEmpty() &&
                         verifyEmail(edittext_signup_email) &&
                         verifyReenterPin(edittext_signup_reenterpin, edittext_signup_pin) &&
-                        verifyPin(edittext_signup_pin, edittext_signup_reenterpin, button_signup_reenterpin_verify ) &&
+                        verifyPin(edittext_signup_pin, edittext_signup_reenterpin, button_signup_reenterpin_verify) &&
                         verifyphone(edittext_signup_phone)) {
                     proceedSignup();
                 } else {
@@ -149,10 +149,11 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private boolean verifyPin(EditText edittext_signup_pin, EditText edittextSignupReenterpin, AppCompatButton button_signup_reenterpin_verify) {
-        if(edittext_signup_pin.getText().toString().length() == 4 && edittext_signup_pin.getText().toString().equals(edittextSignupReenterpin.getText().toString())){
+        if (edittext_signup_pin.getText().toString().length() == 4 && edittext_signup_pin.getText().toString().equals(edittextSignupReenterpin.getText().toString())) {
             button_signup_reenterpin_verify.setVisibility(View.INVISIBLE);
-        }else {
-            button_signup_reenterpin_verify.setVisibility(View.VISIBLE);
+        } else {
+            if (edittext_signup_pin.getText().toString().length() == 4)
+                button_signup_reenterpin_verify.setVisibility(View.VISIBLE);
         }
         return edittext_signup_pin.getText().toString().length() == 4;
     }
@@ -164,7 +165,7 @@ public class SignupActivity extends AppCompatActivity {
 
     public void proceedSignup() {
         View view = getLayoutInflater().inflate(R.layout.otp_dialog, null);
-        BottomSheetDialog dialog = new BottomSheetDialog(SignupActivity.this,  R.style.dialogStyle);
+        BottomSheetDialog dialog = new BottomSheetDialog(SignupActivity.this, R.style.dialogStyle);
         dialog.setContentView(view);
         dialog.setCancelable(false);
         dialog.show();

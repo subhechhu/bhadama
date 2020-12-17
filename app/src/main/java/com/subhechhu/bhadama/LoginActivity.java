@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,7 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class LoginActivity extends AppCompatActivity {
     EditText editText_phone, editText_pin;
-    AppCompatButton button_login_phone_verify, button_login_pin_verify;
+    AppCompatButton button_login_phone_verify, button_login_pin_verify, button_login_signin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +23,12 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        editText_phone = findViewById(R.id.edittext_login_phone);
+        editText_phone = findViewById(R.id.edittext_home_location);
         editText_pin = findViewById(R.id.edittext_login_pin);
 
         button_login_phone_verify = findViewById(R.id.button_login_phone_verify);
         button_login_pin_verify = findViewById(R.id.button_login_pin_verify);
+        button_login_signin = findViewById(R.id.button_login_signin);
 
         editText_phone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -65,6 +65,19 @@ public class LoginActivity extends AppCompatActivity {
                     button_login_pin_verify.setVisibility(View.INVISIBLE);
                 else
                     button_login_pin_verify.setVisibility(View.VISIBLE);
+            }
+        });
+
+        button_login_signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!verifyPhone(editText_phone)) {
+                    Toast.makeText(LoginActivity.this, "Invalid Phone Number", Toast.LENGTH_SHORT).show();
+                } else if (editText_pin.getText().toString().length() != 4) {
+                    Toast.makeText(LoginActivity.this, "Invalid Pin", Toast.LENGTH_SHORT).show();
+                } else {
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                }
             }
         });
     }
@@ -197,5 +210,9 @@ public class LoginActivity extends AppCompatActivity {
                 button_signup_reenterpin_verify.setVisibility(View.VISIBLE);
         }
         return edittext_login_pin.getText().toString().length() == 4;
+    }
+
+    private boolean verifyPhone(EditText editText_phone) {
+        return editText_phone.getText().toString().length() == 10;
     }
 }

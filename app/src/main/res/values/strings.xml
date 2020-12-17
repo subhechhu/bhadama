@@ -20,4 +20,9 @@
     <string name="proceed">Proceed</string>
     <string name="otp">OTP</string>
     <string name="verify">Verify</string>
+    <string name="Location">Enter Location </string>
+    <string name="range">Rs %1$d000 - Rs %2$d999</string>
+
+    <string name="api_key">AIzaSyBbQvmUqNK7llIfVdi8L1b7VS8zy0uJj3o</string>
+
 </resources>
