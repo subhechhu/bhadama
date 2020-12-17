@@ -175,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void proceed(BottomSheetDialog dialog, EditText edittext_Login_Reenterpin, EditText edittext_login_pin, AppCompatButton button_newpin_reenterpin_verify) {
-        if (verifyPin(edittext_login_pin, edittext_Login_Reenterpin, button_newpin_reenterpin_verify ) &&
+        if (verifyPin(edittext_login_pin, edittext_Login_Reenterpin, button_newpin_reenterpin_verify) &&
                 verifyReenterPin(edittext_Login_Reenterpin, edittext_login_pin)) {
             Toast.makeText(LoginActivity.this, "New pin has been generated.\nProceed to login", Toast.LENGTH_SHORT).show();
             dialog.dismiss();
@@ -190,10 +190,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean verifyPin(EditText edittext_login_pin, EditText edittextSignupReenterpin, AppCompatButton button_signup_reenterpin_verify) {
-        if(edittext_login_pin.getText().toString().length() == 4 && edittext_login_pin.getText().toString().equals(edittextSignupReenterpin.getText().toString())){
+        if (edittext_login_pin.getText().toString().length() == 4 && edittext_login_pin.getText().toString().equals(edittextSignupReenterpin.getText().toString())) {
             button_signup_reenterpin_verify.setVisibility(View.INVISIBLE);
-        }else {
-            button_signup_reenterpin_verify.setVisibility(View.VISIBLE);
+        } else {
+            if (edittext_login_pin.getText().toString().length() == 4)
+                button_signup_reenterpin_verify.setVisibility(View.VISIBLE);
         }
         return edittext_login_pin.getText().toString().length() == 4;
     }
