@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama;
+package com.subhechhu.bhadama.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.subhechhu.bhadama.R;
 
 public class LoginActivity extends AppCompatActivity {
     EditText editText_phone, editText_pin;
@@ -23,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        editText_phone = findViewById(R.id.edittext_home_location);
+        editText_phone = findViewById(R.id.button_home_location);
         editText_pin = findViewById(R.id.edittext_login_pin);
 
         button_login_phone_verify = findViewById(R.id.button_login_phone_verify);

@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama;
+package com.subhechhu.bhadama.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -6,12 +6,12 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.subhechhu.bhadama.R;
 
 public class SignupActivity extends AppCompatActivity {
 

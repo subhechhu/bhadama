@@ -1,10 +1,12 @@
-package com.subhechhu.bhadama;
+package com.subhechhu.bhadama.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.subhechhu.bhadama.R;
 
 public class MainActivity extends AppCompatActivity {
 
