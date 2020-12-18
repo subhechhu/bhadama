@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        editText_phone = findViewById(R.id.button_home_location);
+        editText_phone = findViewById(R.id.edittext_home_location);
         editText_pin = findViewById(R.id.edittext_login_pin);
 
         button_login_phone_verify = findViewById(R.id.button_login_phone_verify);

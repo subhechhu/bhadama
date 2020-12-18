@@ -1,326 +1,354 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_secondary"
     tools:context=".Activity.HomeActivity">
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="280dp"
-        android:layout_height="250dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/background_image" />
-
-    <ImageButton
-        android:id="@+id/button2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/profile"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.953"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_home_location"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginHorizontal="30dp"
-        android:layout_weight="0.95"
-        android:background="@drawable/rounded_corner_primary"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="10dp"
-        android:text="@string/Location"
-        android:textAllCaps="false"
-        android:textColor="@color/white_secondary"
-        android:textColorHint="@color/white_light"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
-
-    <TextView
-        android:id="@+id/textView_range"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
-        android:text="Property range"
-        android:textColor="@color/primary"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_home_location" />
-
-    <TextView
-        android:id="@+id/textView_range_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:textColor="@color/primary"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_range" />
-
-    <com.mohammedalaa.seekbar.DoubleValueSeekBarView
-        android:id="@+id/home_range_seekbar"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_range_value"
-        app:r2CurrentMaxValue="75"
-        app:r2CurrentMinValue="25"
-        app:r2barHeight="10dp"
-        app:r2baseColor="@color/navy"
-        app:r2circleFillColor="@color/primary_solid"
-        app:r2circleRadius="15dp"
-        app:r2circleTextColor="@color/white"
-        app:r2circleTextSize="@dimen/value_bar_circleTextSize"
-        app:r2fillColor="@color/secondary"
-        app:r2maxValue="99"
-        app:r2maxValueStep="1"
-        app:r2minValue="1"
-        app:r2minValueStep="1" />
+        android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/textView_rooms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
-        android:text="Number of Rooms"
-        android:textColor="@color/primary"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_range_seekbar" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_rooms">
-
-        <CheckBox
-            android:id="@+id/checkbox_room1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/checkbox_selector"
-            android:button="@null"
-            android:checked="false"
-            android:gravity="center"
-            android:minWidth="100dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="10dp"
-            android:text="1 Room"
-            android:textColor="@color/white_secondary"
-            android:textStyle="bold" />
-
-        <CheckBox
-            android:id="@+id/checkbox_room2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/checkbox_selector"
-            android:button="@null"
-            android:checked="false"
-            android:gravity="center"
-            android:minWidth="100dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="10dp"
-            android:text="2 Rooms"
-            android:textColor="@color/white_secondary"
-            android:textStyle="bold" />
-
-        <CheckBox
-            android:id="@+id/checkbox_room3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/checkbox_selector"
-            android:button="@null"
-            android:checked="false"
-            android:gravity="center"
-            android:minWidth="100dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="10dp"
-            android:text="3 Rooms"
-            android:textColor="@color/white_secondary"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="4dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <CheckBox
-            android:id="@+id/checkbox_flat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/checkbox_selector"
-            android:button="@null"
-            android:checked="false"
-            android:gravity="center"
-            android:minWidth="100dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="10dp"
-            android:text="Entire Flat"
-            android:textColor="@color/white_secondary"
-            android:textStyle="bold" />
-
-        <CheckBox
-            android:id="@+id/checkbox_house"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/checkbox_selector"
-            android:button="@null"
-            android:checked="false"
-            android:gravity="center"
-            android:minWidth="100dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="10dp"
-            android:text="Entire House"
-            android:textColor="@color/white_secondary"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_home_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="72dp"
-        android:background="@drawable/rounded_corner_primary"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:text="@string/search"
-        android:textAllCaps="false"
-        android:textColor="@color/white_secondary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="8dp"
-        android:weightSum="0.91"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <LinearLayout
-            android:id="@+id/linearButton_first"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.45"
-            android:clickable="true"
-            android:descendantFocusability="blocksDescendants"
-            android:focusable="true"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_baseline_add_circle_24"
-                android:layout_marginBottom="10dp"/>
+                android:id="@+id/imageView"
+                android:layout_width="280dp"
+                android:layout_height="250dp"
+                android:contentDescription="@string/backgroundimage"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/background_image" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/personalproperty"
-                android:textColor="@color/primary_solid" />
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="0.001"
-            android:layout_gravity="center_vertical"
-            android:background="@color/primary_solid" />
+                <ImageButton
+                    android:id="@+id/button2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end"
+                    android:layout_marginVertical="30dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:background="@color/transparent"
+                    android:contentDescription="@string/user"
+                    android:scaleType="fitCenter"
 
+                    android:src="@drawable/profile" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_home_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:layout_marginHorizontal="30dp"
+                    android:background="@drawable/rounded_corner_primary"
+                    android:gravity="center_vertical"
+                    android:text="@string/Location"
+                    android:paddingHorizontal="10dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white_secondary"
+                    android:textColorHint="@color/white_light"
+                    android:textSize="17sp"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_baseline_navigation_24_light"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView_range"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginTop="30dp"
+                            android:text="Property range"
+                            android:textColor="@color/primary"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView_range_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="30dp"
+                            android:textColor="@color/primary"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView_range" />
+
+                        <com.mohammedalaa.seekbar.DoubleValueSeekBarView
+                            android:id="@+id/home_range_seekbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="30dp"
+                            app:r2CurrentMaxValue="75"
+                            app:r2CurrentMinValue="25"
+                            app:r2barHeight="10dp"
+                            app:r2baseColor="@color/navy"
+                            app:r2circleFillColor="@color/primary_solid"
+                            app:r2circleRadius="15dp"
+                            app:r2circleTextColor="@color/white"
+                            app:r2circleTextSize="@dimen/value_bar_circleTextSize"
+                            app:r2fillColor="@color/secondary"
+                            app:r2maxValue="99"
+                            app:r2maxValueStep="1"
+                            app:r2minValue="1"
+                            app:r2minValueStep="1" />
+
+                        <TextView
+                            android:id="@+id/textView_rooms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginTop="30dp"
+                            android:text="Number of Rooms"
+                            android:textColor="@color/primary"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.022"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/home_range_seekbar" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView_rooms">
+
+                            <CheckBox
+                                android:id="@+id/checkbox_room1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/checkbox_selector"
+                                android:button="@null"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:minWidth="100dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:paddingRight="15dp"
+                                android:paddingBottom="10dp"
+                                android:text="1 Room"
+                                android:textColor="@color/white_secondary"
+                                android:textStyle="bold" />
+
+                            <CheckBox
+                                android:id="@+id/checkbox_room2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/checkbox_selector"
+                                android:button="@null"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:minWidth="100dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:paddingRight="15dp"
+                                android:paddingBottom="10dp"
+                                android:text="2 Rooms"
+                                android:textColor="@color/white_secondary"
+                                android:textStyle="bold" />
+
+                            <CheckBox
+                                android:id="@+id/checkbox_room3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/checkbox_selector"
+                                android:button="@null"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:minWidth="100dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:paddingRight="15dp"
+                                android:paddingBottom="10dp"
+                                android:text="3 Rooms"
+                                android:textColor="@color/white_secondary"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginTop="4dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                            <CheckBox
+                                android:id="@+id/checkbox_flat"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/checkbox_selector"
+                                android:button="@null"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:minWidth="100dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:paddingRight="15dp"
+                                android:paddingBottom="10dp"
+                                android:text="Entire Flat"
+                                android:textColor="@color/white_secondary"
+                                android:textStyle="bold" />
+
+                            <CheckBox
+                                android:id="@+id/checkbox_house"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/checkbox_selector"
+                                android:button="@null"
+                                android:checked="false"
+                                android:gravity="center"
+                                android:minWidth="100dp"
+                                android:paddingLeft="15dp"
+                                android:paddingTop="10dp"
+                                android:paddingRight="15dp"
+                                android:paddingBottom="10dp"
+                                android:text="Entire House"
+                                android:textColor="@color/white_secondary"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/recyclerview_places"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="150dp"-->
+<!--                        android:layout_marginHorizontal="30dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/edittext_home_location" />-->
+
+                </FrameLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_home_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/rounded_corner_primary"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="@string/search"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white_secondary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:layout_marginBottom="30dp">
         <LinearLayout
-            android:id="@+id/linearButton_second"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusable="true"
-            android:descendantFocusability="blocksDescendants"
-            android:gravity="center"
-            android:padding="10dp"
-            android:layout_weight="0.45"
-            android:orientation="vertical" >
-            <ImageView
-                android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="30dp"
+            android:weightSum="0.91"
+            >
+
+            <LinearLayout
+                android:id="@+id/linearButton_first"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_baseline_format_list_bulleted_24" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/savedproperty"
-                android:textColor="@color/primary_solid" />
+                android:layout_weight="0.45"
+                android:clickable="true"
+                android:descendantFocusability="blocksDescendants"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_baseline_add_circle_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/personalproperty"
+                    android:textColor="@color/primary_solid" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.001"
+                android:background="@color/primary_solid" />
+
+            <LinearLayout
+                android:id="@+id/linearButton_second"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.45"
+                android:clickable="true"
+                android:descendantFocusability="blocksDescendants"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_baseline_format_list_bulleted_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/savedproperty"
+                    android:textColor="@color/primary_solid" />
+            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</LinearLayout>

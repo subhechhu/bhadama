@@ -20,9 +20,19 @@
     <string name="proceed">Proceed</string>
     <string name="otp">OTP</string>
     <string name="verify">Verify</string>
-    <string name="Location">Enter Location </string>
+    <string name="Location">Add Location </string>
     <string name="range">Rs %1$d000 - Rs %2$d999</string>
 
     <string name="api_key">AIzaSyBbQvmUqNK7llIfVdi8L1b7VS8zy0uJj3o</string>
+    <string name="search">Search Property</string>
+    <string name="search_location">Search Location</string>
+    <string name="personalproperty">Personal Property</string>
+    <string name="savedproperty">Saved Property</string>
+    <string name="backgroundimage">backgroundImage</string>
+    <string name="user">user</string>
+    <string name="navigation">navigation</string>
+    <string name="close">close</string>
+
+    <string name="searched_location">%1$s, %2$s</string>
 
 </resources>

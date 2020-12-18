@@ -44,7 +44,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/button_home_location"
+                    android:id="@+id/edittext_home_location"
                     android:layout_width="0dp"
                     android:layout_height="?actionBarSize"
                     android:layout_weight="0.95"
