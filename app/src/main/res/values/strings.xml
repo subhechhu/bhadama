@@ -34,5 +34,10 @@
     <string name="close">close</string>
 
     <string name="searched_location">%1$s, %2$s</string>
+    <string name="access_token">pk.eyJ1Ijoic3ViaGVjaGNoaHUiLCJhIjoiY2tpdHowdGxrMDN4OTJycDQ5b3p2dnBqNSJ9._SuLiHChFEcu02iTmYfHOw</string>
+    <string name="polygon_circle_transformation_circle_steps">dummy1</string>
+    <string name="polygon_circle_transformation_circle_radius">ok</string>
+    <string name="polygon_circle_transformation_click_map_instruction">okee</string>
+
 
 </resources>

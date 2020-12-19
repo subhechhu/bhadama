@@ -1,7 +1,6 @@
 package com.subhechhu.bhadama.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -20,8 +18,8 @@ import android.widget.Toast;
 
 import com.subhechhu.bhadama.Adapter.LocationAdapter;
 import com.subhechhu.bhadama.R;
-import com.subhechhu.bhadama.model.LocationModel;
-import com.subhechhu.bhadama.viewmodels.LocationViewModel;
+import com.subhechhu.bhadama.Model.LocationModel;
+import com.subhechhu.bhadama.ViewModel.LocationViewModel;
 
 import java.util.Timer;
 import java.util.TimerTask;

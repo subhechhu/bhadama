@@ -1,11 +1,11 @@
-package com.subhechhu.bhadama.networking;
+package com.subhechhu.bhadama.Networking;
 
 
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.subhechhu.bhadama.model.LocationModel;
+import com.subhechhu.bhadama.Model.LocationModel;
 
 import java.util.List;
 

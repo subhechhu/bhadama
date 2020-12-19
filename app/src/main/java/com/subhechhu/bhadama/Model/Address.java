@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.model;
+package com.subhechhu.bhadama.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

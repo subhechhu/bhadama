@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.subhechhu.bhadama.R;
-import com.subhechhu.bhadama.model.LocationModel;
+import com.subhechhu.bhadama.Model.LocationModel;
 
 import java.util.ArrayList;
 import java.util.List;

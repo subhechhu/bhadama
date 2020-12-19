@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.networking;
+package com.subhechhu.bhadama.Networking;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
