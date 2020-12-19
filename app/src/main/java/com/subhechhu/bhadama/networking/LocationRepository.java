@@ -16,6 +16,7 @@ import retrofit2.Response;
 public class LocationRepository {
 
     private static LocationRepository locationRepository;
+    MutableLiveData<List<LocationModel>> locationData;
 
     public static LocationRepository getInstance() {
         if (locationRepository == null) {
@@ -27,27 +28,25 @@ public class LocationRepository {
     LocationApi locationApi;
     public LocationRepository() {
         locationApi = RetrofitService.cteateService(LocationApi.class);
+        locationData = new MutableLiveData<>();
     }
 
     public MutableLiveData<List<LocationModel>> getNews(String source, String key, String countryCode) {
-        MutableLiveData<List<LocationModel>> newsData = new MutableLiveData<>();
         locationApi.getLocationList(source, key, countryCode).enqueue(new Callback<List<LocationModel>>() {
             @Override
             public void onResponse(Call<List<LocationModel>> call,
                                    Response<List<LocationModel>> response) {
                 if (response.isSuccessful()) {
                     Log.e("TAG","newsrepository success response: "+response.body());
-                    newsData.setValue(response.body());
+                    locationData.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<List<LocationModel>> call, Throwable t) {
-                Log.e("TAG","newsrepository fail response: "+call.toString());
-                Log.e("TAG","newsrepository fail response: "+t.getMessage());
-                newsData.setValue(null);
+                locationData.setValue(null);
             }
         });
-        return newsData;
+        return locationData;
     }
 }

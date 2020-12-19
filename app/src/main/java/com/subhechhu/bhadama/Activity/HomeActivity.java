@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     AppCompatButton button_home_search, button_home_location;
     LinearLayout linearButton_first, linearButton_second;
 
-    TextView textView_range_value;
+    TextView textView_range_value, textView_view_in_map;
 
 
     @Override
@@ -40,12 +40,23 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         textView_range_value = findViewById(R.id.textView_range_value);
+        textView_view_in_map = findViewById(R.id.textView_view_in_map);
+
         button_home_search = findViewById(R.id.button_home_search);
         button_home_location = findViewById(R.id.button_home_location);
 
         linearButton_first = findViewById(R.id.linearButton_first);
         linearButton_second = findViewById(R.id.linearButton_second);
 
+
+        textView_view_in_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(button_home_location.getText().equals("Add Location")){
+                    Toast.makeText(HomeActivity.this,"Add location to view in maps",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         button_home_location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +89,7 @@ public class HomeActivity extends AppCompatActivity {
 
         DoubleValueSeekBarView rangeSeekbar = findViewById(R.id.home_range_seekbar);
         textView_range_value.setText(getString(R.string.range, rangeSeekbar.getCurrentMinValue(), rangeSeekbar.getCurrentMaxValue()));
+
         rangeSeekbar.setOnRangeSeekBarViewChangeListener(new OnDoubleValueSeekBarChangeListener() {
             @Override
             public void onValueChanged(DoubleValueSeekBarView doubleValueSeekBarView, int i, int i1, boolean b) {

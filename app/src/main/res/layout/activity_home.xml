@@ -4,17 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_secondary"
+    android:orientation="vertical"
     tools:context=".Activity.HomeActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true">
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -38,8 +37,8 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="end"
-                    android:layout_marginVertical="30dp"
                     android:layout_marginHorizontal="30dp"
+                    android:layout_marginVertical="30dp"
                     android:background="@color/transparent"
                     android:contentDescription="@string/user"
                     android:scaleType="fitCenter"
@@ -53,209 +52,209 @@
                     android:layout_height="?actionBarSize"
                     android:layout_marginHorizontal="30dp"
                     android:background="@drawable/rounded_corner_primary"
+                    android:drawableStart="@drawable/ic_baseline_navigation_24_light"
+                    android:drawablePadding="10dp"
                     android:gravity="center_vertical"
-                    android:text="@string/Location"
                     android:paddingHorizontal="10dp"
+                    android:text="@string/Location"
                     android:textAllCaps="false"
                     android:textColor="@color/white_secondary"
                     android:textColorHint="@color/white_light"
-                    android:textSize="17sp"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/ic_baseline_navigation_24_light"/>
+                    android:textSize="17sp" />
 
-                <FrameLayout
+                <TextView
+                    android:id="@+id/textView_view_in_map"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:text="View in map"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/primary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                    <LinearLayout
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView_range"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginTop="30dp"
+                        android:text="Property range"
+                        android:textColor="@color/primary"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView_range_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="30dp"
+                        android:textColor="@color/primary"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_range" />
+
+                    <com.mohammedalaa.seekbar.DoubleValueSeekBarView
+                        android:id="@+id/home_range_seekbar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginHorizontal="30dp"
+                        app:r2CurrentMaxValue="75"
+                        app:r2CurrentMinValue="25"
+                        app:r2barHeight="10dp"
+                        app:r2baseColor="@color/navy"
+                        app:r2circleFillColor="@color/primary_solid"
+                        app:r2circleRadius="15dp"
+                        app:r2circleTextColor="@color/white"
+                        app:r2circleTextSize="@dimen/value_bar_circleTextSize"
+                        app:r2fillColor="@color/secondary"
+                        app:r2maxValue="99"
+                        app:r2maxValueStep="1"
+                        app:r2minValue="1"
+                        app:r2minValueStep="1" />
 
-                        <TextView
-                            android:id="@+id/textView_range"
-                            android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/textView_rooms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginTop="30dp"
+                        android:text="Number of Rooms"
+                        android:textColor="@color/primary"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.022"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/home_range_seekbar" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_rooms">
+
+                        <CheckBox
+                            android:id="@+id/checkbox_room1"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="30dp"
-                            android:layout_marginTop="30dp"
-                            android:text="Property range"
-                            android:textColor="@color/primary"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            android:layout_weight="1"
+                            android:background="@drawable/checkbox_selector"
+                            android:button="@null"
+                            android:checked="false"
+                            android:gravity="center"
+                            android:minWidth="100dp"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:text="1 Room"
+                            android:textColor="@color/white_secondary"
+                            android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/textView_range_value"
-                            android:layout_width="wrap_content"
+                        <CheckBox
+                            android:id="@+id/checkbox_room2"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="30dp"
-                            android:textColor="@color/primary"
-                            android:textSize="24sp"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView_range" />
+                            android:layout_marginHorizontal="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/checkbox_selector"
+                            android:button="@null"
+                            android:checked="false"
+                            android:gravity="center"
+                            android:minWidth="100dp"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:text="2 Rooms"
+                            android:textColor="@color/white_secondary"
+                            android:textStyle="bold" />
 
-                        <com.mohammedalaa.seekbar.DoubleValueSeekBarView
-                            android:id="@+id/home_range_seekbar"
-                            android:layout_width="match_parent"
+                        <CheckBox
+                            android:id="@+id/checkbox_room3"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="30dp"
-                            app:r2CurrentMaxValue="75"
-                            app:r2CurrentMinValue="25"
-                            app:r2barHeight="10dp"
-                            app:r2baseColor="@color/navy"
-                            app:r2circleFillColor="@color/primary_solid"
-                            app:r2circleRadius="15dp"
-                            app:r2circleTextColor="@color/white"
-                            app:r2circleTextSize="@dimen/value_bar_circleTextSize"
-                            app:r2fillColor="@color/secondary"
-                            app:r2maxValue="99"
-                            app:r2maxValueStep="1"
-                            app:r2minValue="1"
-                            app:r2minValueStep="1" />
+                            android:layout_weight="1"
+                            android:background="@drawable/checkbox_selector"
+                            android:button="@null"
+                            android:checked="false"
+                            android:gravity="center"
+                            android:minWidth="100dp"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:text="3 Rooms"
+                            android:textColor="@color/white_secondary"
+                            android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/textView_rooms"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="30dp"
-                            android:layout_marginTop="30dp"
-                            android:text="Number of Rooms"
-                            android:textColor="@color/primary"
-                            android:textSize="16sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.022"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/home_range_seekbar" />
-
-                        <LinearLayout
-                            android:id="@+id/linearLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="30dp"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView_rooms">
-
-                            <CheckBox
-                                android:id="@+id/checkbox_room1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/checkbox_selector"
-                                android:button="@null"
-                                android:checked="false"
-                                android:gravity="center"
-                                android:minWidth="100dp"
-                                android:paddingLeft="15dp"
-                                android:paddingTop="10dp"
-                                android:paddingRight="15dp"
-                                android:paddingBottom="10dp"
-                                android:text="1 Room"
-                                android:textColor="@color/white_secondary"
-                                android:textStyle="bold" />
-
-                            <CheckBox
-                                android:id="@+id/checkbox_room2"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="4dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/checkbox_selector"
-                                android:button="@null"
-                                android:checked="false"
-                                android:gravity="center"
-                                android:minWidth="100dp"
-                                android:paddingLeft="15dp"
-                                android:paddingTop="10dp"
-                                android:paddingRight="15dp"
-                                android:paddingBottom="10dp"
-                                android:text="2 Rooms"
-                                android:textColor="@color/white_secondary"
-                                android:textStyle="bold" />
-
-                            <CheckBox
-                                android:id="@+id/checkbox_room3"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/checkbox_selector"
-                                android:button="@null"
-                                android:checked="false"
-                                android:gravity="center"
-                                android:minWidth="100dp"
-                                android:paddingLeft="15dp"
-                                android:paddingTop="10dp"
-                                android:paddingRight="15dp"
-                                android:paddingBottom="10dp"
-                                android:text="3 Rooms"
-                                android:textColor="@color/white_secondary"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/linearLayout2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="30dp"
-                            android:layout_marginTop="4dp"
-                            android:orientation="horizontal"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-                            <CheckBox
-                                android:id="@+id/checkbox_flat"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="2dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/checkbox_selector"
-                                android:button="@null"
-                                android:checked="false"
-                                android:gravity="center"
-                                android:minWidth="100dp"
-                                android:paddingLeft="15dp"
-                                android:paddingTop="10dp"
-                                android:paddingRight="15dp"
-                                android:paddingBottom="10dp"
-                                android:text="Entire Flat"
-                                android:textColor="@color/white_secondary"
-                                android:textStyle="bold" />
-
-                            <CheckBox
-                                android:id="@+id/checkbox_house"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="2dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/checkbox_selector"
-                                android:button="@null"
-                                android:checked="false"
-                                android:gravity="center"
-                                android:minWidth="100dp"
-                                android:paddingLeft="15dp"
-                                android:paddingTop="10dp"
-                                android:paddingRight="15dp"
-                                android:paddingBottom="10dp"
-                                android:text="Entire House"
-                                android:textColor="@color/white_secondary"
-                                android:textStyle="bold" />
-                        </LinearLayout>
                     </LinearLayout>
-<!--                    <androidx.recyclerview.widget.RecyclerView-->
-<!--                        android:id="@+id/recyclerview_places"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="150dp"-->
-<!--                        android:layout_marginHorizontal="30dp"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/edittext_home_location" />-->
 
-                </FrameLayout>
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                        <CheckBox
+                            android:id="@+id/checkbox_flat"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/checkbox_selector"
+                            android:button="@null"
+                            android:checked="false"
+                            android:gravity="center"
+                            android:minWidth="100dp"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:text="Entire Flat"
+                            android:textColor="@color/white_secondary"
+                            android:textStyle="bold" />
+
+                        <CheckBox
+                            android:id="@+id/checkbox_house"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/checkbox_selector"
+                            android:button="@null"
+                            android:checked="false"
+                            android:gravity="center"
+                            android:minWidth="100dp"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:text="Entire House"
+                            android:textColor="@color/white_secondary"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button_home_search"
@@ -275,20 +274,23 @@
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
             </LinearLayout>
         </RelativeLayout>
+
+
     </ScrollView>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="30dp"
+        android:gravity="bottom">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:orientation="horizontal"
             android:paddingHorizontal="30dp"
-            android:weightSum="0.91"
-            >
+            android:weightSum="0.91">
 
             <LinearLayout
                 android:id="@+id/linearButton_first"
