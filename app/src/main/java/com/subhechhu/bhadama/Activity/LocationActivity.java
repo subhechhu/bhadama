@@ -122,7 +122,7 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
 
     @Override
     public void onClick(LocationModel modelWord) {
-        Toast.makeText(LocationActivity.this, modelWord.getDisplayPlace(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(LocationActivity.this, modelWord.getDisplayPlace(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
         intent.putExtra("locationObject", modelWord);
         intent.putExtra("city", modelWord.getAddress().getCity());

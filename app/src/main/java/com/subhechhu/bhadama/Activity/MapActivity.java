@@ -1,13 +1,20 @@
 package com.subhechhu.bhadama.Activity;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.github.clans.fab.FloatingActionMenu;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.geojson.Polygon;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -41,12 +48,16 @@ public class MapActivity extends AppCompatActivity {
     private static final String CIRCLE_CENTER_SOURCE_ID = "CIRCLE_CENTER_SOURCE_ID";
     private static final String CIRCLE_CENTER_ICON_ID = "CIRCLE_CENTER_ICON_ID";
     private static final String CIRCLE_CENTER_LAYER_ID = "CIRCLE_CENTER_LAYER_ID";
-    private static final Point DOWNTOWN_KATHMANDU = Point.fromLngLat(85.323283875, 27.7014884022);
+
+    private static Point markerPoint;
 
     double latitude = 27.7014884022, longitude = 85.323283875;
+    String location;
 
     private MapView mapView;
     private MapboxMap mapboxMap;
+
+    FloatingActionButton floating_map_center;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +66,44 @@ public class MapActivity extends AppCompatActivity {
         Mapbox.getInstance(this, getString(R.string.access_token));
         setContentView(R.layout.activity_map);
 
+        latitude = Double.parseDouble(getIntent().getStringExtra("lat"));
+        longitude = Double.parseDouble(getIntent().getStringExtra("lon"));
+        location = getIntent().getStringExtra("location");
+
+        markerPoint = Point.fromLngLat(longitude, latitude);
+
+
+        floating_map_center = findViewById(R.id.floating_map_center);
+
+        ImageView button_map_close = findViewById(R.id.button_map_close);
+        TextView textview_map_textview = findViewById(R.id.textview_map_textview);
+
+        button_map_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        textview_map_textview.setText(location);
+
         CameraPosition position = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude))
                 .zoom(13)
                 .tilt(20)
                 .build();
+
+
+        floating_map_center.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mapboxMap!=null){
+                    mapboxMap.animateCamera(CameraUpdateFactory
+                            .newCameraPosition(position), 3000);
+//                    mapboxMap.setCameraPosition(position);
+                }
+            }
+        });
 
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -69,7 +113,7 @@ public class MapActivity extends AppCompatActivity {
                         Objects.requireNonNull(BitmapUtils.getBitmapFromDrawable(
                                 getResources().getDrawable(R.drawable.red_marker))))
                 .withSource(new GeoJsonSource(CIRCLE_CENTER_SOURCE_ID,
-                        Feature.fromGeometry(DOWNTOWN_KATHMANDU)))
+                        Feature.fromGeometry(markerPoint)))
                 .withSource(new GeoJsonSource(TURF_CALCULATION_FILL_LAYER_GEOJSON_SOURCE_ID))
                 .withLayer(new SymbolLayer(CIRCLE_CENTER_LAYER_ID,
                         CIRCLE_CENTER_SOURCE_ID).withProperties(
@@ -78,14 +122,15 @@ public class MapActivity extends AppCompatActivity {
                         iconAllowOverlap(true),
                         iconOffset(new Float[]{0f, -4f})
                 )), style -> {
-                    MapActivity.this.mapboxMap = mapboxMap;
-                    initPolygonCircleFillLayer();
-                    drawPolygonCircle();
-                    mapboxMap.setCameraPosition(position);
-                    mapboxMap.getUiSettings().setQuickZoomGesturesEnabled(false);
-                    mapboxMap.getUiSettings().setZoomGesturesEnabled(false);
-                }));
+            MapActivity.this.mapboxMap = mapboxMap;
+            initPolygonCircleFillLayer();
+            drawPolygonCircle();
+            mapboxMap.setCameraPosition(position);
+            mapboxMap.getUiSettings().setQuickZoomGesturesEnabled(false);
+            mapboxMap.getUiSettings().setZoomGesturesEnabled(false);
+        }));
     }
+
     private void drawPolygonCircle() {
         mapboxMap.getStyle(style -> {
             Polygon polygonArea = getTurfPolygon();
@@ -98,16 +143,18 @@ public class MapActivity extends AppCompatActivity {
     }
 
     private Polygon getTurfPolygon() {
-        return TurfTransformation.circle(MapActivity.DOWNTOWN_KATHMANDU, 1, 360, com.mapbox.turf.TurfConstants.UNIT_KILOMETERS);
+        return TurfTransformation.circle(MapActivity.markerPoint, 1, 360, com.mapbox.turf.TurfConstants.UNIT_KILOMETERS);
     }
 
     private void initPolygonCircleFillLayer() {
         mapboxMap.getStyle(style -> {
             FillLayer fillLayer = new FillLayer(TURF_CALCULATION_FILL_LAYER_ID,
                     TURF_CALCULATION_FILL_LAYER_GEOJSON_SOURCE_ID);
-            fillLayer.setProperties(
-                    fillColor(getColor(R.color.primary_solid)),
-                    fillOpacity(.5f));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                fillLayer.setProperties(
+                        fillColor(getColor(R.color.primary_solid)),
+                        fillOpacity(.5f));
+            }
             style.addLayerBelow(fillLayer, CIRCLE_CENTER_LAYER_ID);
         });
     }

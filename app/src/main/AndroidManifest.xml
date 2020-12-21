@@ -9,11 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bhadama">
-        <activity android:name=".Activity.MapActivity"/>
+        <activity android:name=".Activity.AddPropertyActivity"/>
+        <activity android:name=".Activity.SavedPropertyActivity" />
+        <activity android:name=".Activity.PersonalPropertyActivity" />
+        <activity android:name=".Activity.MapActivity" />
         <activity android:name=".Activity.LocationActivity" />
         <activity android:name=".Activity.HomeActivity" />
         <activity android:name=".Activity.SignupActivity" />
-        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.SigninActivity" />
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

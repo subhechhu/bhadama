@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent"
     android:layout_width="match_parent"
@@ -9,6 +10,15 @@
     android:background="@color/white_secondary"
     android:orientation="vertical"
     tools:context=".Activity.HomeActivity">
+
+
+    <ImageView
+        android:id="@+id/imageView_arrow"
+        android:layout_width="280dp"
+        android:layout_height="250dp"
+        android:contentDescription="@string/backgroundimage"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/background_image" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,14 +28,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="280dp"
-                android:layout_height="250dp"
-                android:contentDescription="@string/backgroundimage"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/background_image" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,11 +69,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="10dp"
                     android:text="View in map"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/primary"
                     android:textSize="14sp"
-                    android:layout_marginTop="10dp"
                     app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -107,8 +109,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="30dp"
-                        app:r2CurrentMaxValue="75"
-                        app:r2CurrentMinValue="25"
+                        app:r2CurrentMaxValue="50"
+                        app:r2CurrentMinValue="15"
                         app:r2barHeight="10dp"
                         app:r2baseColor="@color/navy"
                         app:r2circleFillColor="@color/primary_solid"
@@ -160,7 +162,7 @@
                             android:paddingTop="10dp"
                             android:paddingRight="15dp"
                             android:paddingBottom="10dp"
-                            android:text="1 Room"
+                            android:text="@string/_1_room"
                             android:textColor="@color/white_secondary"
                             android:textStyle="bold" />
 
@@ -179,7 +181,7 @@
                             android:paddingTop="10dp"
                             android:paddingRight="15dp"
                             android:paddingBottom="10dp"
-                            android:text="2 Rooms"
+                            android:text="@string/_2_rooms"
                             android:textColor="@color/white_secondary"
                             android:textStyle="bold" />
 
@@ -197,7 +199,7 @@
                             android:paddingTop="10dp"
                             android:paddingRight="15dp"
                             android:paddingBottom="10dp"
-                            android:text="3 Rooms"
+                            android:text="@string/_3_rooms"
                             android:textColor="@color/white_secondary"
                             android:textStyle="bold" />
 
@@ -230,7 +232,7 @@
                             android:paddingTop="10dp"
                             android:paddingRight="15dp"
                             android:paddingBottom="10dp"
-                            android:text="Entire Flat"
+                            android:text="@string/entire_flat"
                             android:textColor="@color/white_secondary"
                             android:textStyle="bold" />
 
@@ -249,7 +251,7 @@
                             android:paddingTop="10dp"
                             android:paddingRight="15dp"
                             android:paddingBottom="10dp"
-                            android:text="Entire House"
+                            android:text="@string/entire_house"
                             android:textColor="@color/white_secondary"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -274,83 +276,51 @@
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
             </LinearLayout>
         </RelativeLayout>
-
-
     </ScrollView>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginBottom="30dp"
         android:gravity="bottom">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/floating_icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal"
-            android:paddingHorizontal="30dp"
-            android:weightSum="0.91">
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            fab:menu_animationDelayPerItem="55"
+            fab:menu_backgroundColor="@android:color/transparent"
+            fab:menu_colorNormal="@color/secondary"
+            fab:menu_colorPressed="@color/primary"
+            fab:menu_colorRipple="#99d4d4d4"
+            fab:menu_fab_size="normal"
+            fab:menu_icon="@drawable/fab_add"
+            fab:menu_openDirection="up">
 
-            <LinearLayout
-                android:id="@+id/linearButton_first"
-                android:layout_width="0dp"
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floating_icon_personal"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.45"
-                android:clickable="true"
-                android:descendantFocusability="blocksDescendants"
-                android:focusable="true"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:src="@drawable/ic_baseline_home_24"
+                app:fab_colorNormal="@color/primary_solid"
+                app:fab_colorPressed="@color/primary"
+                fab:fab_label="Personal Property"
+                fab:fab_size="mini"
+                fab:menu_backgroundColor="@android:color/transparent"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_baseline_add_circle_24" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/personalproperty"
-                    android:textColor="@color/primary_solid" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0.001"
-                android:background="@color/primary_solid" />
-
-            <LinearLayout
-                android:id="@+id/linearButton_second"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.45"
-                android:clickable="true"
-                android:descendantFocusability="blocksDescendants"
-                android:focusable="true"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_baseline_format_list_bulleted_24" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/savedproperty"
-                    android:textColor="@color/primary_solid" />
-            </LinearLayout>
-        </LinearLayout>
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floating_icon_saved"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_save_24"
+                app:fab_colorNormal="@color/primary_solid"
+                app:fab_colorPressed="@color/primary"
+                fab:fab_label="Saved Property"
+                fab:fab_size="mini"
+                fab:menu_backgroundColor="@android:color/transparent"
+                />
+        </com.github.clans.fab.FloatingActionMenu>
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

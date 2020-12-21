@@ -20,6 +20,7 @@
     <string name="proceed">Proceed</string>
     <string name="otp">OTP</string>
     <string name="verify">Verify</string>
+    <string name="ALocation">Location </string>
     <string name="Location">Add Location </string>
     <string name="range">Rs %1$d000 - Rs %2$d999</string>
 
@@ -38,6 +39,40 @@
     <string name="polygon_circle_transformation_circle_steps">dummy1</string>
     <string name="polygon_circle_transformation_circle_radius">ok</string>
     <string name="polygon_circle_transformation_click_map_instruction">okee</string>
+    <string name="_3_rooms">3+ Rooms</string>
+    <string name="_2_rooms">2 Rooms</string>
+    <string name="_1_room">1 Room</string>
+    <string name="entire_flat">Entire Flat</string>
+    <string name="entire_house">Entire House</string>
+    <string name="no_property_added">No Property Added</string>
+    <string name="roomsize">Room Size (Approx in sq meter)</string>
+    <string name="rent">Rent</string>
+    <string name="available">Available From</string>
+    <string name="bed">Bed</string>
+    <string name="cupboard">Cupboard</string>
+    <string name="table">Table</string>
+    <string name="ohers">Others</string>
+    <string name="unfurnished">Unfurnished</string>
+    <string name="otherfurnitures">Add Other Furnitures</string>
+    <string name="parking">Parking</string>
+    <string name="furnishing">Furnishing</string>
+    <string name="twowheeler">2 Wheeler</string>
+    <string name="fourwheeler">4 Wheeler</string>
+    <string name="none">None</string>
+    <string name="prefferedtenants">Preferred Tenants</string>
+    <string name="bachelor">Bachelor</string>
+    <string name="family">Family</string>
+    <string name="anyone">Anyone</string>
+    <string name="watersupply">Water Supply</string>
+    <string name="nwsc">NWSC</string>
+    <string name="underground">Underground</string>
+    <string name="other">Other</string>
+    <string name="addimage">Add Image</string>
+    <string name="skip">Skip</string>
+    <string name="propertysummary">Property Summary</string>
+    <string name="furnished">Furnished</string>
+    <string name="semifurnished">Semi Furnished</string>
+    <string name="verifyproperty">Publish Property</string>
 
 
 </resources>

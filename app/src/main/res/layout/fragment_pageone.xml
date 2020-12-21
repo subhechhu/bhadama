@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".Activity.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:contentDescription="@string/app_icon"
+            android:scaleType="fitStart"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/icon_main" />
+
+
+        <TextView
+            android:id="@+id/textView_rooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:text="Number of Rooms"
+            android:textColor="@color/white_secondary"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.022"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_range_seekbar" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_rooms">
+
+            <CheckBox
+                android:id="@+id/checkbox_room1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/checkbox_selector"
+                android:button="@null"
+                android:checked="false"
+                android:gravity="center"
+                android:minWidth="100dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:text="@string/_1_room"
+                android:textColor="@color/white_secondary"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/checkbox_room2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/checkbox_selector"
+                android:button="@null"
+                android:checked="false"
+                android:gravity="center"
+                android:minWidth="100dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:text="@string/_2_rooms"
+                android:textColor="@color/white_secondary"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/checkbox_room3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/checkbox_selector"
+                android:button="@null"
+                android:checked="false"
+                android:gravity="center"
+                android:minWidth="100dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:text="@string/_3_rooms"
+                android:textColor="@color/white_secondary"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <CheckBox
+                android:id="@+id/checkbox_flat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/checkbox_selector"
+                android:button="@null"
+                android:checked="false"
+                android:gravity="center"
+                android:minWidth="100dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:text="@string/entire_flat"
+                android:textColor="@color/white_secondary"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/checkbox_house"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/checkbox_selector"
+                android:button="@null"
+                android:checked="false"
+                android:gravity="center"
+                android:minWidth="100dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:text="@string/entire_house"
+                android:textColor="@color/white_secondary"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.529">
+
+            <EditText
+                android:id="@+id/edittext_addprop_rent"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp"
+                android:autofillHints="Name"
+                android:background="@drawable/rounded_corner"
+                android:hint="@string/rent"
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingHorizontal="10dp"
+                android:textColor="@color/secondary"
+                android:textColorHint="@color/primary"
+                android:textSize="17sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_addprop_date"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_corner"
+                android:gravity="center_vertical"
+                android:text="@string/available"
+                android:paddingHorizontal="10dp"
+                android:textAllCaps="false"
+                android:textColor="@color/secondary"
+                android:textColorHint="@color/primary"
+                android:textSize="17sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_addprop_location"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:layout_marginHorizontal="30dp"
+                android:background="@drawable/rounded_corner"
+                android:gravity="center_vertical"
+                android:text="@string/ALocation"
+                android:paddingHorizontal="10dp"
+                android:textAllCaps="false"
+                android:textColor="@color/secondary"
+                android:textColorHint="@color/primary"
+                android:textSize="17sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+<!--                <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                    android:id="@+id/floating_personalprop_next"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_margin="30dp"-->
+<!--                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"-->
+<!--                    app:backgroundTint="@color/white_secondary"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:tint="@color/secondary" />-->
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:orientation="vertical"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.0"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.529">-->
+
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginHorizontal="20dp"-->
+        <!--                android:layout_marginVertical="10dp"-->
+        <!--                android:background="@drawable/rounded_corner"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <EditText-->
+        <!--                    android:id="@+id/edittext_signup_phone"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="?actionBarSize"-->
+        <!--                    android:layout_weight="0.95"-->
+        <!--                    android:autofillHints="Mobile number"-->
+        <!--                    android:background="@drawable/rounded_corner"-->
+        <!--                    android:hint="@string/phone"-->
+        <!--                    android:inputType="phone"-->
+        <!--                    android:maxLength="10"-->
+        <!--                    android:paddingHorizontal="10dp"-->
+        <!--                    android:textColor="@color/secondary"-->
+        <!--                    android:textColorHint="@color/primary"-->
+        <!--                    android:textSize="17sp" />-->
+
+        <!--                <androidx.appcompat.widget.AppCompatButton-->
+        <!--                    android:id="@+id/button_signup_phone_verify"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="20dp"-->
+        <!--                    android:layout_marginEnd="10dp"-->
+        <!--                    android:layout_weight="0.05"-->
+        <!--                    android:background="@drawable/ic_baseline_invalid_24"-->
+        <!--                    android:visibility="invisible" />-->
+        <!--            </LinearLayout>-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginHorizontal="20dp"-->
+        <!--                android:layout_marginVertical="10dp"-->
+        <!--                android:background="@drawable/rounded_corner"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <EditText-->
+        <!--                    android:id="@+id/edittext_signup_pin"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="?actionBarSize"-->
+        <!--                    android:layout_weight="0.95"-->
+        <!--                    android:autofillHints="Mobile number"-->
+        <!--                    android:background="@drawable/rounded_corner"-->
+        <!--                    android:hint="@string/pin"-->
+        <!--                    android:inputType="number"-->
+        <!--                    android:maxLength="4"-->
+        <!--                    android:paddingHorizontal="10dp"-->
+        <!--                    android:textColor="@color/secondary"-->
+        <!--                    android:textColorHint="@color/primary"-->
+        <!--                    android:textSize="17sp" />-->
+
+        <!--                <androidx.appcompat.widget.AppCompatButton-->
+        <!--                    android:id="@+id/button_signup_pin_verify"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="20dp"-->
+        <!--                    android:layout_marginEnd="10dp"-->
+        <!--                    android:layout_weight="0.05"-->
+        <!--                    android:background="@drawable/ic_baseline_invalid_24"-->
+        <!--                    android:visibility="invisible" />-->
+        <!--            </LinearLayout>-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginHorizontal="20dp"-->
+        <!--                android:layout_marginVertical="10dp"-->
+        <!--                android:background="@drawable/rounded_corner"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <EditText-->
+        <!--                    android:id="@+id/edittext_signup_reenterpin"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="?actionBarSize"-->
+        <!--                    android:layout_weight="0.95"-->
+        <!--                    android:autofillHints="Mobile number"-->
+        <!--                    android:background="@drawable/rounded_corner"-->
+        <!--                    android:hint="@string/reenterpin"-->
+        <!--                    android:inputType="number"-->
+        <!--                    android:maxLength="4"-->
+        <!--                    android:paddingHorizontal="10dp"-->
+        <!--                    android:textColor="@color/secondary"-->
+        <!--                    android:textColorHint="@color/primary"-->
+        <!--                    android:textSize="17sp" />-->
+
+        <!--                <androidx.appcompat.widget.AppCompatButton-->
+        <!--                    android:id="@+id/button_signup_reenterpin_verify"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="20dp"-->
+        <!--                    android:layout_marginEnd="10dp"-->
+        <!--                    android:layout_weight="0.05"-->
+        <!--                    android:background="@drawable/ic_baseline_invalid_24"-->
+        <!--                    android:visibility="invisible" />-->
+        <!--            </LinearLayout>-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginHorizontal="20dp"-->
+        <!--                android:layout_marginVertical="10dp"-->
+        <!--                android:background="@drawable/rounded_corner"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <EditText-->
+        <!--                    android:id="@+id/edittext_signup_email"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="?actionBarSize"-->
+        <!--                    android:layout_weight="0.95"-->
+        <!--                    android:autofillHints="Email address"-->
+        <!--                    android:background="@drawable/rounded_corner"-->
+        <!--                    android:hint="@string/login_email_hint"-->
+        <!--                    android:inputType="textEmailAddress"-->
+        <!--                    android:paddingHorizontal="10dp"-->
+        <!--                    android:textColor="@color/secondary"-->
+        <!--                    android:textColorHint="@color/primary"-->
+        <!--                    android:textSize="17sp" />-->
+
+        <!--                <androidx.appcompat.widget.AppCompatButton-->
+        <!--                    android:id="@+id/button_signup_email_verify"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="20dp"-->
+        <!--                    android:layout_marginEnd="10dp"-->
+        <!--                    android:layout_weight="0.05"-->
+        <!--                    android:background="@drawable/ic_baseline_invalid_24"-->
+        <!--                    android:maxLines="1"-->
+        <!--                    android:visibility="invisible" />-->
+        <!--            </LinearLayout>-->
+
+        <!--            <androidx.appcompat.widget.AppCompatButton-->
+        <!--                android:id="@+id/button_signup_proceed"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="end"-->
+        <!--                android:layout_marginHorizontal="20dp"-->
+        <!--                android:layout_marginVertical="10dp"-->
+        <!--                android:background="@drawable/rounded_corner_button"-->
+        <!--                android:paddingLeft="20dp"-->
+        <!--                android:paddingRight="20dp"-->
+        <!--                android:text="@string/proceed"-->
+        <!--                android:textAllCaps="false"-->
+        <!--                android:textColor="@color/secondary" />-->
+
+        <!--            <RelativeLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:gravity="bottom|center_horizontal"/>-->
+        <!--        </LinearLayout>-->
+    </LinearLayout>
+</ScrollView>

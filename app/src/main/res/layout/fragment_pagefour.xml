@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:paddingHorizontal="30dp"
+    android:scrollbars="none"
+    tools:context=".Activity.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:contentDescription="@string/app_icon"
+            android:scaleType="fitStart"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/icon_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="@string/propertysummary"
+            android:textColor="@color/white_secondary"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="0.022"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_range_seekbar" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_home_24" />
+
+            <TextView
+                android:id="@+id/textView_rooms_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/imageView"
+                android:layout_marginStart="10dp"
+                android:text="3+"
+                android:textColor="@color/white_secondary"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/textView_rooms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Rooms"
+                android:textColor="@color/white_secondary"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_toEndOf="@id/textView_rooms_count"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/iv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_attach_money_24" />
+
+            <TextView
+                android:id="@+id/textView_rupee_amt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Rs"
+                android:textColor="@color/white_secondary"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"
+               android:layout_toEndOf="@id/iv_money"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_rooms_rent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25000"
+                android:textColor="@color/white_secondary"
+                android:layout_toEndOf="@id/textView_rupee_amt"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/iv_furniture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_king_bed_24" />
+
+
+            <TextView
+                android:id="@+id/textView_rooms_furnishing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Furnished"
+                android:textColor="@color/white_secondary"
+                android:layout_toEndOf="@id/iv_furniture"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+
+            <ImageView
+                android:id="@+id/imageView_Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_calendar_today_24" />
+
+            <TextView
+                android:id="@+id/textView_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="From"
+                android:textColor="@color/white_secondary"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/imageView_Date"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_availabledate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25/02/2020"
+                android:textColor="@color/white_secondary"
+                android:layout_toEndOf="@id/textView_date"
+                android:textSize="32sp"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/iv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_location_on_24" />
+
+
+            <TextView
+                android:id="@+id/textView_rooms_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Imadol"
+                android:textColor="@color/white_secondary"
+                android:layout_toEndOf="@id/iv_location"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView_viewinmap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="View in Map"
+            android:textColor="@color/white_secondary"
+            android:textSize="14sp"
+            android:layout_marginStart="10dp"
+            android:textAlignment="viewEnd"
+            app:layout_constraintHorizontal_bias="0.022"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/iv_parking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_local_parking_24" />
+
+            <TextView
+                android:id="@+id/textView_rooms_parking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 Wheeler"
+                android:textColor="@color/white_secondary"
+                android:layout_toEndOf="@id/iv_parking"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/iv_tenant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_people_alt_24" />
+
+            <TextView
+                android:id="@+id/textView_rooms_tenant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Any"
+                android:textColor="@color/white_secondary"
+                android:layout_toEndOf="@id/iv_tenant"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/textView_tenant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Tenant"
+                android:textColor="@color/white_secondary"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/textView_rooms_tenant"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/iv_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_local_drink_24" />
+
+            <TextView
+                android:id="@+id/textView_rooms_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Underground"
+                android:textColor="@color/white_secondary"
+                android:layout_toEndOf="@id/iv_water"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/textView_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Water"
+                android:textColor="@color/white_secondary"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/textView_rooms_water"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+        </RelativeLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <RelativeLayout
+                    android:id="@+id/relative_first"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/imaageview_first"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dash_border" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_baseline_add_circle_24" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_second"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:layout_marginHorizontal="10dp"
+                    android:focusable="true">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_baseline_add_circle_24" />
+
+                    <ImageView
+                        android:id="@+id/imaageview_second"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dash_border" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_third"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imaageview_third"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dash_border" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_baseline_add_circle_24" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_fourth"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_baseline_add_circle_24" />
+
+                    <ImageView
+                        android:id="@+id/imaageview_fourth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dash_border" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_fifth"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/imaageview_fifth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dash_border" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_baseline_add_circle_24" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_sixth"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_baseline_add_circle_24" />
+
+                    <ImageView
+                        android:id="@+id/imaageview_sixth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dash_border" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I declare all information provided is correct.\nI take responsibility for any wrong information."
+            android:textColor="@color/white_secondary"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.022"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_verify_property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="72dp"
+            android:background="@drawable/rounded_corner_primary"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/verifyproperty"
+            android:textAllCaps="false"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/white_secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+    </LinearLayout>
+</ScrollView>
