@@ -61,7 +61,7 @@ public class AddPropertyActivity extends AppCompatActivity {
                 if (position == 0) {
                     floating_personalprop_prev.setVisibility(View.INVISIBLE);
                 }
-                if (position != 0 && position != 2) {
+                if (position != 0 && position != 3) {
                     floating_personalprop_prev.setVisibility(View.VISIBLE);
                     floating_personalprop_next.setVisibility(View.VISIBLE);
                 }

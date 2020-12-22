@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bhadama">
-        <activity android:name=".Activity.AddPropertyActivity"/>
+        <activity android:name=".Activity.PropertyDetails"></activity>
+        <activity android:name=".Activity.AddPropertyActivity" />
         <activity android:name=".Activity.SavedPropertyActivity" />
         <activity android:name=".Activity.PersonalPropertyActivity" />
         <activity android:name=".Activity.MapActivity" />

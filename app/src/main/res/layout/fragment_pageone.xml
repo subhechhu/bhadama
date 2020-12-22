@@ -37,124 +37,130 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_range_seekbar" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_rooms">
+            android:layout_height="wrap_content">
 
-            <CheckBox
-                android:id="@+id/checkbox_room1"
-                android:layout_width="0dp"
+            <RadioGroup
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/checkbox_selector"
-                android:button="@null"
-                android:checked="false"
-                android:gravity="center"
-                android:minWidth="100dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="10dp"
-                android:text="@string/_1_room"
-                android:textColor="@color/white_secondary"
-                android:textStyle="bold" />
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_rooms">
 
-            <CheckBox
-                android:id="@+id/checkbox_room2"
-                android:layout_width="0dp"
+                <RadioButton
+                    android:id="@+id/checkbox_room1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_selector"
+                    android:button="@null"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:minWidth="100dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/_1_room"
+                    android:textColor="@color/white_secondary"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/checkbox_room2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_selector"
+                    android:button="@null"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:minWidth="100dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/_2_rooms"
+                    android:textColor="@color/white_secondary"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/checkbox_room3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_selector"
+                    android:button="@null"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:minWidth="100dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/_3_rooms"
+                    android:textColor="@color/white_secondary"
+                    android:textStyle="bold" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/checkbox_selector"
-                android:button="@null"
-                android:checked="false"
-                android:gravity="center"
-                android:minWidth="100dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="10dp"
-                android:text="@string/_2_rooms"
-                android:textColor="@color/white_secondary"
-                android:textStyle="bold" />
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-            <CheckBox
-                android:id="@+id/checkbox_room3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/checkbox_selector"
-                android:button="@null"
-                android:checked="false"
-                android:gravity="center"
-                android:minWidth="100dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="10dp"
-                android:text="@string/_3_rooms"
-                android:textColor="@color/white_secondary"
-                android:textStyle="bold" />
+                <RadioButton
+                    android:id="@+id/checkbox_flat"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_selector"
+                    android:button="@null"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:minWidth="100dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/entire_flat"
+                    android:textColor="@color/white_secondary"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="4dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-            <CheckBox
-                android:id="@+id/checkbox_flat"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/checkbox_selector"
-                android:button="@null"
-                android:checked="false"
-                android:gravity="center"
-                android:minWidth="100dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="10dp"
-                android:text="@string/entire_flat"
-                android:textColor="@color/white_secondary"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/checkbox_house"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/checkbox_selector"
-                android:button="@null"
-                android:checked="false"
-                android:gravity="center"
-                android:minWidth="100dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="10dp"
-                android:text="@string/entire_house"
-                android:textColor="@color/white_secondary"
-                android:textStyle="bold" />
-        </LinearLayout>
+                <RadioButton
+                    android:id="@+id/checkbox_house"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/checkbox_selector"
+                    android:button="@null"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:minWidth="100dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/entire_house"
+                    android:textColor="@color/white_secondary"
+                    android:textStyle="bold" />
+            </RadioGroup>
+        </RadioGroup>
 
 
         <LinearLayout
@@ -193,8 +199,8 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/rounded_corner"
                 android:gravity="center_vertical"
-                android:text="@string/available"
                 android:paddingHorizontal="10dp"
+                android:text="@string/available"
                 android:textAllCaps="false"
                 android:textColor="@color/secondary"
                 android:textColorHint="@color/primary"
@@ -207,8 +213,9 @@
                 android:layout_marginHorizontal="30dp"
                 android:background="@drawable/rounded_corner"
                 android:gravity="center_vertical"
-                android:text="@string/ALocation"
+                android:maxLines="1"
                 android:paddingHorizontal="10dp"
+                android:text="@string/ALocation"
                 android:textAllCaps="false"
                 android:textColor="@color/secondary"
                 android:textColorHint="@color/primary"
@@ -218,17 +225,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-<!--                <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--                    android:id="@+id/floating_personalprop_next"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:layout_margin="30dp"-->
-<!--                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"-->
-<!--                    app:backgroundTint="@color/white_secondary"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:tint="@color/secondary" />-->
+                <!--                <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+                <!--                    android:id="@+id/floating_personalprop_next"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_alignParentEnd="true"-->
+                <!--                    android:layout_margin="30dp"-->
+                <!--                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"-->
+                <!--                    app:backgroundTint="@color/white_secondary"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:tint="@color/secondary" />-->
             </RelativeLayout>
 
         </LinearLayout>

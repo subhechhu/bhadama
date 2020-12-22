@@ -38,7 +38,7 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/transparent_white"
+        android:background="@color/transparent_dark"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"

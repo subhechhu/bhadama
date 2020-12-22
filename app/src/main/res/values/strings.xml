@@ -42,8 +42,8 @@
     <string name="_3_rooms">3+ Rooms</string>
     <string name="_2_rooms">2 Rooms</string>
     <string name="_1_room">1 Room</string>
-    <string name="entire_flat">Entire Flat</string>
-    <string name="entire_house">Entire House</string>
+    <string name="entire_flat">Flat</string>
+    <string name="entire_house">House</string>
     <string name="no_property_added">No Property Added</string>
     <string name="roomsize">Room Size (Approx in sq meter)</string>
     <string name="rent">Rent</string>
@@ -64,7 +64,7 @@
     <string name="family">Family</string>
     <string name="anyone">Anyone</string>
     <string name="watersupply">Water Supply</string>
-    <string name="nwsc">NWSC</string>
+    <string name="nwsc">Nepal Water Supply Corp.</string>
     <string name="underground">Underground</string>
     <string name="other">Other</string>
     <string name="addimage">Add Image</string>
@@ -73,6 +73,8 @@
     <string name="furnished">Furnished</string>
     <string name="semifurnished">Semi Furnished</string>
     <string name="verifyproperty">Publish Property</string>
+    <string name="contactowner">Contact Owner</string>
+    <string name="unlockcontact">Unlock Contact</string>
 
 
 </resources>

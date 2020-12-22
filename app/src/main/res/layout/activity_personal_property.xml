@@ -8,16 +8,26 @@
     tools:context=".Activity.PersonalPropertyActivity">
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_property"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="16dp"/>
+
+
     <ImageView
-        android:id="@+id/imageView_background"
+        android:id="@+id/imageView_property_image"
         android:layout_width="280dp"
         android:layout_height="250dp"
+        android:layout_marginTop="4dp"
         android:contentDescription="@string/backgroundimage"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/background_image" />
-
 
     <TextView
         android:id="@+id/textView_personalprop_empty"
@@ -40,6 +50,7 @@
         app:backgroundTint="@color/secondary_solid"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_behavior=""
         app:tint="@color/white_secondary" />
 
     <ImageView

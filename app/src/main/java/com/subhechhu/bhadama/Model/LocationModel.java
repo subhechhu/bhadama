@@ -194,6 +194,11 @@ public class LocationModel implements Parcelable {
         parcel.writeString(displayPlace);
         parcel.writeString(displayAddress);
     }
+
+    public LocationModel(){
+
+    }
+
     protected LocationModel(Parcel in) {
         placeId = in.readString();
         osmId = in.readString();

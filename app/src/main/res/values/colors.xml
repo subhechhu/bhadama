@@ -20,7 +20,8 @@
     <color name="loginBkColor">#f0f0f0</color>
 
     <color name="transparent">#00FFFFFF</color>
-    <color name="transparent_white">#EB000000</color>
+    <color name="transparent_dark">#EB000000</color>
+    <color name="transparent_light">#80000000</color>
 
     <!--colros for card-->
     <color name="whiteCardColor">#fff</color>

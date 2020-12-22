@@ -27,8 +27,6 @@ public class LocationViewModel extends ViewModel {
     }
 
 
-
-
     public LiveData<List<LocationModel>> getLocationRepository() {
         return mutableLiveData;
     }

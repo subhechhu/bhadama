@@ -26,15 +26,15 @@ import java.util.TimerTask;
 
 public class LocationActivity extends AppCompatActivity implements LocationAdapter.ItemClick {
 
-    LocationViewModel locationViewModel;
-    LocationAdapter locationAdapter;
-
     AppCompatEditText edittext_location_search;
     ImageView button_clear;
 
     ProgressBar progressBar_search;
-
     RecyclerView recyclerview_places;
+
+
+    LocationViewModel locationViewModel;
+    LocationAdapter locationAdapter;
     Timer timer;
 
     @Override

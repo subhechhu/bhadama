@@ -354,7 +354,7 @@
                         android:id="@+id/imaageview_first"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/dash_border" />
+                        android:background="@drawable/rounded_dash_border" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="30dp"
@@ -384,7 +384,7 @@
                         android:id="@+id/imaageview_second"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/dash_border" />
+                        android:background="@drawable/rounded_dash_border" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -398,7 +398,7 @@
                         android:id="@+id/imaageview_third"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/dash_border" />
+                        android:background="@drawable/rounded_dash_border" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="30dp"
@@ -426,7 +426,7 @@
                         android:id="@+id/imaageview_fourth"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/dash_border" />
+                        android:background="@drawable/rounded_dash_border" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -442,7 +442,7 @@
                         android:id="@+id/imaageview_fifth"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/dash_border" />
+                        android:background="@drawable/rounded_dash_border" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="30dp"
@@ -472,7 +472,7 @@
                         android:id="@+id/imaageview_sixth"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/dash_border" />
+                        android:background="@drawable/rounded_dash_border" />
                 </RelativeLayout>
 
             </LinearLayout>

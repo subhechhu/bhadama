@@ -17,6 +17,7 @@ import com.mohammedalaa.seekbar.DoubleValueSeekBarView;
 import com.mohammedalaa.seekbar.OnDoubleValueSeekBarChangeListener;
 import com.subhechhu.bhadama.R;
 import com.subhechhu.bhadama.Model.LocationModel;
+import com.subhechhu.bhadama.Util.NoInternet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,14 +65,18 @@ public class HomeActivity extends AppCompatActivity {
         textView_view_in_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (button_home_location.getText().equals("Add Location")) {
-                    Toast.makeText(HomeActivity.this, "Add location to view in maps", Toast.LENGTH_SHORT).show();
+                if (NoInternet.getConnection(HomeActivity.this)) {
+                    if (button_home_location.getText().equals("Add Location")) {
+                        Toast.makeText(HomeActivity.this, "Add location to view in maps", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent(HomeActivity.this, MapActivity.class);
+                        intent.putExtra("lat", latitude);
+                        intent.putExtra("lon", longitude);
+                        intent.putExtra("location", location);
+                        startActivity(intent);
+                    }
                 } else {
-                    Intent intent = new Intent(HomeActivity.this, MapActivity.class);
-                    intent.putExtra("lat", latitude);
-                    intent.putExtra("lon", longitude);
-                    intent.putExtra("location", location);
-                    startActivity(intent);
+                    Toast.makeText(HomeActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -79,7 +84,11 @@ public class HomeActivity extends AppCompatActivity {
         button_home_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(HomeActivity.this, LocationActivity.class), LOCATION_ACTIVITY);
+                if (NoInternet.getConnection(HomeActivity.this)) {
+                    startActivityForResult(new Intent(HomeActivity.this, LocationActivity.class), LOCATION_ACTIVITY);
+                } else {
+                    Toast.makeText(HomeActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -88,9 +97,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 floating_icon.close(true);
-                Intent intent = new Intent(HomeActivity.this,PersonalPropertyActivity.class);
-                intent.putExtra("Message","You Have Not Added Property");
-                intent.putExtra("from","personal");
+                Intent intent = new Intent(HomeActivity.this, PersonalPropertyActivity.class);
+                intent.putExtra("Message", "You Have Not Added Property");
+                intent.putExtra("from", "personal");
                 startActivity(intent);
             }
         });
@@ -99,9 +108,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 floating_icon.close(true);
-                Intent intent = new Intent(HomeActivity.this,SavedPropertyActivity.class);
-                intent.putExtra("Message","You Have Not Marked Properties");
-                intent.putExtra("from","saved");
+                Intent intent = new Intent(HomeActivity.this, SavedPropertyActivity.class);
+                intent.putExtra("Message", "");
+                intent.putExtra("from", "saved");
                 startActivity(intent);
             }
         });
@@ -109,9 +118,9 @@ public class HomeActivity extends AppCompatActivity {
         button_home_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (button_home_location.getText().equals("Add Location")) {
-                    Toast.makeText(HomeActivity.this, "Add location to search", Toast.LENGTH_SHORT).show();
-                } else {
+//                if (button_home_location.getText().equals("Add Location")) {
+//                    Toast.makeText(HomeActivity.this, "Add location to search", Toast.LENGTH_SHORT).show();
+//                } else {
                     JSONObject jsonObject = new JSONObject();
                     try {
                         jsonObject.put("lat", latitude);
@@ -126,10 +135,16 @@ public class HomeActivity extends AppCompatActivity {
                         jsonObject.put("entireHouse", checkbox_entireHouse.isChecked());
 
                         Log.e("TAG", "json to server: " + jsonObject.toString());
+
+                        Intent intent = new Intent(HomeActivity.this, SavedPropertyActivity.class);
+                        intent.putExtra("Message", "");
+                        intent.putExtra("from", "saved");
+                        startActivity(intent);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
+//                }
             }
         });
 
@@ -165,7 +180,10 @@ public class HomeActivity extends AppCompatActivity {
             Log.e("TAG", "homemodel word: " + locationObject.toString());
 //            Log.e("TAG","homemodel city: "+data.getStringExtra("city"));
             city = data.getStringExtra("city");
-            location = getString(R.string.searched_location, locationObject.getDisplayPlace(), data.getStringExtra("city"));
+            if(data.getStringExtra("city") == null){
+                city = "Nepal";
+            }
+            location = getString(R.string.searched_location, locationObject.getDisplayPlace(), city);
             latitude = locationObject.getLat();
             longitude = locationObject.getLon();
             button_home_location.setText(location);
