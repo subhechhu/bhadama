@@ -34,6 +34,7 @@
                     android:paddingHorizontal="10dp"
                     android:textAllCaps="false"
                     android:maxLines="1"
+                    android:focusable="true"
                     android:textColor="@color/white_secondary"
                     android:textColorHint="@color/white_light"
                     android:textSize="17sp" />

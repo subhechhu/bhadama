@@ -64,8 +64,12 @@
     <string name="family">Family</string>
     <string name="anyone">Anyone</string>
     <string name="watersupply">Water Supply</string>
-    <string name="nwsc">Nepal Water Supply Corp.</string>
-    <string name="underground">Underground</string>
+    <string name="nwsc">Nepal
+        Water
+        Supply
+        Corp.</string>
+    <string name="underground">Under
+        Ground</string>
     <string name="other">Other</string>
     <string name="addimage">Add Image</string>
     <string name="skip">Skip</string>
@@ -75,6 +79,9 @@
     <string name="verifyproperty">Publish Property</string>
     <string name="contactowner">Contact Owner</string>
     <string name="unlockcontact">Unlock Contact</string>
+    <string name="nopermission">You have previously declined %1$s.\n\nGo to <b>Settings --> Permission</b>, approve the permission to upload images.</string>
+    <string name="settings">Settings</string>
+    <string name="login_pref">LoginPref</string>
 
 
 </resources>

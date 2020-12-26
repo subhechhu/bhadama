@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.Adapter;
+package com.subhechhu.bhadama.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.subhechhu.bhadama.R;
-import com.subhechhu.bhadama.Model.LocationModel;
+import com.subhechhu.bhadama.activity.location.LocationModel;
 
 import java.util.ArrayList;
 import java.util.List;

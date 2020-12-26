@@ -1,25 +1,28 @@
-package com.subhechhu.bhadama.Activity;
+package com.subhechhu.bhadama.activity.location;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import com.subhechhu.bhadama.Adapter.LocationAdapter;
+import com.subhechhu.bhadama.activity.location.LocationModel;
+import com.subhechhu.bhadama.activity.location.LocationViewModel;
+import com.subhechhu.bhadama.adapter.LocationAdapter;
 import com.subhechhu.bhadama.R;
-import com.subhechhu.bhadama.Model.LocationModel;
-import com.subhechhu.bhadama.ViewModel.LocationViewModel;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,11 +35,12 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
     ProgressBar progressBar_search;
     RecyclerView recyclerview_places;
 
-
     LocationViewModel locationViewModel;
     LocationAdapter locationAdapter;
+
     Timer timer;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +54,11 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
         button_clear.setVisibility(View.INVISIBLE);
 
         progressBar_search = findViewById(R.id.progressBar_location);
-        progressBar_search.setVisibility(View.VISIBLE);
+//        progressBar_search.setVisibility(View.VISIBLE);
+
+        edittext_location_search.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(edittext_location_search, InputMethodManager.SHOW_IMPLICIT);
 
         recyclerview_places.setLayoutManager(new LinearLayoutManager(this));
         recyclerview_places.setHasFixedSize(true);
@@ -58,8 +66,6 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
         recyclerview_places.setAdapter(locationAdapter);
 
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel.class);
-        locationViewModel.init();
-        locationViewModel.getLocation("Nepal");
         locationViewModel.getLocationRepository().observe(this, newsResponse -> {
             Log.d("TAG", "===name in main activity: " + newsResponse);
             progressBar_search.setVisibility(View.INVISIBLE);
@@ -104,11 +110,11 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    locationViewModel.getLocation(editable.toString());
+                                    locationViewModel.makeGetRequest(editable.toString());
                                 }
                             });
                         }
-                    }, 3000);
+                    }, 2000);
                     progressBar_search.setVisibility(View.VISIBLE);
                 } else {
                     if (timer != null) {

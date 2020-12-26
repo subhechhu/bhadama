@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.Adapter;
+package com.subhechhu.bhadama.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.subhechhu.bhadama.Model.LocationModel;
+import com.subhechhu.bhadama.activity.location.LocationModel;
 import com.subhechhu.bhadama.R;
 
 import java.util.ArrayList;
@@ -21,11 +21,11 @@ import java.util.List;
 public class SavedPropertyListAdapter extends RecyclerView.Adapter<SavedPropertyListAdapter.MyViewHolder> {
     private List<LocationModel> propertyModel = new ArrayList<>();
 
-    private Context context;
+    private final Context context;
     private final ItemClick itemClick;
-    Integer house[];
+    Integer[] house;
 
-    public SavedPropertyListAdapter(Context context, ItemClick itemClick, Integer house[]) {
+    public SavedPropertyListAdapter(Context context, ItemClick itemClick, Integer[] house) {
         this.house = house;
         this.itemClick = itemClick;
         this.context = context;

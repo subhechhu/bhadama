@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.Adapter;
+package com.subhechhu.bhadama.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.subhechhu.bhadama.Model.LocationModel;
+import com.subhechhu.bhadama.activity.location.LocationModel;
 import com.subhechhu.bhadama.R;
 
 import java.util.ArrayList;
@@ -22,9 +22,9 @@ public class PersonalPropertyListAdapter extends RecyclerView.Adapter<PersonalPr
 
     private Context context;
     //    private final ItemClick itemClick;
-    Integer house[];
+    Integer[] house;
 
-    public PersonalPropertyListAdapter(Integer house[]) {
+    public PersonalPropertyListAdapter(Integer[] house) {
         this.house = house;
     }
 

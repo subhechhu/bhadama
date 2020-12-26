@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".Activity.MainActivity">
+    tools:context=".activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
 
 
         <RadioGroup
-            android:id="@+id/linearLayout2"
+            android:id="@+id/radio_group_furnishing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
@@ -54,7 +54,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <RadioButton
-                android:id="@+id/checkbox_furnished"
+                android:id="@+id/radio_furnished"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="2dp"
@@ -74,14 +74,14 @@
 
 
             <RadioButton
-                android:id="@+id/checkbox_unfurnished"
+                android:id="@+id/radio_unfurnished"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/checkbox_selector"
                 android:button="@null"
-                android:checked="false"
+                android:checked="true"
                 android:gravity="center"
                 android:minWidth="100dp"
                 android:paddingLeft="15dp"
@@ -125,7 +125,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/checkbox_selector"
                 android:button="@null"
-                android:checked="false"
+                android:checked="true"
                 android:gravity="center"
                 android:minWidth="100dp"
                 android:paddingLeft="15dp"
@@ -155,24 +155,6 @@
                 android:textColor="@color/white_secondary"
                 android:textStyle="bold" />
 
-            <CheckBox
-                android:id="@+id/checkbox_noParking"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/checkbox_selector"
-                android:button="@null"
-                android:checked="true"
-                android:gravity="center"
-                android:minWidth="100dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="10dp"
-                android:text="@string/none"
-                android:textColor="@color/white_secondary"
-                android:textStyle="bold" />
-
         </LinearLayout>
 
         <TextView
@@ -190,7 +172,7 @@
             app:layout_constraintTop_toBottomOf="@+id/home_range_seekbar" />
 
         <RadioGroup
-            android:id="@+id/linearLayouttenant"
+            android:id="@+id/radio_group_rent_tenant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
@@ -201,7 +183,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView_rooms">
 
             <RadioButton
-                android:id="@+id/checkbox_bachelor"
+                android:id="@+id/radio_bachelor"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -219,7 +201,7 @@
                 android:textStyle="bold" />
 
             <RadioButton
-                android:id="@+id/checkbox_family"
+                android:id="@+id/radio_family"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="4dp"
@@ -238,7 +220,7 @@
                 android:textStyle="bold" />
 
             <RadioButton
-                android:id="@+id/checkbox_anyone"
+                android:id="@+id/radio_anyone"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -289,7 +271,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/checkbox_selector"
                 android:button="@null"
-                android:checked="false"
+                android:checked="true"
                 android:gravity="center"
                 android:minWidth="100dp"
                 android:paddingLeft="15dp"

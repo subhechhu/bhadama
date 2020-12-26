@@ -7,7 +7,7 @@
     android:fillViewport="true"
     android:paddingHorizontal="30dp"
     android:scrollbars="none"
-    tools:context=".Activity.MainActivity">
+    tools:context=".activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -395,7 +395,7 @@
                     android:layout_weight="1">
 
                     <ImageView
-                        android:id="@+id/imaageview_third"
+                        android:id="@+id/imageview_third"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/rounded_dash_border" />

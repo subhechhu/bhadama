@@ -1,26 +1,17 @@
-package com.subhechhu.bhadama.Fragment;
+package com.subhechhu.bhadama.fragment;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
-import com.subhechhu.bhadama.Activity.LocationActivity;
-import com.subhechhu.bhadama.Model.LocationModel;
 import com.subhechhu.bhadama.R;
 
-import java.util.Calendar;
-
-import static android.app.Activity.RESULT_OK;
-
-public class PageTwo extends Fragment {
+public class PageFour extends Fragment {
 
     private static final int LOCATION_ACTIVITY = 45543;
 
@@ -31,12 +22,10 @@ public class PageTwo extends Fragment {
 
     String latitude, longitude, location, city;
 
-    public static PageTwo newInstance() {
-//        Bundle args = new Bundle();
-//        args.putInt("someInt", page);
-//        args.putString("someTitle", title);
-//        fragmentFirst.setArguments(args);
-        return new PageTwo();
+
+
+    public static PageFour newInstance() {
+        return new PageFour();
     }
 
     // Store instance variables based on arguments passed
@@ -44,14 +33,27 @@ public class PageTwo extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        page = getArguments().getInt("someInt", 0);
-//        title = getArguments().getString("someTitle");
+//        viewModel =  new ViewModelProvider(getActivity()).get(FragmentViewModel.class);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pagetwo, container, false);
+        View view = inflater.inflate(R.layout.fragment_pagefour, container, false);
+
+        AppCompatButton button_verify_property = view.findViewById(R.id.button_verify_property);
+        button_verify_property.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
         return view;
     }
 }
