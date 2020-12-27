@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.fragment;
+package com.subhechhu.bhadama.activity.addProperty.fragment;
 
 import android.Manifest;
 import android.content.Intent;
@@ -185,7 +185,7 @@ public class PageThree extends Fragment {
         int width = image.getWidth();
         int height = image.getHeight();
 
-        float bitmapRatio = (float)width / (float) height;
+        float bitmapRatio = (float) width / (float) height;
         if (bitmapRatio > 0) {
             width = maxSize;
             height = (int) (width / bitmapRatio);
@@ -383,7 +383,7 @@ public class PageThree extends Fragment {
 
         float maxHeight = 816.0f;
         float maxWidth = 612.0f;
-        float imgRatio = actualWidth / actualHeight;
+        float imgRatio = (float) actualWidth / (float) actualHeight;
         float maxRatio = maxWidth / maxHeight;
 
 //      width and height values are set maintaining the aspect ratio of the image
@@ -433,7 +433,7 @@ public class PageThree extends Fragment {
 
         Canvas canvas = new Canvas(scaledBitmap);
         canvas.setMatrix(scaleMatrix);
-        canvas.drawBitmap(bmp, middleX - bmp.getWidth() / 2, middleY - bmp.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
+        canvas.drawBitmap(bmp, middleX - bmp.getWidth() / 2.0f, middleY - bmp.getHeight() / 2.0f, new Paint(Paint.FILTER_BITMAP_FLAG));
 
         ExifInterface exif;
         try {
@@ -458,27 +458,7 @@ public class PageThree extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//
-//        FileOutputStream out = null;
-//        String filename = getFilename();
-//        try {
-//            out = new FileOutputStream(filename);
-////          write the compressed bitmap at the destination specified by filename.
-//            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 80, out);
-
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
         return scaledBitmap;
-    }
-
-    public String getFilename() {
-        File file = new File(Environment.getExternalStorageDirectory().getPath(), "MyFolder/Images");
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        return (file.getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg");
-
     }
 
     private String getRealPathFromURI(String contentURI) {
@@ -501,7 +481,7 @@ public class PageThree extends Fragment {
         if (height > reqHeight || width > reqWidth) {
             final int heightRatio = Math.round((float) height / (float) reqHeight);
             final int widthRatio = Math.round((float) width / (float) reqWidth);
-            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+            inSampleSize = Math.min(heightRatio, widthRatio);
         }
         final float totalPixels = width * height;
         final float totalReqPixelsCap = reqWidth * reqHeight * 2;

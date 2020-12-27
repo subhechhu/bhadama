@@ -68,6 +68,7 @@
         Water
         Supply
         Corp.</string>
+    <string name="nwsc_plain">Nepal Water Supply Corp.</string>
     <string name="underground">Under
         Ground</string>
     <string name="other">Other</string>
@@ -82,6 +83,16 @@
     <string name="nopermission">You have previously declined %1$s.\n\nGo to <b>Settings --> Permission</b>, approve the permission to upload images.</string>
     <string name="settings">Settings</string>
     <string name="login_pref">LoginPref</string>
+    <string name="view_map">View In Map</string>
+    <string name="total_room">"%1$s %2$s"</string>
+    <string name="rent_amount">"Rs %1$s"</string>
+    <string name="bothParking"><![CDATA[2 & 4 Wheeler]]></string>
+    <string name="parking_2">2 Wheeler</string>
+    <string name="parking_4">4  Wheeler</string>
+    <string name="differentSources">Different Water Sources</string>
+    <string name="tenants">Preferred Tenants: %1$s</string>
+    <string name="noparking">No Parking</string>
+    <string name="nowater">No Water Source</string>
 
 
 </resources>

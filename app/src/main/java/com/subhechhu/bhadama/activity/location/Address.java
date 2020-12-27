@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.Model;
+package com.subhechhu.bhadama.activity.location;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -8,28 +8,28 @@ import com.google.gson.annotations.SerializedName;
 public class Address implements Parcelable {
 
 	@SerializedName("country")
-	private String country;
+	private final String country;
 
 	@SerializedName("country_code")
-	private String countryCode;
+	private final String countryCode;
 
 	@SerializedName("city")
-	private String city;
+	private final String city;
 
 	@SerializedName("neighbourhood")
-	private String neighbourhood;
+	private final String neighbourhood;
 
 	@SerializedName("name")
-	private String name;
+	private final String name;
 
 	@SerializedName("postcode")
-	private String postcode;
+	private final String postcode;
 
 	@SerializedName("suburb")
-	private String suburb;
+	private final String suburb;
 
 	@SerializedName("state")
-	private String state;
+	private final String state;
 
 	protected Address(Parcel in) {
 		country = in.readString();

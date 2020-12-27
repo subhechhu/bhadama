@@ -3,7 +3,7 @@ package com.subhechhu.bhadama.activity.signup;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.subhechhu.bhadama.networking.APIRequest;
+import com.subhechhu.bhadama.util.APIRequest;
 
 import java.util.Map;
 

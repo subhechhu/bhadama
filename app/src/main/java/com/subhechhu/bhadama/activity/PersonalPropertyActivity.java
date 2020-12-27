@@ -1,9 +1,4 @@
-package com.subhechhu.bhadama.Activity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.subhechhu.bhadama.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,11 +6,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.subhechhu.bhadama.Adapter.LocationAdapter;
-import com.subhechhu.bhadama.Adapter.PersonalPropertyListAdapter;
-import com.subhechhu.bhadama.Adapter.SavedPropertyListAdapter;
-import com.subhechhu.bhadama.Model.LocationModel;
+import com.subhechhu.bhadama.activity.addProperty.AddPropertyActivity;
+import com.subhechhu.bhadama.activity.location.LocationModel;
+import com.subhechhu.bhadama.adapter.PersonalPropertyListAdapter;
 import com.subhechhu.bhadama.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -47,7 +45,7 @@ public class PersonalPropertyActivity extends AppCompatActivity{
 
         recyclerview_property = findViewById(R.id.recyclerview_property);
 
-        Integer house[] = {
+        Integer[] house = {
                 R.drawable.aa_1,
                 R.drawable.aa_2,
                 R.drawable.aa_3,

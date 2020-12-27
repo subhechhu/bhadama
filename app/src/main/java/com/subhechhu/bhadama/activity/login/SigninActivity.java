@@ -1,22 +1,39 @@
-package com.subhechhu.bhadama.Activity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
+package com.subhechhu.bhadama.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.subhechhu.bhadama.activity.HomeActivity;
+import com.subhechhu.bhadama.activity.signup.SignupActivity;
+import com.subhechhu.bhadama.AppController;
 import com.subhechhu.bhadama.R;
+import com.subhechhu.bhadama.util.GetUrl;
+import com.subhechhu.bhadama.util.Network;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SigninActivity extends AppCompatActivity {
     EditText editText_phone, editText_pin;
+    ProgressBar progressBar_login;
     AppCompatButton button_login_phone_verify, button_login_pin_verify, button_login_signin;
+
+
+    SigninViewModel signinViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +41,33 @@ public class SigninActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_signin);
 
+        progressBar_login = findViewById(R.id.progressBar_login);
         editText_phone = findViewById(R.id.edittext_home_location);
         editText_pin = findViewById(R.id.edittext_login_pin);
 
         button_login_phone_verify = findViewById(R.id.button_login_phone_verify);
         button_login_pin_verify = findViewById(R.id.button_login_pin_verify);
         button_login_signin = findViewById(R.id.button_login_signin);
+
+        signinViewModel = ViewModelProviders.of(this).get(SigninViewModel.class);
+        signinViewModel.signinResponse().observe(this, response -> {
+            Log.d("TAG", "user" + response);
+            button_login_signin.setEnabled(true);
+            progressBar_login.setVisibility(View.INVISIBLE);
+            try {
+                JSONObject responseObject = new JSONObject(response);
+                JSONObject responseBody = responseObject.getJSONObject("body");
+                if (responseObject.getInt("statusCode") == 200 || responseObject.getInt("statusCode") == 201) {
+                    AppController.storePreferenceBoolean(AppController.getInstance().getString(R.string.login_pref), true);
+                    startActivity(new Intent(SigninActivity.this, HomeActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(SigninActivity.this, responseBody.getString("message"), Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
         editText_phone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -72,12 +110,20 @@ public class SigninActivity extends AppCompatActivity {
         button_login_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!verifyPhone(editText_phone)) {
-                    Toast.makeText(SigninActivity.this, "Invalid Phone Number", Toast.LENGTH_SHORT).show();
-                } else if (editText_pin.getText().toString().length() != 4) {
-                    Toast.makeText(SigninActivity.this, "Invalid Pin", Toast.LENGTH_SHORT).show();
-                } else {
-                    startActivity(new Intent(SigninActivity.this, HomeActivity.class));
+                if (Network.getConnection(getApplicationContext())) {
+                    if (!verifyPhone(editText_phone)) {
+                        Toast.makeText(SigninActivity.this, "Invalid Phone Number", Toast.LENGTH_SHORT).show();
+                    } else if (editText_pin.getText().toString().length() != 4) {
+                        Toast.makeText(SigninActivity.this, "Invalid Pin", Toast.LENGTH_SHORT).show();
+                    } else {
+                        progressBar_login.setVisibility(View.VISIBLE);
+
+                        Map<String, String> users = new HashMap<>();
+                        users.put("phone_number", editText_phone.getText().toString());
+                        users.put("pin", editText_pin.getText().toString());
+
+                        signinViewModel.makePostRequest(GetUrl.LOGIN, users);
+                    }
                 }
             }
         });
@@ -188,7 +234,8 @@ public class SigninActivity extends AppCompatActivity {
         });
     }
 
-    private void proceed(BottomSheetDialog dialog, EditText edittext_Login_Reenterpin, EditText edittext_login_pin, AppCompatButton button_newpin_reenterpin_verify) {
+    private void proceed(BottomSheetDialog dialog, EditText edittext_Login_Reenterpin, EditText
+            edittext_login_pin, AppCompatButton button_newpin_reenterpin_verify) {
         if (verifyPin(edittext_login_pin, edittext_Login_Reenterpin, button_newpin_reenterpin_verify) &&
                 verifyReenterPin(edittext_Login_Reenterpin, edittext_login_pin)) {
             Toast.makeText(SigninActivity.this, "New pin has been generated.\nProceed to login", Toast.LENGTH_SHORT).show();
@@ -196,14 +243,16 @@ public class SigninActivity extends AppCompatActivity {
         }
     }
 
-    private boolean verifyReenterPin(EditText edittext_login_reenterpin, EditText edittext_login_pin) {
+    private boolean verifyReenterPin(EditText edittext_login_reenterpin, EditText
+            edittext_login_pin) {
         if (edittext_login_reenterpin.getText().toString().length() == 4 && !edittext_login_reenterpin.getText().toString().equals(edittext_login_pin.getText().toString())) {
             Toast.makeText(SigninActivity.this, "Pin did not match", Toast.LENGTH_LONG).show();
         }
         return edittext_login_reenterpin.getText().toString().equals(edittext_login_pin.getText().toString());
     }
 
-    private boolean verifyPin(EditText edittext_login_pin, EditText edittextSignupReenterpin, AppCompatButton button_signup_reenterpin_verify) {
+    private boolean verifyPin(EditText edittext_login_pin, EditText
+            edittextSignupReenterpin, AppCompatButton button_signup_reenterpin_verify) {
         if (edittext_login_pin.getText().toString().length() == 4 && edittext_login_pin.getText().toString().equals(edittextSignupReenterpin.getText().toString())) {
             button_signup_reenterpin_verify.setVisibility(View.INVISIBLE);
         } else {

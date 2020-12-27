@@ -33,7 +33,7 @@
         </provider>
 
         <activity android:name=".activity.PropertyDetails"/>
-        <activity android:name=".activity.AddPropertyActivity" />
+        <activity android:name=".activity.addProperty.AddPropertyActivity" />
         <activity android:name=".activity.SavedPropertyActivity" />
         <activity android:name=".activity.PersonalPropertyActivity" />
         <activity android:name=".activity.MapActivity" />

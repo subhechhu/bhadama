@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.networking;
+package com.subhechhu.bhadama.util;
 
 import android.util.Log;
 
@@ -52,7 +52,10 @@ public class APIRequest {
                     Log.e(TAG, "getResponse: " + response);
                     fromAPI.getResponse(response);
                 },
-                error -> VolleyLog.e(TAG, "Error: " + error.getMessage()));
+                error -> {
+                    fromAPI.getResponse(null);
+                    VolleyLog.e(TAG, "Error: " + error.getMessage());
+                });
 
         queue.add(req);
     }

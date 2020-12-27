@@ -1,21 +1,34 @@
-package com.subhechhu.bhadama.Activity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
+package com.subhechhu.bhadama.activity.signup;
 
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.subhechhu.bhadama.AppController;
 import com.subhechhu.bhadama.R;
+import com.subhechhu.bhadama.util.GetUrl;
+import com.subhechhu.bhadama.util.Network;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
 
     final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+    SignupViewModel signupViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +37,8 @@ public class SignupActivity extends AppCompatActivity {
 
         EditText edittext_signup_name, edittext_signup_phone, edittext_signup_pin, edittext_signup_reenterpin, edittext_signup_email;
         AppCompatButton button_signup_phone_verify, button_signup_pin_verify, button_signup_reenterpin_verify, button_signup_email_verify, button_signup_proceed;
+
+        ProgressBar progressBar_signup = findViewById(R.id.progressBar_signup);
 
         edittext_signup_email = findViewById(R.id.edittext_signup_email);
         edittext_signup_reenterpin = findViewById(R.id.edittext_signup_reenterpin);
@@ -36,6 +51,26 @@ public class SignupActivity extends AppCompatActivity {
         button_signup_pin_verify = findViewById(R.id.button_signup_pin_verify);
         button_signup_phone_verify = findViewById(R.id.button_signup_phone_verify);
         button_signup_proceed = findViewById(R.id.button_signup_proceed);
+
+        signupViewModel = ViewModelProviders.of(this).get(SignupViewModel.class);
+        signupViewModel.signupResponse().observe(this, userResponse -> {
+            Log.d("TAG", "user" + userResponse);
+            button_signup_proceed.setEnabled(true);
+            progressBar_signup.setVisibility(View.INVISIBLE);
+            try {
+                JSONObject responseObject = new JSONObject(userResponse);
+                JSONObject responseBody = responseObject.getJSONObject("body");
+                if (responseObject.getInt("statusCode") == 200 || responseObject.getInt("statusCode") == 201) {
+                    Toast.makeText(SignupActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(SignupActivity.this, responseBody.getString("message"), Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
 
         edittext_signup_email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -129,7 +164,19 @@ public class SignupActivity extends AppCompatActivity {
                         verifyReenterPin(edittext_signup_reenterpin, edittext_signup_pin) &&
                         verifyPin(edittext_signup_pin, edittext_signup_reenterpin, button_signup_reenterpin_verify) &&
                         verifyphone(edittext_signup_phone)) {
-                    proceedSignup();
+
+                    if (Network.getConnection(AppController.getInstance())) {
+                        progressBar_signup.setVisibility(View.VISIBLE);
+                        button_signup_proceed.setEnabled(false);
+
+                        Map<String, String> users = new HashMap<>();
+                        users.put("username", edittext_signup_name.getText().toString());
+                        users.put("phone_number", edittext_signup_phone.getText().toString());
+                        users.put("pin", edittext_signup_pin.getText().toString());
+                        users.put("email", edittext_signup_email.getText().toString());
+
+                        signupViewModel.getPostRequest(GetUrl.SIGNUP, users);
+                    }
                 } else {
                     Toast.makeText(SignupActivity.this, "All fields must be entered", Toast.LENGTH_LONG).show();
                 }

@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.Activity;
+package com.subhechhu.bhadama.activity;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.clans.fab.FloatingActionMenu;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.LineString;
@@ -26,8 +28,6 @@ import com.mapbox.mapboxsdk.utils.BitmapUtils;
 import com.mapbox.turf.TurfMeta;
 import com.mapbox.turf.TurfTransformation;
 import com.subhechhu.bhadama.R;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -111,7 +111,7 @@ public class MapActivity extends AppCompatActivity {
         mapView.getMapAsync(mapboxMap -> mapboxMap.setStyle(new Style.Builder().fromUri(Style.MAPBOX_STREETS)
                 .withImage(CIRCLE_CENTER_ICON_ID,
                         Objects.requireNonNull(BitmapUtils.getBitmapFromDrawable(
-                                getResources().getDrawable(R.drawable.red_marker))))
+                                ContextCompat.getDrawable(this, R.drawable.red_marker))))
                 .withSource(new GeoJsonSource(CIRCLE_CENTER_SOURCE_ID,
                         Feature.fromGeometry(markerPoint)))
                 .withSource(new GeoJsonSource(TURF_CALCULATION_FILL_LAYER_GEOJSON_SOURCE_ID))

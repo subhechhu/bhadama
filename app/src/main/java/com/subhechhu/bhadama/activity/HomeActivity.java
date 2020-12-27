@@ -1,7 +1,4 @@
-package com.subhechhu.bhadama.Activity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
+package com.subhechhu.bhadama.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +8,17 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.mohammedalaa.seekbar.DoubleValueSeekBarView;
 import com.mohammedalaa.seekbar.OnDoubleValueSeekBarChangeListener;
+import com.subhechhu.bhadama.activity.location.LocationActivity;
+import com.subhechhu.bhadama.activity.location.LocationModel;
 import com.subhechhu.bhadama.R;
-import com.subhechhu.bhadama.Model.LocationModel;
-import com.subhechhu.bhadama.Util.NoInternet;
+import com.subhechhu.bhadama.util.Network;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
         textView_view_in_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (NoInternet.getConnection(HomeActivity.this)) {
+                if (Network.getConnection(HomeActivity.this)) {
                     if (button_home_location.getText().equals("Add Location")) {
                         Toast.makeText(HomeActivity.this, "Add location to view in maps", Toast.LENGTH_SHORT).show();
                     } else {
@@ -84,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
         button_home_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (NoInternet.getConnection(HomeActivity.this)) {
+                if (Network.getConnection(HomeActivity.this)) {
                     startActivityForResult(new Intent(HomeActivity.this, LocationActivity.class), LOCATION_ACTIVITY);
                 } else {
                     Toast.makeText(HomeActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
@@ -176,7 +177,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == LOCATION_ACTIVITY) {
-            LocationModel locationObject = (LocationModel) data.getExtras().getParcelable("locationObject");
+            LocationModel locationObject = data.getExtras().getParcelable("locationObject");
             Log.e("TAG", "homemodel word: " + locationObject.toString());
 //            Log.e("TAG","homemodel city: "+data.getStringExtra("city"));
             city = data.getStringExtra("city");

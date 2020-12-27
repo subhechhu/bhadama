@@ -1,19 +1,19 @@
-package com.subhechhu.bhadama.adapter;
+package com.subhechhu.bhadama.activity.addProperty;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.subhechhu.bhadama.fragment.PageFour;
-import com.subhechhu.bhadama.fragment.PageOne;
-import com.subhechhu.bhadama.fragment.PageThree;
-import com.subhechhu.bhadama.fragment.PageTwo;
+import com.subhechhu.bhadama.activity.addProperty.fragment.PageFour;
+import com.subhechhu.bhadama.activity.addProperty.fragment.PageOne;
+import com.subhechhu.bhadama.activity.addProperty.fragment.PageThree;
+import com.subhechhu.bhadama.activity.addProperty.fragment.PageTwo;
 
-public class VPagerAdapter extends FragmentStateAdapter {
+public class addPropertyAdapter extends FragmentStateAdapter {
     private static final int NUM_ITEMS = 4;
 
-    public VPagerAdapter(FragmentActivity fa) {
+    public addPropertyAdapter(FragmentActivity fa) {
         super(fa);
     }
 

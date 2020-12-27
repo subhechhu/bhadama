@@ -1,9 +1,9 @@
-package com.subhechhu.bhadama.Activity;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.subhechhu.bhadama.activity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.subhechhu.bhadama.R;
 

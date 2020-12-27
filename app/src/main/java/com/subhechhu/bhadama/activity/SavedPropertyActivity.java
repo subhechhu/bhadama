@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.Activity;
+package com.subhechhu.bhadama.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.subhechhu.bhadama.Adapter.SavedPropertyListAdapter;
-import com.subhechhu.bhadama.Model.LocationModel;
+import com.subhechhu.bhadama.activity.location.LocationModel;
+import com.subhechhu.bhadama.adapter.SavedPropertyListAdapter;
 import com.subhechhu.bhadama.R;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class SavedPropertyActivity extends AppCompatActivity implements SavedPro
 
         recyclerview_property = findViewById(R.id.recyclerview_property);
 
-        Integer house[] = {
+        Integer[] house = {
                 R.drawable.aa_1,
                 R.drawable.aa_2,
                 R.drawable.aa_3,
@@ -76,7 +76,7 @@ public class SavedPropertyActivity extends AppCompatActivity implements SavedPro
         Intent intent = new Intent(SavedPropertyActivity.this, PropertyDetails.class);
         intent.putExtra("img", house);
         ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(SavedPropertyActivity.this, (View) imageView, "backgroundImage");
+                makeSceneTransitionAnimation(SavedPropertyActivity.this, imageView, "backgroundImage");
         startActivity(intent, options.toBundle());
     }
 }

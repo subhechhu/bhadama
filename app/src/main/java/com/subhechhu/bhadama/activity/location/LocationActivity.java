@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,9 +20,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.subhechhu.bhadama.activity.location.LocationModel;
-import com.subhechhu.bhadama.activity.location.LocationViewModel;
-import com.subhechhu.bhadama.adapter.LocationAdapter;
 import com.subhechhu.bhadama.R;
 
 import java.util.Timer;
@@ -66,10 +64,13 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
         recyclerview_places.setAdapter(locationAdapter);
 
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel.class);
-        locationViewModel.getLocationRepository().observe(this, newsResponse -> {
-            Log.d("TAG", "===name in main activity: " + newsResponse);
+        locationViewModel.getLocationRepository().observe(this, locationResponse -> {
+            Log.d("TAG", "===name in main activity: " + locationResponse);
             progressBar_search.setVisibility(View.INVISIBLE);
-            locationAdapter.showList(newsResponse);
+            if (locationResponse != null)
+                locationAdapter.showList(locationResponse);
+            else
+                Toast.makeText(this,"Location not found",Toast.LENGTH_SHORT).show();
         });
 
         button_clear.setOnClickListener(new View.OnClickListener() {

@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.Model;
+package com.subhechhu.bhadama.activity.location;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -48,7 +48,7 @@ public class LocationModel implements Parcelable {
     private String displayAddress;
     @SerializedName("address")
     @Expose
-    private com.subhechhu.bhadama.Model.Address address;
+    private Address address;
 
     public String getPlaceId() {
         return placeId;
@@ -146,11 +146,11 @@ public class LocationModel implements Parcelable {
         this.displayAddress = displayAddress;
     }
 
-    public com.subhechhu.bhadama.Model.Address getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(com.subhechhu.bhadama.Model.Address address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
