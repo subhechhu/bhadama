@@ -19,8 +19,8 @@ public class LocationRepository implements APIRequest.FromAPI {
         responseLocationData = new MutableLiveData<>();
     }
 
-    public void makeLocationRequest(String url) { //new
-        new APIRequest(this).makeGetRequest(url);
+    public void makeLocationRequest(String url, int rc) { //new
+        new APIRequest(this).makeGetRequest(url, rc);
     }
 
     public LiveData<List<LocationModel>> getLocationResponseResponse() {
@@ -28,7 +28,7 @@ public class LocationRepository implements APIRequest.FromAPI {
     }
 
     @Override
-    public void getResponse(String data) {
+    public void getResponse(String data, int requestCode) {
         Gson gson = new Gson();
         Type listOfMyClassObject = new TypeToken<List<LocationModel>>() {}.getType();
         List<LocationModel> locationModelList = gson.fromJson(data,listOfMyClassObject);

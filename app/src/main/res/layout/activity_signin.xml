@@ -9,6 +9,7 @@
     tools:context=".activity.login.SigninActivity">
 
     <LinearLayout
+        android:id="@+id/parentlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -116,6 +117,7 @@
                 android:textColor="@color/secondary" />
 
             <TextView
+                android:id="@+id/textView_forgot_pin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"

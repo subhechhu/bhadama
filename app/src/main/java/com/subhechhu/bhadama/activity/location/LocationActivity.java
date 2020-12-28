@@ -21,11 +21,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.subhechhu.bhadama.R;
+import com.subhechhu.bhadama.activity.addProperty.fragment.PageOne;
+import com.subhechhu.bhadama.util.GetConstants;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class LocationActivity extends AppCompatActivity implements LocationAdapter.ItemClick {
+    private static final String TAG = LocationActivity.class.getSimpleName();
 
     AppCompatEditText edittext_location_search;
     ImageView button_clear;
@@ -65,12 +68,12 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
 
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel.class);
         locationViewModel.getLocationRepository().observe(this, locationResponse -> {
-            Log.d("TAG", "===name in main activity: " + locationResponse);
+            Log.d(TAG, "===name in main activity: " + locationResponse);
             progressBar_search.setVisibility(View.INVISIBLE);
             if (locationResponse != null)
                 locationAdapter.showList(locationResponse);
             else
-                Toast.makeText(this,"Location not found",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT).show();
         });
 
         button_clear.setOnClickListener(new View.OnClickListener() {
@@ -107,11 +110,11 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
                     timer.schedule(new TimerTask() {
                         @Override
                         public void run() {
-                            Log.e("TAG", "text found: " + editable.toString());
+                            Log.e(TAG, "text found: " + editable.toString());
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    locationViewModel.makeGetRequest(editable.toString());
+                                    locationViewModel.makeGetRequest(editable.toString(), GetConstants.LOGIN_REQUESTCODE);
                                 }
                             });
                         }

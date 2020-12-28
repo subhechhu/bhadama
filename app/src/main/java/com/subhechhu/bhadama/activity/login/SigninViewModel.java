@@ -16,8 +16,8 @@ public class SigninViewModel extends AndroidViewModel {
         signinRepository = new SigninRepository();
     }
 
-    public void makePostRequest(String url, Map<String, String> u) {
-        signinRepository.makeSigninRequest(url, u);
+    public void makePostRequest(String url, Map<String, String> u, int rc) {
+        signinRepository.makeSigninRequest(url, u, rc);
     }
 
     public LiveData<String> signinResponse() {

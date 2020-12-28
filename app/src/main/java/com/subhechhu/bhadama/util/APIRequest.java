@@ -27,13 +27,13 @@ public class APIRequest {
         queue = Volley.newRequestQueue(AppController.getInstance());
     }
 
-    public void makePostRequest(String url, Map<String, String> params) {
+    public void makePostRequest(String url, Map<String, String> params, int requestCode) {
         Log.e(TAG, "post url: " + url);
-        JsonObjectRequest req = new JsonObjectRequest(url, new JSONObject(params),
-                response -> {
-                    Log.e(TAG, "post respnse: " + response.toString());
-                    fromAPI.getResponse(response.toString());
-                },
+
+        JsonObjectRequest req = new JsonObjectRequest(url, new JSONObject(params), response -> {
+            Log.e(TAG, "post respnse: " + response.toString());
+            fromAPI.getResponse(response.toString(), requestCode);
+        },
                 error -> VolleyLog.e(TAG, "Error: " + error.getMessage())) {
             @Override
             public Map<String, String> getHeaders() {
@@ -45,15 +45,32 @@ public class APIRequest {
         queue.add(req);
     }
 
-    public void makeGetRequest(String url) {
+    public void makePutRequest(String url, Map<String, String> params, int requestCode) {
+        Log.e(TAG, "post url: " + url);
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(params), response -> {
+            Log.e(TAG, "post respnse: " + response.toString());
+            fromAPI.getResponse(response.toString(), requestCode);
+        },
+                error -> VolleyLog.e(TAG, "Error: " + error.getMessage())) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                return params;
+            }
+        };
+        queue.add(req);
+    }
+
+    public void makeGetRequest(String url, int requestCode) {
         Log.e(TAG, "get url: " + url);
         StringRequest req = new StringRequest(Request.Method.GET, url,
                 response -> {
                     Log.e(TAG, "getResponse: " + response);
-                    fromAPI.getResponse(response);
+                    fromAPI.getResponse(response, requestCode);
                 },
                 error -> {
-                    fromAPI.getResponse(null);
+                    fromAPI.getResponse(null, requestCode);
                     VolleyLog.e(TAG, "Error: " + error.getMessage());
                 });
 
@@ -61,6 +78,6 @@ public class APIRequest {
     }
 
     public interface FromAPI {
-        void getResponse(String data);
+        void getResponse(String data, int requestCode);
     }
 }

@@ -11,8 +11,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.subhechhu.bhadama.R;
+import com.subhechhu.bhadama.activity.addProperty.fragment.PageFour;
 
 public class AddPropertyActivity extends AppCompatActivity {
+
+    private static final String TAG = AddPropertyActivity.class.getSimpleName();
 
     FloatingActionButton floating_personalprop_next, floating_personalprop_prev;
     addPropertyAdapter adapterViewPager;
@@ -46,17 +49,17 @@ public class AddPropertyActivity extends AppCompatActivity {
                 switch (currentPosition) {
                     case 0:
                         //TODO uncomment below lines
-//                        if (roomSize.isEmpty())
-//                            makeToast("Select Number Of Rooms");
-//                        else if (rentAmount.isEmpty())
-//                            makeToast("Enter Room Rent");
-//                        else if (roomAvailableFrom.isEmpty())
-//                            makeToast("Enter Room Available Date");
-//                        else if (location.isEmpty())
-//                            makeToast("Enter Room Location");
-//                        else
-//                            vpPager.setCurrentItem(currentPosition + 1, true);
-//                        break;
+                        if (roomSize.isEmpty())
+                            makeToast("Select Number Of Rooms");
+                        else if (rentAmount.isEmpty())
+                            makeToast("Enter Room Rent");
+                        else if (roomAvailableFrom.isEmpty())
+                            makeToast("Enter Room Available Date");
+                        else if (location.isEmpty())
+                            makeToast("Enter Room Location");
+                        else
+                            vpPager.setCurrentItem(currentPosition + 1, true);
+                        break;
                     case 1:
                     case 2:
                     case 3:
@@ -105,7 +108,7 @@ public class AddPropertyActivity extends AppCompatActivity {
     }
 
     public void updateRent(String rentAmount) {
-        Log.e("TAG", "rentamount: " + rentAmount);
+        Log.e(TAG, "rentamount: " + rentAmount);
         this.rentAmount = rentAmount;
     }
 

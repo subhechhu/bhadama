@@ -34,8 +34,8 @@ import static android.app.Activity.RESULT_OK;
 
 public class PageOne extends Fragment {
 
-    private static final int LOCATION_ACTIVITY = 45543;
     private static final String TAG = PageOne.class.getSimpleName();
+    private static final int LOCATION_ACTIVITY = 45543;
 
     DatePickerDialog datepicker;
     AppCompatButton button_addprop_date, button_addprop_location;
@@ -154,7 +154,7 @@ public class PageOne extends Fragment {
             datepicker = new DatePickerDialog(getActivity(),
                     (view1, year1, monthOfYear, dayOfMonth) -> {
                         availableDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1;
-                        button_addprop_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1);
+                        button_addprop_date.setText(getString(R.string.date, dayOfMonth, monthOfYear + 1, year1));
                         if (fieldObject != null) {
                             try {
                                 fieldObject.put("date", availableDate);

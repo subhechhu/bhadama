@@ -14,8 +14,8 @@ public class SigninRepository implements APIRequest.FromAPI {
         responseSigninData = new MutableLiveData<>();
     }
 
-    public void makeSigninRequest(String url, Map<String, String> params) {
-        new APIRequest(this).makePostRequest(url, params);
+    public void makeSigninRequest(String url, Map<String, String> params, int rc) {
+        new APIRequest(this).makePostRequest(url, params, rc);
     }
 
     public LiveData<String> getSigninResponse() {
@@ -23,7 +23,7 @@ public class SigninRepository implements APIRequest.FromAPI {
     }
 
     @Override
-    public void getResponse(String data) {
+    public void getResponse(String data,int requestCode) {
         responseSigninData.setValue(data);
     }
 }

@@ -39,27 +39,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_marginVertical="10dp"
             android:layout_marginStart="40dp"
-            android:layout_marginVertical="10dp">
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textView_rooms_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
                 android:textColor="@color/white_secondary"
                 android:textSize="21sp"
-                android:drawablePadding="10dp"
+                app:drawableStartCompat="@drawable/ic_baseline_home_24"
                 app:layout_constraintHorizontal_bias="0.022"
-                app:layout_constraintStart_toStartOf="parent"
-                app:drawableStartCompat="@drawable/ic_baseline_home_24" />
+                app:layout_constraintStart_toStartOf="parent" />
+
             <TextView
                 android:id="@+id/textView_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:textColor="@color/white_secondary"
                 android:textSize="21sp"
-                android:layout_marginStart="5dp"
                 app:layout_constraintHorizontal_bias="0.022"
                 app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
@@ -67,60 +68,60 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_marginVertical="10dp"
             android:layout_marginStart="40dp"
-            android:layout_marginVertical="10dp">
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textView_rooms_rent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
                 android:textColor="@color/white_secondary"
                 android:textSize="21sp"
-                android:drawablePadding="10dp"
+                app:drawableStartCompat="@drawable/ic_baseline_attach_money_24"
                 app:layout_constraintHorizontal_bias="0.022"
-                app:layout_constraintStart_toStartOf="parent"
-                app:drawableStartCompat="@drawable/ic_baseline_attach_money_24" />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_marginVertical="10dp"
             android:layout_marginStart="40dp"
-            android:layout_marginVertical="10dp">
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textView_availabledate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
                 android:textColor="@color/white_secondary"
                 android:textSize="21sp"
-                android:drawablePadding="10dp"
+                app:drawableStartCompat="@drawable/ic_baseline_calendar_today_24"
                 app:layout_constraintHorizontal_bias="0.022"
-                app:layout_constraintStart_toStartOf="parent"
-                app:drawableStartCompat="@drawable/ic_baseline_calendar_today_24" />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_marginVertical="10dp"
             android:layout_marginStart="40dp"
-            android:layout_marginVertical="10dp">
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textView_rooms_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
                 android:textColor="@color/white_secondary"
                 android:textSize="21sp"
-                android:drawablePadding="10dp"
+                app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
                 app:layout_constraintHorizontal_bias="0.022"
-                app:layout_constraintStart_toStartOf="parent"
-                app:drawableStartCompat="@drawable/ic_baseline_location_on_24" />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </LinearLayout>
 
@@ -129,248 +130,140 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
+            android:layout_marginStart="10dp"
             android:text="@string/view_map"
+            android:textAlignment="viewEnd"
             android:textColor="@color/white_secondary"
             android:textSize="14sp"
-            android:layout_marginStart="10dp"
-            android:textAlignment="viewEnd"
             app:layout_constraintHorizontal_bias="0.022"
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_marginVertical="10dp"
             android:layout_marginStart="40dp"
-            android:layout_marginVertical="10dp">
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textView_rooms_furnishing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
                 android:textColor="@color/white_secondary"
                 android:textSize="21sp"
-                android:drawablePadding="10dp"
+                app:drawableStartCompat="@drawable/ic_baseline_king_bed_24"
                 app:layout_constraintHorizontal_bias="0.022"
-                app:layout_constraintStart_toStartOf="parent"
-                app:drawableStartCompat="@drawable/ic_baseline_king_bed_24" />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_marginVertical="10dp"
             android:layout_marginStart="40dp"
-            android:layout_marginVertical="10dp">
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textView_rooms_parking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
                 android:textColor="@color/white_secondary"
                 android:textSize="21sp"
-                android:drawablePadding="10dp"
+                app:drawableStartCompat="@drawable/ic_baseline_local_parking_24"
                 app:layout_constraintHorizontal_bias="0.022"
-                app:layout_constraintStart_toStartOf="parent"
-                app:drawableStartCompat="@drawable/ic_baseline_local_parking_24" />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_marginVertical="10dp"
             android:layout_marginStart="40dp"
-            android:layout_marginVertical="10dp">
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textView_rooms_tenant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
                 android:textColor="@color/white_secondary"
                 android:textSize="21sp"
-                android:drawablePadding="10dp"
+                app:drawableStartCompat="@drawable/ic_baseline_people_alt_24"
                 app:layout_constraintHorizontal_bias="0.022"
-                app:layout_constraintStart_toStartOf="parent"
-                app:drawableStartCompat="@drawable/ic_baseline_people_alt_24" />
+                app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_marginVertical="10dp"
             android:layout_marginStart="40dp"
-            android:layout_marginVertical="10dp">
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textView_rooms_water"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
                 android:textColor="@color/white_secondary"
                 android:textSize="21sp"
-                android:drawablePadding="10dp"
+                app:drawableStartCompat="@drawable/ic_baseline_local_drink_24"
                 app:layout_constraintHorizontal_bias="0.022"
-                app:layout_constraintStart_toStartOf="parent"
-                app:drawableStartCompat="@drawable/ic_baseline_local_drink_24" />
+                app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="30dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:baselineAligned="false">
-
-                <RelativeLayout
-                    android:id="@+id/relative_first"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:id="@+id/imaageview_first"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/rounded_dash_border" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/ic_baseline_add_circle_24" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relative_second"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:layout_marginHorizontal="10dp"
-                    android:focusable="true">
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/ic_baseline_add_circle_24" />
-
-                    <ImageView
-                        android:id="@+id/imaageview_second"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/rounded_dash_border" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relative_third"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:id="@+id/imageview_third"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/rounded_dash_border" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/ic_baseline_add_circle_24" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relative_fourth"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_weight="1">
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/ic_baseline_add_circle_24" />
-
-                    <ImageView
-                        android:id="@+id/imaageview_fourth"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/rounded_dash_border" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relative_fifth"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:id="@+id/imaageview_fifth"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/rounded_dash_border" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/ic_baseline_add_circle_24" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relative_sixth"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/ic_baseline_add_circle_24" />
-
-                    <ImageView
-                        android:id="@+id/imaageview_sixth"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/rounded_dash_border" />
-                </RelativeLayout>
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
-
-        <TextView
-            android:layout_marginTop="30dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_first"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="I declare all information provided is correct.\nI take responsibility for any wrong information."
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_corner_white"
+            android:elevation="8dp"
+            app:cardCornerRadius="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/imageView_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_centerInParent="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView_viewViewAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/viewall"
+            android:textAlignment="viewEnd"
             android:textColor="@color/white_secondary"
             android:textSize="14sp"
+            app:layout_constraintHorizontal_bias="0.022"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/tnc"
+            android:textColor="@color/white_secondary"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.022"
             app:layout_constraintStart_toStartOf="parent" />
@@ -382,17 +275,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="72dp"
+            android:layout_marginBottom="60dp"
             android:background="@drawable/rounded_corner_primary"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:text="@string/verifyproperty"
             android:textAllCaps="false"
-            android:layout_marginBottom="30dp"
             android:textColor="@color/white_secondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-
     </LinearLayout>
 </ScrollView>

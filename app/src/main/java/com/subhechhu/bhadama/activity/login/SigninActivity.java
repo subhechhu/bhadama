@@ -7,7 +7,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +17,13 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.snackbar.Snackbar;
 import com.subhechhu.bhadama.activity.HomeActivity;
+import com.subhechhu.bhadama.activity.addProperty.fragment.PageOne;
 import com.subhechhu.bhadama.activity.signup.SignupActivity;
 import com.subhechhu.bhadama.AppController;
 import com.subhechhu.bhadama.R;
+import com.subhechhu.bhadama.util.GetConstants;
 import com.subhechhu.bhadama.util.GetUrl;
 import com.subhechhu.bhadama.util.Network;
 
@@ -28,18 +33,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SigninActivity extends AppCompatActivity {
-    EditText editText_phone, editText_pin;
-    ProgressBar progressBar_login;
-    AppCompatButton button_login_phone_verify, button_login_pin_verify, button_login_signin;
+    private static final String TAG = SigninActivity.class.getSimpleName();
 
+    EditText editText_phone, editText_pin;
+    ProgressBar progressBar_login, progressBar_otp, progressBar_newPin;
+    AppCompatButton button_login_phone_verify, button_login_pin_verify, button_login_signin,
+            button_otp_verify, button_newpin_proceed;
+    TextView textView_forgot_pin;
+
+    BottomSheetDialog newPinDialog, otpDialog;
+
+    Snackbar snackbar;
+    LinearLayout parentlayout;
 
     SigninViewModel signinViewModel;
+    ForgotPasswordViewModel forgotPasswordViewModel;
+
+    String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_signin);
+
+        parentlayout = findViewById(R.id.parentlayout);
 
         progressBar_login = findViewById(R.id.progressBar_login);
         editText_phone = findViewById(R.id.edittext_home_location);
@@ -49,9 +67,18 @@ public class SigninActivity extends AppCompatActivity {
         button_login_pin_verify = findViewById(R.id.button_login_pin_verify);
         button_login_signin = findViewById(R.id.button_login_signin);
 
+        textView_forgot_pin = findViewById(R.id.textView_forgot_pin);
+
+        /*
+         *
+         * Response
+         * of
+         * Signin
+         *
+         * */
         signinViewModel = ViewModelProviders.of(this).get(SigninViewModel.class);
         signinViewModel.signinResponse().observe(this, response -> {
-            Log.d("TAG", "user" + response);
+            Log.d(TAG, "user" + response);
             button_login_signin.setEnabled(true);
             progressBar_login.setVisibility(View.INVISIBLE);
             try {
@@ -62,7 +89,95 @@ public class SigninActivity extends AppCompatActivity {
                     startActivity(new Intent(SigninActivity.this, HomeActivity.class));
                     finish();
                 } else {
-                    Toast.makeText(SigninActivity.this, responseBody.getString("message"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SigninActivity.this, responseBody.getString("message"), Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        forgotPasswordViewModel = ViewModelProviders.of(this).get(ForgotPasswordViewModel.class);
+
+        /*
+         *
+         * Response
+         * of
+         * Forget
+         * Pin
+         *
+         * */
+
+        forgotPasswordViewModel.forgetPasswordResponse().observe(this, response ->
+        {
+            textView_forgot_pin.setEnabled(true);
+            progressBar_login.setVisibility(View.INVISIBLE);
+            try {
+                JSONObject responseObject = new JSONObject(response);
+                JSONObject responseBody = responseObject.getJSONObject("body");
+                if (responseObject.getInt("statusCode") == 200 || responseObject.getInt("statusCode") == 201) {
+                    snackbar = Snackbar.make(parentlayout, responseBody.getString("message"), Snackbar.LENGTH_INDEFINITE)
+                            .setAction("OKAY", view -> {
+                                snackbar.dismiss();
+                                renderOTPDialog();
+                            })
+                            .setActionTextColor(getResources().getColor(R.color.secondary));
+                    snackbar.show();
+                } else {
+                    Toast.makeText(SigninActivity.this, responseBody.getString("message"), Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+
+
+        /*
+         *
+         * Response
+         * of
+         * Verify
+         * OTP
+         *
+         * */
+        forgotPasswordViewModel.verifyOTPResponse().observe(this, response ->
+        {
+            try {
+                JSONObject responseObject = new JSONObject(response);
+                JSONObject responseBody = responseObject.getJSONObject("body");
+                if (responseObject.getInt("statusCode") == 200 || responseObject.getInt("statusCode") == 201) {
+                    otpDialog.dismiss();
+                    renderNewPin();
+                } else {
+                    button_otp_verify.setEnabled(true);
+                    progressBar_otp.setVisibility(View.INVISIBLE);
+                    Toast.makeText(SigninActivity.this, responseBody.getString("message"), Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        /*
+         *
+         * Response
+         * of
+         * New
+         * Pin
+         *
+         * */
+        forgotPasswordViewModel.newPinResponse().observe(this, response ->
+        {
+            try {
+                JSONObject responseObject = new JSONObject(response);
+                JSONObject responseBody = responseObject.getJSONObject("body");
+                if (responseObject.getInt("statusCode") == 200 || responseObject.getInt("statusCode") == 201) {
+                    Toast.makeText(SigninActivity.this, "New pin has been generated.\nProceed to login", Toast.LENGTH_LONG).show();
+                    newPinDialog.dismiss();
+                } else {
+                    button_newpin_proceed.setEnabled(true);
+                    progressBar_newPin.setVisibility(View.INVISIBLE);
+                    Toast.makeText(SigninActivity.this, responseBody.getString("message"), Toast.LENGTH_LONG).show();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -81,9 +196,9 @@ public class SigninActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable arg0) {
-                if (arg0.toString().length() == 10)
+                if (arg0.toString().length() == 10) {
                     button_login_phone_verify.setVisibility(View.INVISIBLE);
-                else
+                } else
                     button_login_phone_verify.setVisibility(View.VISIBLE);
             }
         });
@@ -107,75 +222,89 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
-        button_login_signin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Network.getConnection(getApplicationContext())) {
-                    if (!verifyPhone(editText_phone)) {
-                        Toast.makeText(SigninActivity.this, "Invalid Phone Number", Toast.LENGTH_SHORT).show();
-                    } else if (editText_pin.getText().toString().length() != 4) {
-                        Toast.makeText(SigninActivity.this, "Invalid Pin", Toast.LENGTH_SHORT).show();
-                    } else {
-                        progressBar_login.setVisibility(View.VISIBLE);
+        button_login_signin.setOnClickListener(view -> {
+            if (Network.getConnection(getApplicationContext())) {
+                if (!verifyPhone(editText_phone)) {
+                    Toast.makeText(SigninActivity.this, "Invalid Phone Number", Toast.LENGTH_LONG).show();
+                } else if (editText_pin.getText().toString().length() != 4) {
+                    Toast.makeText(SigninActivity.this, "Invalid Pin", Toast.LENGTH_LONG).show();
+                } else {
+                    progressBar_login.setVisibility(View.VISIBLE);
 
-                        Map<String, String> users = new HashMap<>();
-                        users.put("phone_number", editText_phone.getText().toString());
-                        users.put("pin", editText_pin.getText().toString());
+                    Map<String, String> users = new HashMap<>();
+                    users.put("phone_number", editText_phone.getText().toString());
+                    users.put("pin", editText_pin.getText().toString());
 
-                        signinViewModel.makePostRequest(GetUrl.LOGIN, users);
-                    }
+                    signinViewModel.makePostRequest(GetUrl.LOGIN, users, GetConstants.LOGIN_REQUESTCODE);
+                }
+            }
+        });
+
+    }
+
+    public void forgotPin(View v) {
+        if (isConnected()) {
+            if (editText_phone.getText().toString().length() != 10) {
+                Toast.makeText(SigninActivity.this, "Please Enter Valid Phone Number To Proceed", Toast.LENGTH_LONG).show();
+            } else {
+                progressBar_login.setVisibility(View.VISIBLE);
+                textView_forgot_pin.setEnabled(false);
+
+                phoneNumber = editText_phone.getText().toString();
+
+                Map<String, String> phoneMap = new HashMap<>();
+                phoneMap.put("phone_number", editText_phone.getText().toString());
+
+                forgotPasswordViewModel.makePostRequest(GetUrl.FORGET_PASSWORD, phoneMap, GetConstants.FORGETPIN_REQUESTCODE);
+            }
+        }
+    }
+
+    private void renderOTPDialog() {
+        View view = getLayoutInflater().inflate(R.layout.otp_dialog, null);
+        otpDialog = new BottomSheetDialog(SigninActivity.this, R.style.dialogStyle);
+        otpDialog.setContentView(view);
+        otpDialog.setCancelable(false);
+        otpDialog.show();
+
+        EditText editText_otp = view.findViewById(R.id.edittext_otp_otp);
+        progressBar_otp = view.findViewById(R.id.progressBar_otp);
+
+        button_otp_verify = view.findViewById(R.id.button_otp_verify);
+
+        view.findViewById(R.id.button_otp_close).setOnClickListener(view1 -> otpDialog.dismiss());
+
+        button_otp_verify.setOnClickListener(view12 -> {
+            if (isConnected()) {
+                button_otp_verify.setEnabled(false);
+                progressBar_otp.setVisibility(View.VISIBLE);
+
+                if (editText_otp.getText().toString().length() != 4) {
+                    Toast.makeText(this, "Enter Valid OTP to Proceed", Toast.LENGTH_LONG).show();
+                } else {
+                    Map<String, String> otpmap = new HashMap<>();
+                    otpmap.put("phone_number", phoneNumber);
+                    otpmap.put("otp", editText_otp.getText().toString());
+                    forgotPasswordViewModel.makePostRequest(GetUrl.VERIFY_OTP, otpmap, GetConstants.VERIFYOTP_REQUESTCODE);
                 }
             }
         });
     }
 
-    public void signUp(View v) {
-        startActivity(new Intent(SigninActivity.this, SignupActivity.class));
-    }
-
-    public void forgotPin(View v) {
-
-        if (editText_phone.getText().toString().length() != 10) {
-            Toast.makeText(SigninActivity.this, "Please enter phone number to proceed", Toast.LENGTH_LONG).show();
-        } else {
-            View view = getLayoutInflater().inflate(R.layout.otp_dialog, null);
-            BottomSheetDialog dialog = new BottomSheetDialog(SigninActivity.this, R.style.dialogStyle);
-            dialog.setContentView(view);
-            dialog.setCancelable(false);
-            dialog.show();
-
-            EditText editText_otp = view.findViewById(R.id.edittext_otp_otp);
-
-            view.findViewById(R.id.button_otp_close).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog.dismiss();
-                }
-            });
-            view.findViewById(R.id.button_otp_verify).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(SigninActivity.this, "OTP entered is " + editText_otp.getText().toString(), Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                    renderNewPin();
-                }
-            });
-        }
-    }
-
     private void renderNewPin() {
         View view = getLayoutInflater().inflate(R.layout.newpin_dialog, null);
-        BottomSheetDialog dialog = new BottomSheetDialog(SigninActivity.this, R.style.dialogStyle);
-        dialog.setContentView(view);
-        dialog.setCancelable(false);
-        dialog.show();
+        newPinDialog = new BottomSheetDialog(SigninActivity.this, R.style.dialogStyle);
+        newPinDialog.setContentView(view);
+        newPinDialog.setCancelable(false);
+        newPinDialog.show();
 
         EditText editText_pin = view.findViewById(R.id.edittext_newpin_pin);
         EditText edit_confirmpin = view.findViewById(R.id.edittext_newpin_reenterpin);
 
         AppCompatButton button_newpin_pin_verify = view.findViewById(R.id.button_newpin_pin_verify);
+        progressBar_newPin = view.findViewById(R.id.progressBar_newpin);
         AppCompatButton button_newpin_reenterpin_verify = view.findViewById(R.id.button_newpin_reenterpin_verify);
-
+        button_newpin_proceed = view.findViewById(R.id.button_newpin_proceed);
 
         editText_pin.addTextChangedListener(new TextWatcher() {
             @Override
@@ -219,40 +348,30 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
+        view.findViewById(R.id.button_newpin_close).setOnClickListener(view12 -> newPinDialog.dismiss());
 
-        view.findViewById(R.id.button_newpin_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
+        button_newpin_proceed.setOnClickListener(view1 -> {
+            if (isConnected()) {
+                if (verifyReenterPin(edit_confirmpin, editText_pin)) {
+                    button_newpin_proceed.setEnabled(false);
+                    progressBar_newPin.setVisibility(View.VISIBLE);
+
+                    Map<String, String> newPinMap = new HashMap<>();
+                    newPinMap.put("phone_number", phoneNumber);
+                    newPinMap.put("pin", editText_pin.getText().toString());
+                    forgotPasswordViewModel.makePutRequest(GetUrl.UPDATE_PIN, newPinMap, GetConstants.NEWPIN_REQUESTCODE);
+                } else {
+                    Toast.makeText(this, "Pin Did Not Match", Toast.LENGTH_LONG).show();
+                }
             }
         });
-        view.findViewById(R.id.button_newpin_proceed).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                proceed(dialog, editText_pin, edit_confirmpin, button_newpin_reenterpin_verify);
-            }
-        });
     }
 
-    private void proceed(BottomSheetDialog dialog, EditText edittext_Login_Reenterpin, EditText
-            edittext_login_pin, AppCompatButton button_newpin_reenterpin_verify) {
-        if (verifyPin(edittext_login_pin, edittext_Login_Reenterpin, button_newpin_reenterpin_verify) &&
-                verifyReenterPin(edittext_Login_Reenterpin, edittext_login_pin)) {
-            Toast.makeText(SigninActivity.this, "New pin has been generated.\nProceed to login", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-        }
+    public void signUp(View v) {
+        startActivity(new Intent(SigninActivity.this, SignupActivity.class));
     }
 
-    private boolean verifyReenterPin(EditText edittext_login_reenterpin, EditText
-            edittext_login_pin) {
-        if (edittext_login_reenterpin.getText().toString().length() == 4 && !edittext_login_reenterpin.getText().toString().equals(edittext_login_pin.getText().toString())) {
-            Toast.makeText(SigninActivity.this, "Pin did not match", Toast.LENGTH_LONG).show();
-        }
-        return edittext_login_reenterpin.getText().toString().equals(edittext_login_pin.getText().toString());
-    }
-
-    private boolean verifyPin(EditText edittext_login_pin, EditText
-            edittextSignupReenterpin, AppCompatButton button_signup_reenterpin_verify) {
+    private boolean verifyPin(EditText edittext_login_pin, EditText edittextSignupReenterpin, AppCompatButton button_signup_reenterpin_verify) {
         if (edittext_login_pin.getText().toString().length() == 4 && edittext_login_pin.getText().toString().equals(edittextSignupReenterpin.getText().toString())) {
             button_signup_reenterpin_verify.setVisibility(View.INVISIBLE);
         } else {
@@ -262,7 +381,18 @@ public class SigninActivity extends AppCompatActivity {
         return edittext_login_pin.getText().toString().length() == 4;
     }
 
+    private boolean verifyReenterPin(EditText edittext_login_reenterpin, EditText edittext_login_pin) {
+        if (edittext_login_reenterpin.getText().toString().length() == 4 && !edittext_login_reenterpin.getText().toString().equals(edittext_login_pin.getText().toString())) {
+            Toast.makeText(SigninActivity.this, "Pin did not match", Toast.LENGTH_LONG).show();
+        }
+        return edittext_login_reenterpin.getText().toString().equals(edittext_login_pin.getText().toString());
+    }
+
     private boolean verifyPhone(EditText editText_phone) {
         return editText_phone.getText().toString().length() == 10;
+    }
+
+    private boolean isConnected() {
+        return Network.getConnection(AppController.getInstance());
     }
 }

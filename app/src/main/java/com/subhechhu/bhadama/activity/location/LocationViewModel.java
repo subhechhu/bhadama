@@ -19,8 +19,8 @@ public class LocationViewModel extends AndroidViewModel {
         locationRepository = new LocationRepository();
     }
 
-    public void makeGetRequest(String q) {
-        locationRepository.makeLocationRequest(GetUrl.LOCATION_URL + q);
+    public void makeGetRequest(String q, int rc) {
+        locationRepository.makeLocationRequest(GetUrl.LOCATION_URL + q, rc);
     }
 
     public LiveData<List<LocationModel>> getLocationRepository() {

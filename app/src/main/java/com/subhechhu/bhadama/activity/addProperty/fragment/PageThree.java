@@ -1,6 +1,7 @@
 package com.subhechhu.bhadama.activity.addProperty.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -47,6 +48,9 @@ import static android.app.Activity.RESULT_OK;
 
 public class PageThree extends Fragment {
 
+    private static final String TAG = PageThree.class.getSimpleName();
+
+
     final private int CAMERA_PERMISSION = 1221;
     final private int GALLERY_PERMISSION = 1222;
 
@@ -57,6 +61,9 @@ public class PageThree extends Fragment {
     LinearLayout linearlayout;
     View parentView;
     ImageView image_first, image_second, image_third, image_fourth, image_fifth, image_sixth;
+    ImageView add_image_first, add_image_second, add_image_third, add_image_fourth, add_image_fifth, add_image_sixth;
+
+    boolean first, second, third, fourth, fifth, sixth;
 
     String currentPhotoPath;
 
@@ -90,34 +97,78 @@ public class PageThree extends Fragment {
         image_fifth = parentView.findViewById(R.id.imageView_fifth);
         image_sixth = parentView.findViewById(R.id.imageView_sixth);
 
+        add_image_first = parentView.findViewById(R.id.add_image_first);
+        add_image_second = parentView.findViewById(R.id.add_image_second);
+        add_image_third = parentView.findViewById(R.id.add_image_third);
+        add_image_fourth = parentView.findViewById(R.id.add_image_fourth);
+        add_image_fifth = parentView.findViewById(R.id.add_image_fifth);
+        add_image_sixth = parentView.findViewById(R.id.add_image_sixth);
+
         cardview_first.setOnClickListener(view -> {
-            renderPickerDialog();
-            imageViewSelected = 1;
+            if (first) {
+                first = false;
+                image_first.setImageDrawable(null);
+                add_image_first.setImageResource(R.drawable.ic_baseline_add_circle_24);
+            } else {
+                renderPickerDialog();
+                imageViewSelected = 1;
+            }
+
         });
 
         cardview_second.setOnClickListener(view -> {
-            renderPickerDialog();
-            imageViewSelected = 2;
+            if (second) {
+                second = false;
+                image_second.setImageDrawable(null);
+                add_image_second.setImageResource(R.drawable.ic_baseline_add_circle_24);
+            } else {
+                renderPickerDialog();
+                imageViewSelected = 2;
+            }
         });
 
         cardview_third.setOnClickListener(view -> {
-            renderPickerDialog();
-            imageViewSelected = 3;
+            if (third) {
+                third = false;
+                image_third.setImageDrawable(null);
+                add_image_third.setImageResource(R.drawable.ic_baseline_add_circle_24);
+            } else {
+                renderPickerDialog();
+                imageViewSelected = 3;
+            }
         });
 
         cardview_fourth.setOnClickListener(view -> {
-            renderPickerDialog();
-            imageViewSelected = 4;
+            if (fourth) {
+                fourth = false;
+                image_fourth.setImageDrawable(null);
+                add_image_fourth.setImageResource(R.drawable.ic_baseline_add_circle_24);
+            } else {
+                renderPickerDialog();
+                imageViewSelected = 4;
+            }
         });
 
         cardview_fifth.setOnClickListener(view -> {
-            renderPickerDialog();
-            imageViewSelected = 5;
+            if (fifth) {
+                fifth = false;
+                image_fifth.setImageDrawable(null);
+                add_image_fifth.setImageResource(R.drawable.ic_baseline_add_circle_24);
+            } else {
+                renderPickerDialog();
+                imageViewSelected = 5;
+            }
         });
 
         cardview_sixth.setOnClickListener(view -> {
-            renderPickerDialog();
-            imageViewSelected = 6;
+            if (sixth) {
+                sixth = false;
+                image_sixth.setImageDrawable(null);
+                add_image_sixth.setImageResource(R.drawable.ic_baseline_add_circle_24);
+            } else {
+                renderPickerDialog();
+                imageViewSelected = 6;
+            }
         });
 
         return parentView;
@@ -164,6 +215,7 @@ public class PageThree extends Fragment {
         });
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     private void openCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(Objects.requireNonNull(getActivity()).getPackageManager()) != null) {
@@ -181,21 +233,6 @@ public class PageThree extends Fragment {
         }
     }
 
-    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-
-        float bitmapRatio = (float) width / (float) height;
-        if (bitmapRatio > 0) {
-            width = maxSize;
-            height = (int) (width / bitmapRatio);
-        } else {
-            height = maxSize;
-            width = (int) (height * bitmapRatio);
-        }
-        return Bitmap.createScaledBitmap(image, width, height, true);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -203,10 +240,8 @@ public class PageThree extends Fragment {
             switch (imageViewSelected) {
                 case 1:
                     try {
-//                        compressImage(currentPhotoPath);
-//                        Bitmap bitmap_1 = BitmapFactory.decodeFile(currentPhotoPath);
-////                        Log.e("TAG")
-//                        bitmap_1.compress(Bitmap.CompressFormat.JPEG, 2, new FileOutputStream(currentPhotoPath));
+                        first = true;
+                        add_image_first.setImageResource(R.drawable.ic_baseline_delete_24);
                         image_first.setImageBitmap(compressImage(currentPhotoPath));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -214,9 +249,8 @@ public class PageThree extends Fragment {
                     break;
                 case 2:
                     try {
-//                        Bitmap bitmap_2 = BitmapFactory.decodeFile(currentPhotoPath);
-//                        bitmap_2.compress(Bitmap.CompressFormat.JPEG, 2, new FileOutputStream(currentPhotoPath));
-//                        image_second.setImageBitmap(bitmap_2);
+                        second = true;
+                        add_image_second.setImageResource(R.drawable.ic_baseline_delete_24);
                         image_second.setImageBitmap(compressImage(currentPhotoPath));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -224,9 +258,8 @@ public class PageThree extends Fragment {
                     break;
                 case 3:
                     try {
-//                        Bitmap bitmap_3 = BitmapFactory.decodeFile(currentPhotoPath);
-//                        bitmap_3.compress(Bitmap.CompressFormat.JPEG, 2, new FileOutputStream(currentPhotoPath));
-//                        image_third.setImageBitmap(bitmap_3);
+                        third = true;
+                        add_image_third.setImageResource(R.drawable.ic_baseline_delete_24);
                         image_third.setImageBitmap(compressImage(currentPhotoPath));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -235,10 +268,8 @@ public class PageThree extends Fragment {
 
                 case 4:
                     try {
-//                        Bitmap bitmap_4 = BitmapFactory.decodeFile(currentPhotoPath);
-//                        bitmap_4 = getResizedBitmap(bitmap_4, 100);
-//                        bitmap_4.compress(Bitmap.CompressFormat.JPEG, 2, new FileOutputStream(currentPhotoPath));
-//                        image_fourth.setImageBitmap(bitmap_4);
+                        fourth = true;
+                        add_image_fourth.setImageResource(R.drawable.ic_baseline_delete_24);
                         image_fourth.setImageBitmap(compressImage(currentPhotoPath));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -247,10 +278,8 @@ public class PageThree extends Fragment {
 
                 case 5:
                     try {
-//                        Bitmap bitmap_5 = BitmapFactory.decodeFile(currentPhotoPath);
-//                        bitmap_5 = getResizedBitmap(bitmap_5, 100);
-//                        bitmap_5.compress(Bitmap.CompressFormat.JPEG, 2, new FileOutputStream(currentPhotoPath));
-//                        image_fifth.setImageBitmap(bitmap_5);
+                        fifth = true;
+                        add_image_fifth.setImageResource(R.drawable.ic_baseline_delete_24);
                         image_fifth.setImageBitmap(compressImage(currentPhotoPath));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -259,10 +288,8 @@ public class PageThree extends Fragment {
 
                 case 6:
                     try {
-//                        Bitmap bitmap_6 = BitmapFactory.decodeFile(currentPhotoPath);
-//                        bitmap_6 = getResizedBitmap(bitmap_6, 100);
-//                        bitmap_6.compress(Bitmap.CompressFormat.JPEG, 2, new FileOutputStream(currentPhotoPath));
-//                        image_sixth.setImageBitmap(bitmap_6);
+                        sixth = true;
+                        add_image_sixth.setImageResource(R.drawable.ic_baseline_delete_24);
                         image_sixth.setImageBitmap(compressImage(currentPhotoPath));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -336,7 +363,7 @@ public class PageThree extends Fragment {
                     } else {
                         if (ActivityCompat.shouldShowRequestPermissionRationale(Objects.requireNonNull(getActivity()),
                                 Manifest.permission.CAMERA)) {
-                            Log.e("TAG", "177 Camera Permission Denied");
+                            Log.e(TAG, "177 Camera Permission Denied");
                         } else {
                             showNoPermissionDialog("Camera Permission");
                         }
@@ -351,7 +378,7 @@ public class PageThree extends Fragment {
                     } else {
                         if (ActivityCompat.shouldShowRequestPermissionRationale(Objects.requireNonNull(getActivity()),
                                 Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                            Log.e("TAG", "195 Gallery Permission Denied");
+                            Log.e(TAG, "195 Gallery Permission Denied");
                         } else {
                             showNoPermissionDialog("Gallery Permission");
                         }
@@ -463,13 +490,17 @@ public class PageThree extends Fragment {
 
     private String getRealPathFromURI(String contentURI) {
         Uri contentUri = Uri.parse(contentURI);
+        String cursorString;
+
         Cursor cursor = Objects.requireNonNull(getActivity()).getContentResolver().query(contentUri, null, null, null, null);
         if (cursor == null) {
             return contentUri.getPath();
         } else {
             cursor.moveToFirst();
             int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(index);
+            cursorString = cursor.getString(index);
+            cursor.close();
+            return cursorString;
         }
     }
 

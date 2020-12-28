@@ -1,6 +1,5 @@
 package com.subhechhu.bhadama.activity.addProperty.fragment;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,14 +13,10 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.subhechhu.bhadama.AppController;
 import com.subhechhu.bhadama.R;
-import com.subhechhu.bhadama.activity.HomeActivity;
 import com.subhechhu.bhadama.activity.MapActivity;
-import com.subhechhu.bhadama.activity.login.SigninActivity;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -34,7 +29,7 @@ public class PageFour extends Fragment {
             textView_rooms_type, textView_viewinmaps;
 
     String latitude = "", longitude = "", location = "", city = "", roomsize = "", rent = "", availableDate = "", roomType = "";
-    String furnishing = "", tenants = "", watersupply = "", parking = "";
+    String furnishing = "", tenants = "";
 
     boolean wheel2, wheel4, nwsc, underground, others;
 
@@ -83,7 +78,7 @@ public class PageFour extends Fragment {
                 textView_rooms_water.setText(getString(R.string.nwsc_plain));
             } else if (underground) {
                 textView_rooms_water.setText(getString(R.string.underground));
-            }else
+            } else
                 textView_rooms_water.setText(getString(R.string.nowater));
 
         } catch (Exception e) {
@@ -108,7 +103,7 @@ public class PageFour extends Fragment {
 
 
         AppCompatButton button_verify_property = view.findViewById(R.id.button_verify_property);
-        button_verify_property.setOnClickListener(view1 -> Objects.requireNonNull(getActivity()).onBackPressed());
+        button_verify_property.setOnClickListener(view1 -> Objects.requireNonNull(getActivity()).finish());
 
         fragmentViewModel.fragmentOneResponse().observe(getViewLifecycleOwner(), response -> {
             try {

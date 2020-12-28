@@ -135,7 +135,7 @@ public class HomeActivity extends AppCompatActivity {
                         jsonObject.put("entireFlat", checkbox_entireFlat.isChecked());
                         jsonObject.put("entireHouse", checkbox_entireHouse.isChecked());
 
-                        Log.e("TAG", "json to server: " + jsonObject.toString());
+                        Log.e(TAG, "json to server: " + jsonObject.toString());
 
                         Intent intent = new Intent(HomeActivity.this, SavedPropertyActivity.class);
                         intent.putExtra("Message", "");
@@ -178,8 +178,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == LOCATION_ACTIVITY) {
             LocationModel locationObject = data.getExtras().getParcelable("locationObject");
-            Log.e("TAG", "homemodel word: " + locationObject.toString());
-//            Log.e("TAG","homemodel city: "+data.getStringExtra("city"));
+            Log.e(TAG, "homemodel word: " + locationObject.toString());
+//            Log.e(TAG,"homemodel city: "+data.getStringExtra("city"));
             city = data.getStringExtra("city");
             if(data.getStringExtra("city") == null){
                 city = "Nepal";

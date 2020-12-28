@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.subhechhu.bhadama.AppController;
 import com.subhechhu.bhadama.R;
+import com.subhechhu.bhadama.activity.addProperty.fragment.PageOne;
+import com.subhechhu.bhadama.util.GetConstants;
 import com.subhechhu.bhadama.util.GetUrl;
 import com.subhechhu.bhadama.util.Network;
 
@@ -25,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
+    private static final String TAG = SignupActivity.class.getSimpleName();
 
     final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
@@ -54,7 +57,7 @@ public class SignupActivity extends AppCompatActivity {
 
         signupViewModel = ViewModelProviders.of(this).get(SignupViewModel.class);
         signupViewModel.signupResponse().observe(this, userResponse -> {
-            Log.d("TAG", "user" + userResponse);
+            Log.d(TAG, "user" + userResponse);
             button_signup_proceed.setEnabled(true);
             progressBar_signup.setVisibility(View.INVISIBLE);
             try {
@@ -175,7 +178,7 @@ public class SignupActivity extends AppCompatActivity {
                         users.put("pin", edittext_signup_pin.getText().toString());
                         users.put("email", edittext_signup_email.getText().toString());
 
-                        signupViewModel.getPostRequest(GetUrl.SIGNUP, users);
+                        signupViewModel.getPostRequest(GetUrl.SIGNUP, users, GetConstants.SIGNUP_REQUESTCODE);
                     }
                 } else {
                     Toast.makeText(SignupActivity.this, "All fields must be entered", Toast.LENGTH_LONG).show();
