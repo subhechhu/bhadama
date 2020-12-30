@@ -32,10 +32,14 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.subhechhu.bhadama.BuildConfig;
 import com.subhechhu.bhadama.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,18 +59,27 @@ public class PageThree extends Fragment {
     final private int GALLERY_PERMISSION = 1222;
 
     final private int REQUEST_IMAGE_CAPTURE = 4367;
+    final private int REQUEST_IMAGE_GALLERY = 5447;
 
     int imageViewSelected = 0;
 
     LinearLayout linearlayout;
     View parentView;
     ImageView image_first, image_second, image_third, image_fourth, image_fifth, image_sixth;
-    ImageView add_image_first, add_image_second, add_image_third, add_image_fourth, add_image_fifth, add_image_sixth;
+    ImageView add_image_first, add_image_second, add_image_third, add_image_fourth, add_image_fifth,
+            add_image_sixth;
+
+    CardView cardview_first, cardview_second, cardview_third, cardview_fourth, cardview_fifth,
+            cardview_sixth;
+
 
     boolean first, second, third, fourth, fifth, sixth;
 
     String currentPhotoPath;
+    String path_1 = "", path_2 = "", path_3 = "", path_4 = "", path_5 = "", path_6 = "";
 
+    FragmentViewModel fragmentViewModel;
+    JSONObject fieldObject;
 
     public static PageThree newInstance() {
         return new PageThree();
@@ -76,6 +89,7 @@ public class PageThree extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        fragmentViewModel = ViewModelProviders.of(requireActivity()).get(FragmentViewModel.class);
     }
 
     @Override
@@ -83,12 +97,24 @@ public class PageThree extends Fragment {
         parentView = inflater.inflate(R.layout.fragment_pagethree, container, false);
         linearlayout = parentView.findViewById(R.id.linearlayout);
 
-        CardView cardview_first = parentView.findViewById(R.id.cardview_first);
-        CardView cardview_second = parentView.findViewById(R.id.cardview_second);
-        CardView cardview_third = parentView.findViewById(R.id.cardview_third);
-        CardView cardview_fourth = parentView.findViewById(R.id.cardview_fourth);
-        CardView cardview_fifth = parentView.findViewById(R.id.cardview_fifth);
-        CardView cardview_sixth = parentView.findViewById(R.id.cardview_sixth);
+
+        cardview_first = parentView.findViewById(R.id.cardview_first);
+
+        cardview_second = parentView.findViewById(R.id.cardview_second);
+        cardview_second.setVisibility(View.GONE);
+
+        cardview_third = parentView.findViewById(R.id.cardview_third);
+        cardview_third.setVisibility(View.GONE);
+
+        cardview_fourth = parentView.findViewById(R.id.cardview_fourth);
+        cardview_fourth.setVisibility(View.GONE);
+
+        cardview_fifth = parentView.findViewById(R.id.cardview_fifth);
+        cardview_fifth.setVisibility(View.GONE);
+
+        cardview_sixth = parentView.findViewById(R.id.cardview_sixth);
+        cardview_sixth.setVisibility(View.GONE);
+
 
         image_first = parentView.findViewById(R.id.imageView_first);
         image_second = parentView.findViewById(R.id.imageView_second);
@@ -105,69 +131,137 @@ public class PageThree extends Fragment {
         add_image_sixth = parentView.findViewById(R.id.add_image_sixth);
 
         cardview_first.setOnClickListener(view -> {
-            if (first) {
-                first = false;
-                image_first.setImageDrawable(null);
-                add_image_first.setImageResource(R.drawable.ic_baseline_add_circle_24);
-            } else {
-                renderPickerDialog();
-                imageViewSelected = 1;
-            }
+            try {
+                if (first) {
+                    cardview_second.setVisibility(View.GONE);
 
+                    path_1 = "";
+                    if (fieldObject != null)
+                        fieldObject.put("img_1", path_1);
+
+                    first = false;
+                    image_first.setImageDrawable(null);
+                    add_image_first.setImageResource(R.drawable.ic_baseline_add_circle_24);
+                } else {
+                    renderPickerDialog();
+                    imageViewSelected = 1;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         cardview_second.setOnClickListener(view -> {
-            if (second) {
-                second = false;
-                image_second.setImageDrawable(null);
-                add_image_second.setImageResource(R.drawable.ic_baseline_add_circle_24);
-            } else {
-                renderPickerDialog();
-                imageViewSelected = 2;
+            try {
+                if (second) {
+                    add_image_first.setVisibility(View.VISIBLE);
+                    cardview_first.setEnabled(true);
+                    cardview_third.setVisibility(View.GONE);
+
+                    path_2 = "";
+                    if (fieldObject != null)
+                        fieldObject.put("img_2", path_2);
+
+                    second = false;
+                    image_second.setImageDrawable(null);
+                    add_image_second.setImageResource(R.drawable.ic_baseline_add_circle_24);
+                } else {
+                    renderPickerDialog();
+                    imageViewSelected = 2;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
         cardview_third.setOnClickListener(view -> {
-            if (third) {
-                third = false;
-                image_third.setImageDrawable(null);
-                add_image_third.setImageResource(R.drawable.ic_baseline_add_circle_24);
-            } else {
-                renderPickerDialog();
-                imageViewSelected = 3;
+            try {
+                if (third) {
+                    add_image_second.setVisibility(View.VISIBLE);
+                    cardview_second.setEnabled(true);
+                    cardview_fourth.setVisibility(View.GONE);
+
+                    path_3 = "";
+                    if (fieldObject != null)
+                        fieldObject.put("img_3", path_3);
+
+                    third = false;
+                    image_third.setImageDrawable(null);
+                    add_image_third.setImageResource(R.drawable.ic_baseline_add_circle_24);
+                } else {
+                    renderPickerDialog();
+                    imageViewSelected = 3;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
         cardview_fourth.setOnClickListener(view -> {
-            if (fourth) {
-                fourth = false;
-                image_fourth.setImageDrawable(null);
-                add_image_fourth.setImageResource(R.drawable.ic_baseline_add_circle_24);
-            } else {
-                renderPickerDialog();
-                imageViewSelected = 4;
+            try {
+                if (fourth) {
+                    add_image_third.setVisibility(View.VISIBLE);
+                    cardview_third.setEnabled(true);
+                    cardview_fifth.setVisibility(View.GONE);
+
+                    path_4 = "";
+                    if (fieldObject != null)
+                        fieldObject.put("img_4", path_4);
+
+                    fourth = false;
+                    image_fourth.setImageDrawable(null);
+                    add_image_fourth.setImageResource(R.drawable.ic_baseline_add_circle_24);
+                } else {
+                    renderPickerDialog();
+                    imageViewSelected = 4;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
         cardview_fifth.setOnClickListener(view -> {
-            if (fifth) {
-                fifth = false;
-                image_fifth.setImageDrawable(null);
-                add_image_fifth.setImageResource(R.drawable.ic_baseline_add_circle_24);
-            } else {
-                renderPickerDialog();
-                imageViewSelected = 5;
+            try {
+                if (fifth) {
+                    add_image_fourth.setVisibility(View.VISIBLE);
+                    cardview_fourth.setEnabled(true);
+                    cardview_sixth.setVisibility(View.GONE);
+
+                    path_5 = "";
+                    if (fieldObject != null)
+                        fieldObject.put("img_5", path_5);
+
+                    fifth = false;
+                    image_fifth.setImageDrawable(null);
+                    add_image_fifth.setImageResource(R.drawable.ic_baseline_add_circle_24);
+                } else {
+                    renderPickerDialog();
+                    imageViewSelected = 5;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
         cardview_sixth.setOnClickListener(view -> {
-            if (sixth) {
-                sixth = false;
-                image_sixth.setImageDrawable(null);
-                add_image_sixth.setImageResource(R.drawable.ic_baseline_add_circle_24);
-            } else {
-                renderPickerDialog();
-                imageViewSelected = 6;
+            try {
+                if (sixth) {
+                    add_image_fifth.setVisibility(View.VISIBLE);
+                    cardview_fifth.setEnabled(true);
+
+                    path_6 = "";
+                    if (fieldObject != null)
+                        fieldObject.put("img_6", path_6);
+
+                    sixth = false;
+                    image_sixth.setImageDrawable(null);
+                    add_image_sixth.setImageResource(R.drawable.ic_baseline_add_circle_24);
+                } else {
+                    renderPickerDialog();
+                    imageViewSelected = 6;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
@@ -202,7 +296,7 @@ public class PageThree extends Fragment {
         button_gallery.setOnClickListener(viewGallery -> {
             dialog.dismiss();
             if (checkPermission(GALLERY_PERMISSION)) {
-                Toast.makeText(getActivity(), "Gallery Permission granted", Toast.LENGTH_SHORT).show();
+                openGallery();
             } else {
                 try {
                     requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
@@ -233,34 +327,55 @@ public class PageThree extends Fragment {
         }
     }
 
+    private void openGallery() {
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(pickPhoto, REQUEST_IMAGE_GALLERY);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if ((requestCode == REQUEST_IMAGE_CAPTURE || requestCode == REQUEST_IMAGE_GALLERY) && resultCode == RESULT_OK) {
             switch (imageViewSelected) {
                 case 1:
                     try {
+                        if (requestCode == REQUEST_IMAGE_CAPTURE)
+                            path_1 = currentPhotoPath;
+                        if (requestCode == REQUEST_IMAGE_GALLERY)
+                            path_1 = getImagePath(data);
+                        if (fieldObject != null)
+                            fieldObject.put("img_1", path_1);
                         first = true;
-                        add_image_first.setImageResource(R.drawable.ic_baseline_delete_24);
-                        image_first.setImageBitmap(compressImage(currentPhotoPath));
+                        renderImage(1, path_1, null, null, cardview_second, image_first, add_image_first);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
                 case 2:
                     try {
+                        if (requestCode == REQUEST_IMAGE_CAPTURE)
+                            path_2 = currentPhotoPath;
+                        if (requestCode == REQUEST_IMAGE_GALLERY)
+                            path_2 = getImagePath(data);
+                        if (fieldObject != null)
+                            fieldObject.put("img_2", path_2);
                         second = true;
-                        add_image_second.setImageResource(R.drawable.ic_baseline_delete_24);
-                        image_second.setImageBitmap(compressImage(currentPhotoPath));
+                        renderImage(2, path_2, add_image_first, cardview_first, cardview_third, image_second, add_image_second);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
                 case 3:
                     try {
+                        if (requestCode == REQUEST_IMAGE_CAPTURE)
+                            path_3 = currentPhotoPath;
+                        if (requestCode == REQUEST_IMAGE_GALLERY)
+                            path_3 = getImagePath(data);
+                        if (fieldObject != null)
+                            fieldObject.put("img_3", path_3);
                         third = true;
-                        add_image_third.setImageResource(R.drawable.ic_baseline_delete_24);
-                        image_third.setImageBitmap(compressImage(currentPhotoPath));
+                        renderImage(3, path_3, add_image_second, cardview_second, cardview_fourth, image_third, add_image_third);
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -268,9 +383,14 @@ public class PageThree extends Fragment {
 
                 case 4:
                     try {
+                        if (requestCode == REQUEST_IMAGE_CAPTURE)
+                            path_4 = currentPhotoPath;
+                        if (requestCode == REQUEST_IMAGE_GALLERY)
+                            path_4 = getImagePath(data);
+                        if (fieldObject != null)
+                            fieldObject.put("img_4", path_4);
                         fourth = true;
-                        add_image_fourth.setImageResource(R.drawable.ic_baseline_delete_24);
-                        image_fourth.setImageBitmap(compressImage(currentPhotoPath));
+                        renderImage(4, path_4, add_image_third, cardview_third, cardview_fifth, image_fourth, add_image_fourth);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -278,9 +398,14 @@ public class PageThree extends Fragment {
 
                 case 5:
                     try {
+                        if (requestCode == REQUEST_IMAGE_CAPTURE)
+                            path_5 = currentPhotoPath;
+                        if (requestCode == REQUEST_IMAGE_GALLERY)
+                            path_5 = getImagePath(data);
+                        if (fieldObject != null)
+                            fieldObject.put("img_5", path_5);
                         fifth = true;
-                        add_image_fifth.setImageResource(R.drawable.ic_baseline_delete_24);
-                        image_fifth.setImageBitmap(compressImage(currentPhotoPath));
+                        renderImage(5, path_5, add_image_fourth, cardview_fourth, cardview_sixth, image_fifth, add_image_fifth);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -288,15 +413,79 @@ public class PageThree extends Fragment {
 
                 case 6:
                     try {
+                        if (requestCode == REQUEST_IMAGE_CAPTURE)
+                            path_6 = currentPhotoPath;
+                        if (requestCode == REQUEST_IMAGE_GALLERY)
+                            path_6 = getImagePath(data);
+                        if (fieldObject != null)
+                            fieldObject.put("img_6", path_6);
                         sixth = true;
-                        add_image_sixth.setImageResource(R.drawable.ic_baseline_delete_24);
-                        image_sixth.setImageBitmap(compressImage(currentPhotoPath));
+                        renderImage(6, path_6, add_image_fifth, cardview_fifth, null, image_sixth, add_image_sixth);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
             }
+        } else if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK) {
+            if (data != null) {
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                if (selectedImage != null) {
+                    Cursor cursor = Objects.requireNonNull(getActivity()).getContentResolver().query(selectedImage,
+                            filePathColumn, null, null, null);
+                    if (cursor != null) {
+                        cursor.moveToFirst();
+
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        String picturePath = cursor.getString(columnIndex);
+                        Log.e(TAG, "--------------------------- PAGE 3 from gallery picture path: " + picturePath);
+//                    imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                        cursor.close();
+                    }
+                }
+            }
         }
+    }
+
+    private String getImagePath(Intent data) {
+        if (data != null) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            if (selectedImage != null) {
+                Cursor cursor = Objects.requireNonNull(getActivity()).getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                if (cursor != null) {
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String picturePath = cursor.getString(columnIndex);
+                    Log.e(TAG, "--------------------------- PAGE 3 from gallery picture path: " + picturePath);
+                    cursor.close();
+                    return picturePath;
+                }
+            }
+        }
+        return "";
+    }
+
+
+    private void renderImage(int number, String imagePath, ImageView imageViewPreviousIcon,
+                             CardView cardViewPrevious, CardView cardviewNext,
+                             ImageView imageviewCurrent, ImageView iconImageCurrent) {
+
+        if (number != 1) {
+            imageViewPreviousIcon.setVisibility(View.INVISIBLE);
+            cardViewPrevious.setEnabled(false);
+        }
+
+        if (number != 6) {
+            cardviewNext.setVisibility(View.VISIBLE);
+            cardviewNext.setEnabled(true);
+        }
+
+        imageviewCurrent.setImageBitmap(compressImage(imagePath));
+        iconImageCurrent.setImageResource(R.drawable.ic_baseline_delete_24);
+
     }
 
     private File createImageFile() throws IOException {
@@ -374,7 +563,7 @@ public class PageThree extends Fragment {
             case GALLERY_PERMISSION:
                 if (grantResults.length > 0 && permissions[0].equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        Toast.makeText(getActivity(), "Opening Gallery", Toast.LENGTH_SHORT).show();
+                        openGallery();
                     } else {
                         if (ActivityCompat.shouldShowRequestPermissionRationale(Objects.requireNonNull(getActivity()),
                                 Manifest.permission.READ_EXTERNAL_STORAGE)) {
@@ -520,5 +709,26 @@ public class PageThree extends Fragment {
             inSampleSize++;
         }
         return inSampleSize;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (fieldObject == null) {
+            try {
+                fieldObject = new JSONObject();
+                fieldObject.put("img_1", path_1);
+                fieldObject.put("img_2", path_2);
+                fieldObject.put("img_3", path_3);
+                fieldObject.put("img_4", path_4);
+                fieldObject.put("img_5", path_5);
+                fieldObject.put("img_6", path_6);
+            } catch (JSONException e) {
+                Log.e(TAG, "exception: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        Log.d(TAG, "fragment three on pause data" + fieldObject);
+        fragmentViewModel.postFragmentThreeData(fieldObject);
     }
 }

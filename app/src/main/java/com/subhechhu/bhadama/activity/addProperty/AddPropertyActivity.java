@@ -49,17 +49,17 @@ public class AddPropertyActivity extends AppCompatActivity {
                 switch (currentPosition) {
                     case 0:
                         //TODO uncomment below lines
-                        if (roomSize.isEmpty())
-                            makeToast("Select Number Of Rooms");
-                        else if (rentAmount.isEmpty())
-                            makeToast("Enter Room Rent");
-                        else if (roomAvailableFrom.isEmpty())
-                            makeToast("Enter Room Available Date");
-                        else if (location.isEmpty())
-                            makeToast("Enter Room Location");
-                        else
-                            vpPager.setCurrentItem(currentPosition + 1, true);
-                        break;
+//                        if (roomSize.isEmpty())
+//                            makeToast("Select Number Of Rooms");
+//                        else if (rentAmount.isEmpty())
+//                            makeToast("Enter Room Rent");
+//                        else if (roomAvailableFrom.isEmpty())
+//                            makeToast("Enter Room Available Date");
+//                        else if (location.isEmpty())
+//                            makeToast("Enter Room Location");
+//                        else
+//                            vpPager.setCurrentItem(currentPosition + 1, true);
+//                        break;
                     case 1:
                     case 2:
                     case 3:
