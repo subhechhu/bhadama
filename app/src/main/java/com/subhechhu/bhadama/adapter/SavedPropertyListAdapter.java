@@ -50,7 +50,7 @@ public class SavedPropertyListAdapter extends RecyclerView.Adapter<SavedProperty
     @Override
     public SavedPropertyListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.property_card_saved, parent, false);
+                .inflate(R.layout.row_item_savedproperty, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -64,26 +64,11 @@ public class SavedPropertyListAdapter extends RecyclerView.Adapter<SavedProperty
         final LocationModel modelWord = propertyModel.get(position);
         holder.imageView_background.setImageResource(this.house[position]);
 
-        holder.imageView_call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context,"Phone a friend? ",Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.imageView_call.setOnClickListener(view -> Toast.makeText(context,"Phone a friend? ",Toast.LENGTH_SHORT).show());
 
-        holder.imageView_fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.imageView_fav.setImageResource(R.drawable.ic_baseline_favorite_24);
-            }
-        });
+        holder.imageView_fav.setOnClickListener(view -> holder.imageView_fav.setImageResource(R.drawable.ic_baseline_favorite_24));
 
-        holder.imageView_background.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemClick.onClick(modelWord, holder.imageView_background, house[position]);
-            }
-        });
+        holder.imageView_background.setOnClickListener(v -> itemClick.onClick(modelWord, holder.imageView_background, house[position]));
     }
 
     @Override

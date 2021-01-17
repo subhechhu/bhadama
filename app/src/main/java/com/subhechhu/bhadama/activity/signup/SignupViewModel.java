@@ -16,7 +16,7 @@ public class SignupViewModel extends AndroidViewModel {
         loginRepository = new SignupRepository();
     }
 
-    public void getPostRequest(String url, Map<String, String> u, int rc) {
+    public void getPostRequest(String url, Map<String, Object> u, int rc) {
         loginRepository.makeSignupRequest(url, u, rc);
     }
 

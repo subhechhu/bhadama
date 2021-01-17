@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_secondary"
+    tools:context=".activity.propertyDetailsBuyer.PropertyDetailsBuyer">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/background_image_2"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/backgroundimage" />
+
+    <ScrollView
+        android:id="@+id/scrollView_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView_property_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="center"
+                    android:transitionName="@string/backgroundimage"
+                    android:background="@drawable/background_image"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/textView_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView_roomtype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="20dp"
+                android:background="@color/primary_light" />
+
+            <TextView
+                android:id="@+id/textview_totalViews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="143 buyers viewed your property"
+                android:drawablePadding="10dp"
+                app:drawableTint="@color/primary"
+                app:drawableStartCompat="@drawable/ic_baseline_bookmark_24"
+                android:layout_marginVertical="4dp"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textview_totalClick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="24 buyers unlocked your contact"
+                android:drawablePadding="10dp"
+                android:layout_marginVertical="4dp"
+                app:drawableTint="@color/primary"
+                app:drawableStartCompat="@drawable/ic_baseline_phone_locked_24"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textview_propertyEnableStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="Property is enabled"
+                android:drawablePadding="10dp"
+                android:layout_marginVertical="4dp"
+                app:drawableTint="@color/primary"
+                app:drawableStartCompat="@drawable/ic_baseline_remove_circle_24"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textview_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="3.8 by 58 buyers"
+                android:drawablePadding="10dp"
+                android:layout_marginVertical="4dp"
+                app:drawableStartCompat="@drawable/ic_baseline_star_rate_24"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textview_interestRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="75.7% tried reaching you"
+                android:drawablePadding="10dp"
+                android:layout_marginVertical="4dp"
+                app:drawableStartCompat="@drawable/ic_baseline_lightening"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textview_approvalStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="Verification Pending"
+                android:drawablePadding="10dp"
+                android:layout_marginVertical="4dp"
+                app:drawableStartCompat="@drawable/ic_baseline_report_24"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="20dp"
+                android:background="@color/primary_light" />
+
+            <TextView
+                android:id="@+id/textView_rent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="Rs 25000"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_attach_money_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="possession 22/12/2020"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_calendar_today_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_tenant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="Any Tenant"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_people_alt_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_furnishing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="Unfurnished"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_king_bed_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textView_parking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="2 &amp; 4 Wheeler"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_local_parking_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_watersupply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="Multiple Source"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_local_drink_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textview_postedDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="Posted on 22/12/2020"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_calendar_today_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vpPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginBottom="80dp"
+                app:ci_drawable="@drawable/indicator" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/floating_icon_property"
+            fab:menu_animationDelayPerItem="55"
+            fab:menu_backgroundColor="@android:color/transparent"
+            fab:menu_colorNormal="@color/secondary_solid_light"
+            fab:menu_colorPressed="@color/primary"
+            fab:menu_colorRipple="#99d4d4d4"
+            fab:menu_fab_size="normal"
+            fab:menu_icon="@drawable/ic_baseline_menu"
+            fab:menu_openDirection="up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floating_icon_delete"
+                fab:fab_label="Delete Property"
+                fab:fab_size="mini"
+                fab:menu_backgroundColor="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_delete_24"
+                android:tint="@color/secondary"
+                app:fab_colorNormal="@color/primary_solid"
+                app:fab_colorPressed="@color/primary" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floating_icon_disable"
+                fab:fab_label="Disable Property"
+                fab:fab_size="mini"
+                fab:menu_backgroundColor="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/secondary"
+                android:src="@drawable/ic_baseline_remove_circle_24"
+                app:fab_colorNormal="@color/primary_solid"
+                app:fab_colorPressed="@color/primary" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floating_icon_edit"
+                fab:fab_label="Edit Property"
+                fab:fab_size="mini"
+                fab:menu_backgroundColor="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_edit_24"
+                app:fab_colorNormal="@color/primary_solid"
+                android:tint="@color/secondary"
+                app:fab_colorPressed="@color/primary" />
+        </com.github.clans.fab.FloatingActionMenu>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

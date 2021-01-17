@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.activity.login;
+package com.subhechhu.bhadama.activity.signin;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -14,7 +14,7 @@ public class SigninRepository implements APIRequest.FromAPI {
         responseSigninData = new MutableLiveData<>();
     }
 
-    public void makeSigninRequest(String url, Map<String, String> params, int rc) {
+    public void makeSigninRequest(String url, Map<String, Object> params, int rc) {
         new APIRequest(this).makePostRequest(url, params, rc);
     }
 

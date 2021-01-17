@@ -14,7 +14,7 @@ public class SignupRepository implements APIRequest.FromAPI {
         responseSignupData = new MutableLiveData<>();
     }
 
-    public void makeSignupRequest(String url, Map<String, String> params, int rc) {
+    public void makeSignupRequest(String url, Map<String, Object> params, int rc) {
         new APIRequest(this).makePostRequest(url, params, rc);
     }
 

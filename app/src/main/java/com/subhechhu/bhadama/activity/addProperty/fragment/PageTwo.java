@@ -8,13 +8,20 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.subhechhu.bhadama.R;
+import com.subhechhu.bhadama.activity.addProperty.AddPropertyActivity;
+import com.subhechhu.bhadama.activity.personalProperty.ModelPersonalProperty;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
 
 public class PageTwo extends Fragment {
 
@@ -25,9 +32,12 @@ public class PageTwo extends Fragment {
     boolean twoWheeler = true, fourWheeler, nwsc = true, underground, other;
 
     String furnishing = "Unfurnished", tenants = "Any";
+    boolean furnishingBool;
 
     FragmentViewModel fragmentViewModel;
     JSONObject fieldObject;
+
+    ModelPersonalProperty personalProperty;
 
     public static PageTwo newInstance() {
         return new PageTwo();
@@ -37,6 +47,11 @@ public class PageTwo extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragmentViewModel = ViewModelProviders.of(requireActivity()).get(FragmentViewModel.class);
+        fieldObject = new JSONObject();
+
+        if (getActivity() instanceof AddPropertyActivity) {
+            personalProperty = ((AddPropertyActivity) Objects.requireNonNull(getActivity())).getDataToEdit();
+        }
     }
 
     @Override
@@ -105,12 +120,15 @@ public class PageTwo extends Fragment {
         });
 
         radio_group_furnishing.setOnCheckedChangeListener((radioGroup, i) -> {
-            if (i == R.id.radio_furnished)
+            if (i == R.id.radio_furnished) {
+                furnishingBool = true;
                 furnishing = "Furnished";
-            else
+            } else {
                 furnishing = "Unfurnished";
+                furnishingBool = false;
+            }
             try {
-                fieldObject.put("furnishing", furnishing);
+                fieldObject.put("furnishing", furnishingBool);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -135,22 +153,62 @@ public class PageTwo extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (personalProperty != null) {
+
+            //Adding furnishing
+            if (personalProperty.getFurnishing().equalsIgnoreCase("true")) {
+                radio_group_furnishing.check(R.id.radio_furnished);
+                furnishingBool = true;
+            } else {
+                radio_group_furnishing.check(R.id.radio_unfurnished);
+                furnishingBool = false;
+            }
+
+
+            //Parking
+            cbtwoWheeler.setChecked(personalProperty.isTwoWheeler());
+            cbfourWheeler.setChecked(personalProperty.isFourWheeler());
+
+            //Tenants
+            if (personalProperty.getTenants().equalsIgnoreCase("Any"))
+                radio_group_rent_tenant.check(R.id.radio_anyone);
+            else if (personalProperty.getTenants().equalsIgnoreCase("Family"))
+                radio_group_rent_tenant.check(R.id.radio_family);
+            else if (personalProperty.getTenants().equalsIgnoreCase("Bachelor"))
+                radio_group_rent_tenant.check(R.id.radio_bachelor);
+
+            //WaterSupply
+            cbnwsc.setChecked(personalProperty.isWaterSupplyNwscc());
+            cbunderground.setChecked(personalProperty.isWaterSupplyUnderground());
+            cbother.setChecked(personalProperty.isWaterSupplyOther());
+
+            tenants = personalProperty.getTenants();
+            other = personalProperty.isWaterSupplyOther();
+            underground = personalProperty.isWaterSupplyUnderground();
+            nwsc = personalProperty.isWaterSupplyNwscc();
+
+            twoWheeler = personalProperty.isTwoWheeler();
+            fourWheeler = personalProperty.isFourWheeler();
+        }
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
-        if (fieldObject == null) {
-            fieldObject = new JSONObject();
-            try {
-                fieldObject.put("furnishing", furnishing);
-                fieldObject.put("tenants", tenants);
-                fieldObject.put("watersupply_other", other);
-                fieldObject.put("watersupply_underground", underground);
-                fieldObject.put("watersupply_nwsc", nwsc);
-                fieldObject.put("twoWheeler", twoWheeler);
-                fieldObject.put("fourWheeler", fourWheeler);
-            } catch (JSONException e) {
-                Log.e(TAG, "exception: " + e.getMessage());
-                e.printStackTrace();
-            }
+        try {
+            fieldObject.put("furnishing", furnishingBool);
+            fieldObject.put("tenants", tenants);
+            fieldObject.put("watersupply_other", other);
+            fieldObject.put("watersupply_underground", underground);
+            fieldObject.put("watersupply_nwsc", nwsc);
+            fieldObject.put("twoWheeler", twoWheeler);
+            fieldObject.put("fourWheeler", fourWheeler);
+        } catch (JSONException e) {
+            Log.e(TAG, "exception: " + e.getMessage());
+            e.printStackTrace();
         }
         Log.d(TAG, "fragment two on pause data" + fieldObject);
         fragmentViewModel.postFragmentTwoData(fieldObject);

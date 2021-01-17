@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_secondary"
-    tools:context=".activity.PropertyDetails">
+    tools:context=".activity.propertyDetailsBuyer.PropertyDetailsBuyer">
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:background="@drawable/background_image_2"
         app:layout_constraintBottom_toBottomOf="@+id/scrollView_detail"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/background_image_2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView_detail"
@@ -27,6 +27,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:orientation="vertical">
 
             <ImageView
@@ -40,203 +41,175 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_marginTop="10dp"
                 android:id="@+id/textView_room"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:text="3+ Room"
                 android:textColor="@color/primary"
-                android:textSize="18sp"
-                android:text="3+ Room" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
+                android:text="at Imadol Swimmming pool"
                 android:textColor="@color/primary"
-                android:textSize="18sp"
-                android:text="at Imadol Swimmming pool" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textview_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
+                android:text="Gwarko"
                 android:textColor="@color/primary"
-                android:textSize="18sp"
-                android:text="Gwarko" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textview_map"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
-                android:textColor="@color/primary"
-                android:textAlignment="textEnd"
-                android:textSize="16sp"
                 android:drawablePadding="5dp"
                 android:text="View in Map"
-                app:drawableTint="@color/primary"
-                app:drawableEndCompat="@drawable/ic_baseline_location_on_24" />
+                android:textAlignment="textEnd"
+                android:textColor="@color/primary"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="20dp"
+                android:background="@color/primary_light" />
 
             <TextView
+                android:id="@+id/textView_rent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="60dp"
-                android:textSize="25sp"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="Rs 25000"
                 android:textColor="@color/primary"
-                android:layout_marginBottom="20dp"
-                android:text="Overview"/>
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_attach_money_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/textView_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="possession 22/12/2020"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_calendar_today_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_tenant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="Any Tenant"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_people_alt_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_furnishing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="Unfurnished"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_king_bed_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textView_parking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="2 &amp; 4 Wheeler"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_local_parking_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_watersupply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:drawablePadding="10dp"
+                android:text="Multiple Source"
+                android:textColor="@color/primary"
+                android:textSize="21sp"
+                app:drawableStartCompat="@drawable/ic_baseline_local_drink_24"
+                app:drawableTint="@color/primary"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="35dp"
+                android:background="@color/primary_light" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginHorizontal="40dp">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_attach_money_24"
-                    app:tint="@color/primary" />
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vpPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/textView_rent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Rs 25000"
-                    android:textColor="@color/primary"
-                    android:textSize="21sp"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </LinearLayout>
 
-            <LinearLayout
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/indicator"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="40dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_calendar_today_24"
-                    app:tint="@color/primary" />
-
-                <TextView
-                    android:id="@+id/textView_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="possession 22/12/2020"
-                    android:textColor="@color/primary"
-                    android:textSize="21sp"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="40dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_people_alt_24"
-                    app:tint="@color/primary" />
-
-                <TextView
-                    android:id="@+id/textView_tenant"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Any Tenant"
-                    android:textColor="@color/primary"
-                    android:textSize="21sp"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="40dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_king_bed_24"
-                    app:tint="@color/primary" />
-
-                <TextView
-                    android:id="@+id/textView_furnishing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Unfurnished"
-                    android:textColor="@color/primary"
-                    android:textSize="21sp"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="40dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_local_parking_24"
-                    app:tint="@color/primary" />
-
-                <TextView
-                    android:id="@+id/textView_parking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="2 &amp; 4 Wheeler"
-                    android:textColor="@color/primary"
-                    android:textSize="21sp"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="40dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_local_drink_24"
-                    app:tint="@color/primary" />
-
-                <TextView
-                    android:id="@+id/textView_watersupply"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Underground Water supply"
-                    android:textColor="@color/primary"
-                    android:textSize="21sp"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </LinearLayout>
+                android:layout_height="24dp"
+                android:layout_marginBottom="80dp"
+                app:ci_drawable="@drawable/indicator" />
 
         </LinearLayout>
     </ScrollView>
@@ -246,15 +219,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_corner_primary"
-        android:paddingLeft="20dp"
-        android:drawableStart="@drawable/ic_baseline_phone_locked_24"
-        android:paddingRight="20dp"
-        android:text="@string/unlockcontact"
+        android:drawableStart="@drawable/ic_baseline_local_phone_24"
+        android:paddingStart="20dp"
+        android:paddingEnd="55dp"
+        android:text="@string/call_owner"
         android:textAllCaps="false"
         android:textColor="@color/white_secondary"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.subhechhu.bhadama.activity.location.LocationModel;
+import com.subhechhu.bhadama.activity.propertyDetailsBuyer.PropertyDetailsBuyer;
 import com.subhechhu.bhadama.adapter.SavedPropertyListAdapter;
 import com.subhechhu.bhadama.R;
 
@@ -29,7 +30,7 @@ public class SavedPropertyActivity extends AppCompatActivity implements SavedPro
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_property);
 
-        TextView textView_personalprop_empty = findViewById(R.id.textView_personalprop_empty);
+        TextView textView_personalprop_empty = findViewById(R.id.textView_personalprop_message);
         textView_personalprop_empty.setText(getIntent().getStringExtra("Message"));
 
         if (getIntent().getStringExtra("from").equalsIgnoreCase("Saved")) {
@@ -73,7 +74,7 @@ public class SavedPropertyActivity extends AppCompatActivity implements SavedPro
 
     @Override
     public void onClick(LocationModel modelWord, ImageView imageView, int house) {
-        Intent intent = new Intent(SavedPropertyActivity.this, PropertyDetails.class);
+        Intent intent = new Intent(SavedPropertyActivity.this, PropertyDetailsBuyer.class);
         intent.putExtra("img", house);
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(SavedPropertyActivity.this, imageView, "backgroundImage");

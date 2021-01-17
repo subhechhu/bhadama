@@ -18,6 +18,7 @@ import com.mohammedalaa.seekbar.OnDoubleValueSeekBarChangeListener;
 import com.subhechhu.bhadama.activity.location.LocationActivity;
 import com.subhechhu.bhadama.activity.location.LocationModel;
 import com.subhechhu.bhadama.R;
+import com.subhechhu.bhadama.activity.personalProperty.PersonalPropertyActivity;
 import com.subhechhu.bhadama.util.Network;
 
 import org.json.JSONException;
@@ -122,29 +123,29 @@ public class HomeActivity extends AppCompatActivity {
 //                if (button_home_location.getText().equals("Add Location")) {
 //                    Toast.makeText(HomeActivity.this, "Add location to search", Toast.LENGTH_SHORT).show();
 //                } else {
-                    JSONObject jsonObject = new JSONObject();
-                    try {
-                        jsonObject.put("lat", latitude);
-                        jsonObject.put("long", longitude);
-                        jsonObject.put("city", city);
-                        jsonObject.put("maxAmount", minAmount);
-                        jsonObject.put("minAmount", minAmount);
-                        jsonObject.put("room1", checkbox_room1.isChecked());
-                        jsonObject.put("room2", checkbox_room2.isChecked());
-                        jsonObject.put("room3", checkbox_room3.isChecked());
-                        jsonObject.put("entireFlat", checkbox_entireFlat.isChecked());
-                        jsonObject.put("entireHouse", checkbox_entireHouse.isChecked());
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("lat", latitude);
+                    jsonObject.put("long", longitude);
+                    jsonObject.put("city", city);
+                    jsonObject.put("maxAmount", minAmount);
+                    jsonObject.put("minAmount", minAmount);
+                    jsonObject.put("room1", checkbox_room1.isChecked());
+                    jsonObject.put("room2", checkbox_room2.isChecked());
+                    jsonObject.put("room3", checkbox_room3.isChecked());
+                    jsonObject.put("entireFlat", checkbox_entireFlat.isChecked());
+                    jsonObject.put("entireHouse", checkbox_entireHouse.isChecked());
 
-                        Log.e(TAG, "json to server: " + jsonObject.toString());
+                    Log.e(TAG, "json to server: " + jsonObject.toString());
 
-                        Intent intent = new Intent(HomeActivity.this, SavedPropertyActivity.class);
-                        intent.putExtra("Message", "");
-                        intent.putExtra("from", "saved");
-                        startActivity(intent);
+                    Intent intent = new Intent(HomeActivity.this, SavedPropertyActivity.class);
+                    intent.putExtra("Message", "");
+                    intent.putExtra("from", "saved");
+                    startActivity(intent);
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 //                }
             }
         });
@@ -181,7 +182,7 @@ public class HomeActivity extends AppCompatActivity {
             Log.e(TAG, "homemodel word: " + locationObject.toString());
 //            Log.e(TAG,"homemodel city: "+data.getStringExtra("city"));
             city = data.getStringExtra("city");
-            if(data.getStringExtra("city") == null){
+            if (data.getStringExtra("city") == null) {
                 city = "Nepal";
             }
             location = getString(R.string.searched_location, locationObject.getDisplayPlace(), city);
@@ -189,5 +190,13 @@ public class HomeActivity extends AppCompatActivity {
             longitude = locationObject.getLon();
             button_home_location.setText(location);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (floating_icon.isOpened())
+            floating_icon.close(true);
+        else
+            super.onBackPressed();
     }
 }

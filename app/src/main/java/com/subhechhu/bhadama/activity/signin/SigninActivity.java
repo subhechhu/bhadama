@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.activity.login;
+package com.subhechhu.bhadama.activity.signin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +19,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.subhechhu.bhadama.activity.HomeActivity;
-import com.subhechhu.bhadama.activity.addProperty.fragment.PageOne;
 import com.subhechhu.bhadama.activity.signup.SignupActivity;
 import com.subhechhu.bhadama.AppController;
 import com.subhechhu.bhadama.R;
@@ -56,6 +55,7 @@ public class SigninActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_signin);
+        AppController.storePreferenceString(AppController.getContext().getString(R.string.at), "");
 
         parentlayout = findViewById(R.id.parentlayout);
 
@@ -85,7 +85,9 @@ public class SigninActivity extends AppCompatActivity {
                 JSONObject responseObject = new JSONObject(response);
                 JSONObject responseBody = responseObject.getJSONObject("body");
                 if (responseObject.getInt("statusCode") == 200 || responseObject.getInt("statusCode") == 201) {
-                    AppController.storePreferenceBoolean(AppController.getInstance().getString(R.string.login_pref), true);
+                    Log.e(TAG, "accesstoken: " + responseBody.getString("accessToken"));
+                    AppController.storePreferenceBoolean(AppController.getContext().getString(R.string.login_pref), true);
+                    AppController.storePreferenceString(AppController.getContext().getString(R.string.at), responseBody.getString("accessToken"));
                     startActivity(new Intent(SigninActivity.this, HomeActivity.class));
                     finish();
                 } else {
@@ -231,7 +233,7 @@ public class SigninActivity extends AppCompatActivity {
                 } else {
                     progressBar_login.setVisibility(View.VISIBLE);
 
-                    Map<String, String> users = new HashMap<>();
+                    Map<String, Object> users = new HashMap<>();
                     users.put("phone_number", editText_phone.getText().toString());
                     users.put("pin", editText_pin.getText().toString());
 
@@ -252,7 +254,7 @@ public class SigninActivity extends AppCompatActivity {
 
                 phoneNumber = editText_phone.getText().toString();
 
-                Map<String, String> phoneMap = new HashMap<>();
+                Map<String, Object> phoneMap = new HashMap<>();
                 phoneMap.put("phone_number", editText_phone.getText().toString());
 
                 forgotPasswordViewModel.makePostRequest(GetUrl.FORGET_PASSWORD, phoneMap, GetConstants.FORGETPIN_REQUESTCODE);
@@ -261,7 +263,7 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     private void renderOTPDialog() {
-        View view = getLayoutInflater().inflate(R.layout.otp_dialog, null);
+        View view = getLayoutInflater().inflate(R.layout.dialog_otp, null);
         otpDialog = new BottomSheetDialog(SigninActivity.this, R.style.dialogStyle);
         otpDialog.setContentView(view);
         otpDialog.setCancelable(false);
@@ -282,7 +284,7 @@ public class SigninActivity extends AppCompatActivity {
                 if (editText_otp.getText().toString().length() != 4) {
                     Toast.makeText(this, "Enter Valid OTP to Proceed", Toast.LENGTH_LONG).show();
                 } else {
-                    Map<String, String> otpmap = new HashMap<>();
+                    Map<String, Object> otpmap = new HashMap<>();
                     otpmap.put("phone_number", phoneNumber);
                     otpmap.put("otp", editText_otp.getText().toString());
                     forgotPasswordViewModel.makePostRequest(GetUrl.VERIFY_OTP, otpmap, GetConstants.VERIFYOTP_REQUESTCODE);
@@ -292,7 +294,7 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     private void renderNewPin() {
-        View view = getLayoutInflater().inflate(R.layout.newpin_dialog, null);
+        View view = getLayoutInflater().inflate(R.layout.dialog_newpin, null);
         newPinDialog = new BottomSheetDialog(SigninActivity.this, R.style.dialogStyle);
         newPinDialog.setContentView(view);
         newPinDialog.setCancelable(false);
@@ -393,6 +395,6 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     private boolean isConnected() {
-        return Network.getConnection(AppController.getInstance());
+        return Network.getConnection(AppController.getContext());
     }
 }

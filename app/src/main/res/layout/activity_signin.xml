@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_design"
     android:fillViewport="true"
-    tools:context=".activity.login.SigninActivity">
+    tools:context=".activity.signin.SigninActivity">
 
     <LinearLayout
         android:id="@+id/parentlayout"

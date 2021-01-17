@@ -37,6 +37,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.subhechhu.bhadama.BuildConfig;
 import com.subhechhu.bhadama.R;
+import com.subhechhu.bhadama.activity.addProperty.AddPropertyActivity;
+import com.subhechhu.bhadama.activity.personalProperty.ModelPersonalProperty;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,13 +74,13 @@ public class PageThree extends Fragment {
     CardView cardview_first, cardview_second, cardview_third, cardview_fourth, cardview_fifth,
             cardview_sixth;
 
-
     boolean first, second, third, fourth, fifth, sixth;
 
     String currentPhotoPath;
     String path_1 = "", path_2 = "", path_3 = "", path_4 = "", path_5 = "", path_6 = "";
 
     FragmentViewModel fragmentViewModel;
+    ModelPersonalProperty personalProperty;
     JSONObject fieldObject;
 
     public static PageThree newInstance() {
@@ -90,6 +92,9 @@ public class PageThree extends Fragment {
         super.onCreate(savedInstanceState);
 
         fragmentViewModel = ViewModelProviders.of(requireActivity()).get(FragmentViewModel.class);
+        if (getActivity() instanceof AddPropertyActivity) {
+            personalProperty = ((AddPropertyActivity) Objects.requireNonNull(getActivity())).getDataToEdit();
+        }
     }
 
     @Override
@@ -268,8 +273,18 @@ public class PageThree extends Fragment {
         return parentView;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (personalProperty.getImages().size() > 0) {
+            for (int i = 0; i < personalProperty.getImages().size(); i++) {
+
+            }
+        }
+    }
+
     public void renderPickerDialog() {
-        View view = getLayoutInflater().inflate(R.layout.imagepicker_dialog, (ViewGroup) parentView, false);
+        View view = getLayoutInflater().inflate(R.layout.dialog_imagepicker, (ViewGroup) parentView, false);
         BottomSheetDialog dialog = new BottomSheetDialog(Objects.requireNonNull(getActivity()), R.style.dialogStyle);
         dialog.setContentView(view);
         dialog.setCancelable(true);
@@ -502,44 +517,6 @@ public class PageThree extends Fragment {
     }
 
 
-    public boolean checkPermission(int permissionCode) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
-            return false;
-
-        if (permissionCode == CAMERA_PERMISSION) {
-            int result = Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA);
-            return result == PackageManager.PERMISSION_GRANTED;
-        } else if (permissionCode == GALLERY_PERMISSION) {
-            int result = Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
-            return result == PackageManager.PERMISSION_GRANTED;
-        }
-
-        return false;
-    }
-
-    private void showNoPermissionDialog(String permission) {
-        View view = getLayoutInflater().inflate(R.layout.imagepicker_nopermission_dialog, (ViewGroup) parentView, false);
-        BottomSheetDialog dialog = new BottomSheetDialog(Objects.requireNonNull(getActivity()), R.style.dialogStyle);
-        dialog.setContentView(view);
-        dialog.setCancelable(true);
-        dialog.show();
-
-        AppCompatButton button_permission_close = view.findViewById(R.id.button_permission_close);
-        AppCompatButton button_permission_settings = view.findViewById(R.id.button_permission_settings);
-
-        TextView textView_permission_message = view.findViewById(R.id.textView_permission_message);
-        textView_permission_message.setText(getString(R.string.nopermission, permission));
-
-        button_permission_close.setOnClickListener(viewClose -> dialog.dismiss());
-
-        button_permission_settings.setOnClickListener(viewPermission -> {
-            startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                    Uri.parse("package:" + BuildConfig.APPLICATION_ID)));
-            dialog.dismiss();
-
-        });
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[]
             permissions, @NonNull int[] grantResults) {
@@ -578,6 +555,44 @@ public class PageThree extends Fragment {
             default:
                 break;
         }
+    }
+
+    public boolean checkPermission(int permissionCode) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+            return false;
+
+        if (permissionCode == CAMERA_PERMISSION) {
+            int result = Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA);
+            return result == PackageManager.PERMISSION_GRANTED;
+        } else if (permissionCode == GALLERY_PERMISSION) {
+            int result = Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+            return result == PackageManager.PERMISSION_GRANTED;
+        }
+
+        return false;
+    }
+
+    private void showNoPermissionDialog(String permission) {
+        View view = getLayoutInflater().inflate(R.layout.dialog_imagepicker_nopermission, (ViewGroup) parentView, false);
+        BottomSheetDialog dialog = new BottomSheetDialog(Objects.requireNonNull(getActivity()), R.style.dialogStyle);
+        dialog.setContentView(view);
+        dialog.setCancelable(true);
+        dialog.show();
+
+        AppCompatButton button_permission_close = view.findViewById(R.id.button_permission_close);
+        AppCompatButton button_permission_settings = view.findViewById(R.id.button_permission_settings);
+
+        TextView textView_permission_message = view.findViewById(R.id.textView_permission_message);
+        textView_permission_message.setText(getString(R.string.nopermission, permission));
+
+        button_permission_close.setOnClickListener(viewClose -> dialog.dismiss());
+
+        button_permission_settings.setOnClickListener(viewPermission -> {
+            startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    Uri.parse("package:" + BuildConfig.APPLICATION_ID)));
+            dialog.dismiss();
+
+        });
     }
 
     public Bitmap compressImage(String imageUri) {

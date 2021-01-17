@@ -17,7 +17,7 @@ public class Network {
         boolean isAvailable = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
         if (!isAvailable) {
-            Toast.makeText(AppController.getInstance(), "No Internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AppController.getContext(), "No Internet", Toast.LENGTH_SHORT).show();
         }
 
         return activeNetwork != null &&

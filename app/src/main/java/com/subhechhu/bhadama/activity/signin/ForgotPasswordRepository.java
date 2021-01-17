@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.activity.login;
+package com.subhechhu.bhadama.activity.signin;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -19,7 +19,7 @@ public class ForgotPasswordRepository implements APIRequest.FromAPI {
         responseNewPinData = new MutableLiveData<>();
     }
 
-    public void makePostRequest(String url, Map<String, String> params, int requestCode) {
+    public void makePostRequest(String url, Map<String, Object> params, int requestCode) {
         new APIRequest(this).makePostRequest(url, params, requestCode);
     }
     public void makePutRequest(String url, Map<String, String> u, int rc) {

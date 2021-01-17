@@ -21,8 +21,7 @@
             android:layout_marginTop="0dp"
             android:contentDescription="@string/app_icon"
             android:scaleType="fitStart"
-            android:visibility="invisible"
-            app:srcCompat="@drawable/icon_main" />
+            android:visibility="invisible" />
 
 
         <TextView
@@ -52,6 +51,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:id="@+id/imageView_first"
                     android:layout_width="match_parent"
@@ -65,8 +65,10 @@
 
                 <ImageView
                     android:id="@+id/add_image_first"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="2dp"
+                    android:background="@drawable/rounded_button_white"
                     android:src="@drawable/ic_baseline_add_circle_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -95,15 +97,17 @@
                     android:id="@+id/imageView_second"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                                        android:scaleType="centerCrop"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/add_image_second"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="2dp"
+                    android:background="@drawable/rounded_button_white"
                     android:src="@drawable/ic_baseline_add_circle_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -133,15 +137,17 @@
                     android:id="@+id/imageview_third"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                                        android:scaleType="centerCrop"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/add_image_third"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="2dp"
+                    android:background="@drawable/rounded_button_white"
                     android:src="@drawable/ic_baseline_add_circle_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -170,15 +176,17 @@
                     android:id="@+id/imageView_fourth"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                                        android:scaleType="centerCrop"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/add_image_fourth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="2dp"
+                    android:background="@drawable/rounded_button_white"
                     android:src="@drawable/ic_baseline_add_circle_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -207,15 +215,17 @@
                     android:id="@+id/imageView_fifth"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                                        android:scaleType="centerCrop"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/add_image_fifth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="2dp"
+                    android:background="@drawable/rounded_button_white"
                     android:src="@drawable/ic_baseline_add_circle_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -245,15 +255,17 @@
                     android:id="@+id/imageView_sixth"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                                        android:scaleType="centerCrop"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/add_image_sixth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="2dp"
+                    android:background="@drawable/rounded_button_white"
                     android:src="@drawable/ic_baseline_add_circle_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

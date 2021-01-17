@@ -1,54 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parentlayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="16dp"
-    android:elevation="8dp"
     app:cardCornerRadius="8dp"
+    android:elevation="8dp"
     android:background="@drawable/rounded_corner_white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView_property_image"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:scaleType="fitXY"
+            android:scaleType="center"
             android:src="@drawable/icon_main"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:transitionName="@string/backgroundimage"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="@drawable/rounded_bottom_corner"
             android:gravity="center_vertical"
+            android:alpha="0.7"
             android:paddingHorizontal="10dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/imageView_property_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView_call"
+            <TextView
+                android:id="@+id/textView_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:visibility="invisible"
-                android:src="@drawable/ic_baseline_phone_locked_24" />
-
-            <ImageView
-                android:id="@+id/imageView_fav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:visibility="invisible"
-                android:layout_toStartOf="@id/imageView_call"
-                android:src="@drawable/ic_outline_favorite_border_24" />
+                android:text="Imadol, Gwarko, Lalitpur "
+                android:layout_marginVertical="2dp"
+                android:maxLines="1"
+                android:textColor="@color/white_secondary" />
 
             <TextView
                 android:id="@+id/textView_rent"
@@ -57,7 +52,7 @@
                 android:text="Rs 30,000"
                 android:textColor="@color/white_secondary" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -65,6 +60,7 @@
             android:layout_margin="10dp"
             android:paddingVertical="3dp"
             android:gravity="center_vertical"
+            android:alpha="0.7"
             android:background="@drawable/rounded_oval_bottom"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -76,7 +72,7 @@
                 android:textColor="@color/white_secondary"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
-                android:text="4.2"/>
+                android:text="4.3"/>
 
             <ImageView
                 android:id="@+id/imageView_lightening"
@@ -84,7 +80,6 @@
                 android:layout_height="20dp"
                 android:padding="1dp"
                 android:layout_marginEnd="5dp"
-                android:layout_alignEnd="@id/textview_rating"
                 android:src="@drawable/ic_baseline_star_rate_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -92,12 +87,13 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView_seen"
+            android:id="@+id/imageView_verified"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_margin="10dp"
             android:background="@drawable/rounded_button"
-            android:src="@drawable/ic_baseline_check_circle_24"
+            android:visibility="visible"
+            android:src="@drawable/ic_baseline_report_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

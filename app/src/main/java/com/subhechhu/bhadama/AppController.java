@@ -16,21 +16,31 @@ public class AppController extends Application {
     }
 
 
-
-    public static synchronized AppController getInstance() {
+    public static synchronized AppController getContext() {
         return mInstance;
     }
 
-    public static SharedPreferences getSharedPreference(){
-        return getInstance().getSharedPreferences(mInstance.getString(R.string.login_pref), 0);
+    public static SharedPreferences getSharedPreference() {
+        return getContext().getSharedPreferences(mInstance.getString(R.string.login_pref), 0);
     }
 
-    public static void storePreferenceBoolean(String key, boolean boolValue){
+    public static void storePreferenceString(String key, String stringValue) {
+        SharedPreferences.Editor spEditor = getSharedPreference().edit();
+        spEditor.putString(key, stringValue);
+        spEditor.apply();
+    }
+
+    public static void storePreferenceBoolean(String key, boolean boolValue) {
         SharedPreferences.Editor spEditor = getSharedPreference().edit();
         spEditor.putBoolean(key, boolValue);
         spEditor.apply();
     }
-    public static boolean getBoolean(String key){
-        return getSharedPreference().getBoolean(key,false);
+
+    public static String getPreferenceString(String key) {
+        return getSharedPreference().getString(key, "");
+    }
+
+    public static boolean getPreferenceBoolean(String key) {
+        return getSharedPreference().getBoolean(key, false);
     }
 }

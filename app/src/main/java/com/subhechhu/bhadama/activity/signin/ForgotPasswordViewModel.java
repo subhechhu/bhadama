@@ -1,4 +1,4 @@
-package com.subhechhu.bhadama.activity.login;
+package com.subhechhu.bhadama.activity.signin;
 
 import android.app.Application;
 
@@ -16,7 +16,7 @@ public class ForgotPasswordViewModel extends AndroidViewModel {
         forgotPasswordRepository = new ForgotPasswordRepository();
     }
 
-    public void makePostRequest(String url, Map<String, String> u, int rc) {
+    public void makePostRequest(String url, Map<String, Object> u, int rc) {
         forgotPasswordRepository.makePostRequest(url, u, rc);
     }
 

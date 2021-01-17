@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.subhechhu.bhadama.AppController;
 import com.subhechhu.bhadama.R;
-import com.subhechhu.bhadama.activity.addProperty.fragment.PageOne;
 import com.subhechhu.bhadama.util.GetConstants;
 import com.subhechhu.bhadama.util.GetUrl;
 import com.subhechhu.bhadama.util.Network;
@@ -168,11 +167,11 @@ public class SignupActivity extends AppCompatActivity {
                         verifyPin(edittext_signup_pin, edittext_signup_reenterpin, button_signup_reenterpin_verify) &&
                         verifyphone(edittext_signup_phone)) {
 
-                    if (Network.getConnection(AppController.getInstance())) {
+                    if (Network.getConnection(AppController.getContext())) {
                         progressBar_signup.setVisibility(View.VISIBLE);
                         button_signup_proceed.setEnabled(false);
 
-                        Map<String, String> users = new HashMap<>();
+                        Map<String, Object> users = new HashMap<>();
                         users.put("username", edittext_signup_name.getText().toString());
                         users.put("phone_number", edittext_signup_phone.getText().toString());
                         users.put("pin", edittext_signup_pin.getText().toString());
@@ -214,7 +213,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void proceedSignup() {
-        View view = getLayoutInflater().inflate(R.layout.otp_dialog, null);
+        View view = getLayoutInflater().inflate(R.layout.dialog_otp, null);
         BottomSheetDialog dialog = new BottomSheetDialog(SignupActivity.this, R.style.dialogStyle);
         dialog.setContentView(view);
         dialog.setCancelable(false);

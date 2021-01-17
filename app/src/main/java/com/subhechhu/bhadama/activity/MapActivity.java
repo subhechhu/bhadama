@@ -97,10 +97,10 @@ public class MapActivity extends AppCompatActivity {
         floating_map_center.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mapboxMap!=null){
+                if (mapboxMap != null) {
                     mapboxMap.animateCamera(CameraUpdateFactory
                             .newCameraPosition(position), 3000);
-//                    mapboxMap.setCameraPosition(position);
+                    mapboxMap.setCameraPosition(position);
                 }
             }
         });

@@ -27,8 +27,8 @@
     <string name="api_key">AIzaSyBbQvmUqNK7llIfVdi8L1b7VS8zy0uJj3o</string>
     <string name="search">Search Property</string>
     <string name="search_location">Search Location</string>
-    <string name="personalproperty">Personal Property</string>
-    <string name="savedproperty">Saved Property</string>
+    <string name="myProperty">My Property</string>
+    <string name="interestedproperty">Interested Property</string>
     <string name="backgroundimage">backgroundImage</string>
     <string name="user">user</string>
     <string name="navigation">navigation</string>
@@ -39,7 +39,7 @@
     <string name="polygon_circle_transformation_circle_steps">dummy1</string>
     <string name="polygon_circle_transformation_circle_radius">ok</string>
     <string name="polygon_circle_transformation_click_map_instruction">okee</string>
-    <string name="_3_rooms">3+ Rooms</string>
+    <string name="_3_rooms">2+ Rooms</string>
     <string name="_2_rooms">2 Rooms</string>
     <string name="_1_room">1 Room</string>
     <string name="entire_flat">Flat</string>
@@ -71,21 +71,23 @@
     <string name="nwsc_plain">Nepal Water Supply Corp.</string>
     <string name="underground">Under
         Ground</string>
-    <string name="other">Other</string>
+    <string name="other">Other Sources</string>
     <string name="addimage">Add Image</string>
+    <string name="propertyImage">Property Image(s)</string>
     <string name="skip">Skip</string>
     <string name="propertysummary">Property Summary</string>
     <string name="furnished">Furnished</string>
-    <string name="semifurnished">Semi Furnished</string>
     <string name="verifyproperty">Publish Property</string>
     <string name="contactowner">Contact Owner</string>
     <string name="unlockcontact">Unlock Contact</string>
     <string name="nopermission">You have previously declined %1$s.\n\nGo to <b>Settings --> Permission</b>, approve the permission to upload images.</string>
     <string name="settings">Settings</string>
     <string name="login_pref">LoginPref</string>
+    <string name="at">AccessToken</string>
     <string name="view_map">View In Map</string>
     <string name="total_room">"%1$s %2$s"</string>
     <string name="rent_amount">"Rs %1$s"</string>
+    <string name="rent_amount_int">"Rs %1$d"</string>
     <string name="bothParking"><![CDATA[2 & 4 Wheeler]]></string>
     <string name="parking_2">2 Wheeler</string>
     <string name="parking_4">4  Wheeler</string>
@@ -95,7 +97,23 @@
     <string name="nowater">No Water Source</string>
     <string name="tnc">I declare all information provided is correct.\nI take responsibility for any wrong information.</string>
     <string name="viewall">View All</string>
-    <string name="date">%1$d/%2$d/%3$d</string>
-
+    <string name="date">%1$d-%2$d-%3$d</string>
+    <string name="date_possession">%1$s %2$d-%3$d-%4$d</string>
+    <string name="call_owner">Call Owner</string>
+    <string name="property_data_upload">Please Wait While We Upload Your Information…</string>
+    <string name="uploading_images">Uploding images (%1$d/%2$d)</string>
+    <string name="add_property">Add Property</string>
+    <string name="empty_property">No property added</string>
+    <string name="unable_to_fetch">Unable to fetch your data. Please try again</string>
+    <string name="edit_property">Edit Property</string>
+    <string name="approved">Verification Approved</string>
+    <string name="pending">Verification Pending</string>
+    <string name="disable_property">Disable Property</string>
+    <string name="delete">Delete</string>
+    <string name="disable">Disable</string>
+    <string name="delete_property">Delete Property</string>
+    <string name="delete_warning">Delete Property will remove this property from the database. You cannot repost it in future.\nIf you wish to hide the property but not delete, Select Disable Property in previous option.\n\nAre you sure to proceed?</string>
+    <string name="disable_warning">Disable Property will hide it from the buyers. You can re-enable it later.\n\nAre you sure you want to proceed?</string>
+    <string name="flatorhouse">Flat/House</string>
 
 </resources>
