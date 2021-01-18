@@ -1,22 +1,14 @@
 package com.subhechhu.bhadama.activity.addProperty.fragment;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.media.ExifInterface;
 import android.media.ThumbnailUtils;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -25,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -33,20 +24,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.subhechhu.bhadama.R;
 import com.subhechhu.bhadama.activity.MapActivity;
 import com.subhechhu.bhadama.activity.addProperty.AddPropertyActivity;
+import com.subhechhu.bhadama.activity.personalProperty.ModelPersonalProperty;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
-import java.util.zip.Inflater;
 
 public class PageFour extends Fragment {
 
@@ -70,6 +58,7 @@ public class PageFour extends Fragment {
     JSONArray imageArray;
 
     FragmentViewModel fragmentViewModel;
+    ModelPersonalProperty personalProperty;
 
     public static PageFour newInstance() {
         return new PageFour();
@@ -80,6 +69,9 @@ public class PageFour extends Fragment {
         super.onCreate(savedInstanceState);
 
         fragmentViewModel = ViewModelProviders.of(requireActivity()).get(FragmentViewModel.class);
+        if (getActivity() instanceof AddPropertyActivity) {
+            personalProperty = ((AddPropertyActivity) Objects.requireNonNull(getActivity())).getDataToEdit();
+        }
     }
 
     private void loadImage(String path, ImageView imageView) {
@@ -123,29 +115,40 @@ public class PageFour extends Fragment {
         cardview_holder = view.findViewById(R.id.cardview_holder);
 
         AppCompatButton button_verify_property = view.findViewById(R.id.button_verify_property);
+
+        if (personalProperty != null) {
+            button_verify_property.setText(R.string.updateProperty);
+        } else {
+            button_verify_property.setText(R.string.publishproperty);
+        }
+
         button_verify_property.setOnClickListener(view1 ->
         {
             try {
-                JSONObject mainObject = new JSONObject();
-                mainObject.put("roomSize", roomsize);
-                mainObject.put("roomtype", roomType);
-                mainObject.put("rent", rent);
-                mainObject.put("availableFrom", availableDate);
-                mainObject.put("place", location);
-                mainObject.put("furnishing", furnishing);
-                mainObject.put("tenants", tenants);
-                mainObject.put("waterSupplyOther", others);
-                mainObject.put("waterSupplyNwscc", nwsc);
-                mainObject.put("waterSupplyUnderground", underground);
-                mainObject.put("twoWheeler", wheel2);
-                mainObject.put("fourWheeler", wheel4);
-                JSONArray locationArray = new JSONArray();
-                locationArray.put(latitude);
-                locationArray.put(longitude);
-                mainObject.put("location", new JSONObject().put("coordinates", locationArray));
-                Log.e(TAG, "final request body: " + mainObject.toString());
+                if (personalProperty != null) {
+                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).dataFromFragment();
+                } else {
+                    JSONObject mainObject = new JSONObject();
+                    mainObject.put("roomSize", roomsize);
+                    mainObject.put("roomtype", roomType);
+                    mainObject.put("rent", rent);
+                    mainObject.put("availableFrom", availableDate);
+                    mainObject.put("place", location);
+                    mainObject.put("furnishing", furnishing);
+                    mainObject.put("tenants", tenants);
+                    mainObject.put("waterSupplyOther", others);
+                    mainObject.put("waterSupplyNwscc", nwsc);
+                    mainObject.put("waterSupplyUnderground", underground);
+                    mainObject.put("twoWheeler", wheel2);
+                    mainObject.put("fourWheeler", wheel4);
+                    JSONArray locationArray = new JSONArray();
+                    locationArray.put(latitude);
+                    locationArray.put(longitude);
+                    mainObject.put("location", new JSONObject().put("coordinates", locationArray));
+                    Log.e(TAG, "final request body: " + mainObject.toString());
 
-                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).uploadData(mainObject, imageArray);
+                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).uploadData(mainObject, imageArray);
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -264,11 +267,26 @@ public class PageFour extends Fragment {
                 Log.e(TAG, "render image called: " + imageArray.get(i));
                 View row = getLayoutInflater().inflate(R.layout.row_item_addimage_fourth, null);
                 ImageView imageview_background = row.findViewById(R.id.imageview_background);
+                ProgressBar progressBar_image = row.findViewById(R.id.progressBar_image);
                 Glide
                         .with(Objects.requireNonNull(getActivity()))
                         .asBitmap()
                         .load(imageArray.getString(i))
                         .centerCrop()
+                        .error(R.drawable.background_image_2)
+                        .listener(new RequestListener<Bitmap>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                                progressBar_image.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                                progressBar_image.setVisibility(View.GONE);
+                                return false;
+                            }
+                        })
                         .into(imageview_background);
 
                 cardview_holder.addView(row);

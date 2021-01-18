@@ -77,7 +77,8 @@
     <string name="skip">Skip</string>
     <string name="propertysummary">Property Summary</string>
     <string name="furnished">Furnished</string>
-    <string name="verifyproperty">Publish Property</string>
+    <string name="publishproperty">Publish Property</string>
+    <string name="updateProperty">Update Property</string>
     <string name="contactowner">Contact Owner</string>
     <string name="unlockcontact">Unlock Contact</string>
     <string name="nopermission">You have previously declined %1$s.\n\nGo to <b>Settings --> Permission</b>, approve the permission to upload images.</string>
@@ -115,5 +116,6 @@
     <string name="delete_warning">Delete Property will remove this property from the database. You cannot repost it in future.\nIf you wish to hide the property but not delete, Select Disable Property in previous option.\n\nAre you sure to proceed?</string>
     <string name="disable_warning">Disable Property will hide it from the buyers. You can re-enable it later.\n\nAre you sure you want to proceed?</string>
     <string name="flatorhouse">Flat/House</string>
+    <string name="hangon">Hang on. It\'s almost done.</string>
 
 </resources>

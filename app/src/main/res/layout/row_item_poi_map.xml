@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardBackgroundColor="@color/secondary_solid"
+    app:cardCornerRadius="10dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="10dp">
+<!--        <ImageView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="15dp"-->
+<!--            android:layout_weight="0.05"-->
+<!--            android:src="@drawable/ic_outline_arrow_back_ios_24"-->
+<!--            app:tint="#43E8E8E8"/>-->
+
+        <TextView
+            android:id="@+id/textView_place"
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Kist Hospital"
+            android:textSize="20sp"
+            android:textColor="@color/white_secondary"/>
+
+<!--        <ImageView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="15dp"-->
+<!--            android:layout_weight="0.05"-->
+<!--            android:src="@drawable/ic_outline_arrow_forward_ios_24"-->
+<!--            app:tint="#43E8E8E8"/>-->
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -15,10 +15,10 @@ import java.util.List;
 
 public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewHolder> {
 
-    private List<MapModel> mData;
-    private LayoutInflater mInflater;
-    private ViewPager2 viewPager2;
-    private Context context;
+    private final List<MapModel> mData;
+    private final LayoutInflater mInflater;
+    private final ViewPager2 viewPager2;
+    private final Context context;
 
     ViewPagerAdapter(Context context, List<MapModel> data, ViewPager2 viewPager2) {
         this.mInflater = LayoutInflater.from(context);

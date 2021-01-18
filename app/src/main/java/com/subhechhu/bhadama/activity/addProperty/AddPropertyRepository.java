@@ -10,8 +10,8 @@ import static com.subhechhu.bhadama.util.GetConstants.*;
 
 public class AddPropertyRepository implements APIRequest.FromAPI {
     MutableLiveData<String> responseAddPropertyData;
-    MutableLiveData<String> responsePostImage;;
-    MutableLiveData<String> updatePropertyData;;
+    MutableLiveData<String> responsePostImage;
+    MutableLiveData<String> updatePropertyData;
 
     public AddPropertyRepository() {
         responseAddPropertyData = new MutableLiveData<>();

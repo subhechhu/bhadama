@@ -84,6 +84,7 @@ public class PersonalPropertyListAdapter extends RecyclerView.Adapter<PersonalPr
                     .with(context)
                     .asBitmap()
                     .load(property.getImages().get(0))
+                    .error(R.drawable.background_image_2)
                     .into(holder.imageView_background);
             holder.imageView_background.setImageAlpha(100);
         }

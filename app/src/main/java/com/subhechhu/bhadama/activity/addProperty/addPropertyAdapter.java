@@ -8,7 +8,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.subhechhu.bhadama.activity.addProperty.fragment.PageFour;
 import com.subhechhu.bhadama.activity.addProperty.fragment.PageOne;
 import com.subhechhu.bhadama.activity.addProperty.fragment.PageThree;
-import com.subhechhu.bhadama.activity.addProperty.fragment.PageThreeNew;
 import com.subhechhu.bhadama.activity.addProperty.fragment.PageTwo;
 
 public class addPropertyAdapter extends FragmentStateAdapter {
@@ -26,7 +25,7 @@ public class addPropertyAdapter extends FragmentStateAdapter {
         } else if (position == 1) {
             return PageTwo.newInstance();
         } else if (position == 2) {
-            return PageThreeNew.newInstance();
+            return PageThree.newInstance();
         } else if (position == 3) {
             return PageFour.newInstance();
         }

@@ -115,9 +115,12 @@ public class PageOne extends Fragment {
                             e.printStackTrace();
                         }
                         if (getActivity() instanceof AddPropertyActivity) {
-                            if (personalProperty != null)
-                                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("rent", rent);
-                            else
+                            if (personalProperty != null) {
+                                if (!rent.equalsIgnoreCase(String.valueOf(personalProperty.getRent())))
+                                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("rent", rent);
+                                else
+                                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("rent");
+                            } else
                                 ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateRent(rent);
                         }
                     }
@@ -143,9 +146,12 @@ public class PageOne extends Fragment {
             }
 
             if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null)
-                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("roomSize", roomSize);
-                else
+                if (personalProperty != null) {
+                    if (!roomSize.equalsIgnoreCase(personalProperty.getRoomSize()))
+                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("roomSize", roomSize);
+                    else
+                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("roomSize");
+                } else
                     ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateRoomSize(roomSize);
             }
         });
@@ -167,9 +173,12 @@ public class PageOne extends Fragment {
                 }
             }
             if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null)
-                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("roomtype", roomType);
-                else
+                if (personalProperty != null) {
+                    if (roomType.equalsIgnoreCase(personalProperty.getRoomType()))
+                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("roomtype", roomType);
+                    else
+                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("roomType");
+                } else
                     ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateRoomType(roomType);
             }
         });
@@ -194,9 +203,12 @@ public class PageOne extends Fragment {
                         }
                         if (getActivity() instanceof AddPropertyActivity) {
                             if (personalProperty != null)
-                                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("availableFrom", dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1);
+                                if (!personalProperty.getAvailableFrom().equalsIgnoreCase(year1 + "-" + (monthOfYear + 1) + "-" + dayOfMonth))
+                                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("availableFrom", year1 + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                else
+                                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("availableFrom");
                             else
-                                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateAvailableDate(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1);
+                                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateAvailableDate(year1 + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                         }
                     }, year, month, day);
             datepicker.show();
@@ -230,7 +242,6 @@ public class PageOne extends Fragment {
             else
                 radio_group_rent_type.check(R.id.radio_house);
 
-//            Log.e(TAG,"personalProperty.getRent(): "+personalProperty.getRent());
             //Adding rent
             edittext_addprop_rent.setText("" + personalProperty.getRent());
 
@@ -268,7 +279,6 @@ public class PageOne extends Fragment {
                 ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateRoomSize(roomSize);
                 ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateRoomType(roomType);
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -299,32 +309,10 @@ public class PageOne extends Fragment {
                 }
             }
 
-            /*
-            *
-            *  property.put("roomSize", propertyJson.getString("roomSize"));
-                property.put("roomtype", propertyJson.getString("roomtype"));
-                property.put("rent", propertyJson.getString("rent"));
-                property.put("availableFrom", propertyJson.getString("availableFrom"));
-                property.put("place", propertyJson.getString("place"));
-                property.put("furnishing", propertyJson.getBoolean("furnishing"));
-                property.put("tenants", propertyJson.getString("tenants"));
-                property.put("waterSupplyOther", propertyJson.getBoolean("waterSupplyOther"));
-                property.put("waterSupplyNwscc", propertyJson.getBoolean("waterSupplyNwscc"));
-                property.put("waterSupplyUnderground", propertyJson.getBoolean("waterSupplyUnderground"));
-                property.put("twoWheeler", propertyJson.getBoolean("twoWheeler"));
-                property.put("fourWheeler", propertyJson.getBoolean("fourWheeler"));
-                property.put("location", propertyJson.getJSONObject("location"));
-            *
-            *
-            *
-            *
-            */
-
             if (getActivity() instanceof AddPropertyActivity) {
                 if (personalProperty != null) {
                     try {
                         ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("place", location);
-
                         JSONArray locationArray = new JSONArray();
                         locationArray.put(latitude);
                         locationArray.put(longitude);

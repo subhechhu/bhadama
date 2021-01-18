@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -21,7 +20,6 @@ import com.google.gson.Gson;
 import com.subhechhu.bhadama.AppController;
 import com.subhechhu.bhadama.R;
 import com.subhechhu.bhadama.activity.personalProperty.ModelPersonalProperty;
-import com.subhechhu.bhadama.util.GetConstants;
 import com.subhechhu.bhadama.util.Network;
 
 import org.json.JSONArray;
@@ -49,7 +47,8 @@ public class AddPropertyActivity extends AppCompatActivity {
     int currentPosition = 0;
     ViewPager2 vpPager;
     JSONArray imagesArray;
-    int currentUploadCount = -1;
+    int currentUploadCount = 0;
+    int imageArrayLength = 0;
 
     String roomSize = "", roomType = "", rentAmount = "", roomAvailableFrom = "", location = "";
     String furnishing = "Unfurnished", parking = "2 Wheeler", tenants = "AnyOne", waterSupply = "Nepal Water Supply Corp.";
@@ -60,6 +59,7 @@ public class AddPropertyActivity extends AppCompatActivity {
     ModelPersonalProperty personalProperty;
     AddPropertyViewModel addPropertyViewModel;
 
+    Map<String, Object> updateProperty;
     ArrayList<String> images;
 
     @Override
@@ -79,9 +79,12 @@ public class AddPropertyActivity extends AppCompatActivity {
         if (getIntent().getStringExtra("from") != null)
             from = getIntent().getStringExtra("from");
 
+        updateProperty = new HashMap<>();
+
         if (from != null && from.equalsIgnoreCase("PropertyDetailsSeller")) {
             gson = new Gson();
             personalProperty = gson.fromJson(getIntent().getStringExtra("data"), ModelPersonalProperty.class);
+            propertyId = personalProperty.getId();
         }
 
         floating_personalprop_next.setOnClickListener(view -> {
@@ -129,12 +132,11 @@ public class AddPropertyActivity extends AppCompatActivity {
 
         addPropertyViewModel = ViewModelProviders.of(this).get(AddPropertyViewModel.class);
         addPropertyViewModel.addPropertyResponse().observe(this, response -> {
-            Log.e(TAG, "============= ==== add property response: " + response);
+            Log.e(TAG, "add property response: " + response);
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 if (jsonObject.getInt("statusCode") == 201) {
                     propertyId = jsonObject.getJSONObject("body").getString("id");
-                    currentUploadCount++;
                     uploadImage();
                 } else {
                     makeToast("Something went wrong. Please Try Again...");
@@ -145,10 +147,10 @@ public class AddPropertyActivity extends AppCompatActivity {
         });
 
         addPropertyViewModel.getImageUploadResponse().observe(this, response -> {
-            Log.e(TAG, "============= ====  image upload response: " + response);
+            Log.e(TAG, "upload image response: " + response);
             try {
                 JSONObject jsonObject = new JSONObject(response);
-                if (jsonObject.getInt("statusCode") == 201 || jsonObject.getInt("statusCode") == 200    ) {
+                if (jsonObject.getInt("statusCode") == 201 || jsonObject.getInt("statusCode") == 200) {
                     images.add(jsonObject.getJSONObject("body").getString("data"));
                 } else {
                     makeToast("Something went wrong. Please Try Again...");
@@ -161,7 +163,7 @@ public class AddPropertyActivity extends AppCompatActivity {
         });
 
         addPropertyViewModel.getPropertyUpdateResponse().observe(this, response -> {
-            Log.e(TAG, "============= ====  update property response: " + response);
+            Log.e(TAG, "update property response: " + response);
             try {
                 JSONObject responseObject = new JSONObject(response);
                 if (responseObject.getInt("statusCode") == 200) {
@@ -170,36 +172,75 @@ public class AddPropertyActivity extends AppCompatActivity {
                         Intent intent = new Intent();
                         setResult(RESULT_OK, intent);
                     }
-                    Toast.makeText(this, "Property Created Successfully!", Toast.LENGTH_SHORT).show();
+                    if (personalProperty == null)
+                        makeToast("Property Created Successfully");
+                    else
+                        makeToast("Property Updated Successfully");
                     finish();
                 } else {
-                    Toast.makeText(this, "Something Went Wrong!!!", Toast.LENGTH_SHORT).show();
+                    makeToast("Something Went Wrong");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         });
     }
+
+
+    /*
+     *
+     *
+     *SEND
+     * &
+     * RECEIVE
+     * DATA TO & FROM
+     * FRAGMENT
+     *
+     *
+     */
 
     public ModelPersonalProperty getDataToEdit() {
         return personalProperty;
     }
-    public void putDataToEdit(String key, Object value){
 
+    public void putDataToEdit(String key, Object value) {
+        updateProperty.put(key, value);
     }
+
+    public void removeDataToEdit(String key) {
+        updateProperty.remove(key);
+    }
+
+
+    /*
+     *
+     *END OF
+     *
+     *SEND
+     * &
+     * RECEIVE
+     * DATA TO & FROM
+     * FRAGMENT
+     *
+     *
+     */
+
 
     private void uploadImage() {
         try {
-            if (currentUploadCount < imagesArray.length()) {
-                Log.e(TAG, "============= ==== image " + (currentUploadCount + 1) + ": " + imagesArray.getString(currentUploadCount));
-                textViewProgressDialogMessage.setText(getString(R.string.uploading_images, (currentUploadCount + 1), imagesArray.length()));
-                addPropertyViewModel.makeImageUploadRequest(UPLOAD_IMAGE, getImageInByte(imagesArray.getString(currentUploadCount)), UPLOAD_IMAGE_REQUESTCODE);
+            if (currentUploadCount < imageArrayLength) {
+                if (imagesArray.getString(currentUploadCount).startsWith("https://")) {
+                    images.add(imagesArray.getString(currentUploadCount));
+                    currentUploadCount++;
+                    uploadImage();
+                } else {
+                    textViewProgressDialogMessage.setText(getString(R.string.uploading_images, (currentUploadCount + 1), imageArrayLength));
+                    addPropertyViewModel.makeImageUploadRequest(UPLOAD_IMAGE, getImageInByte(imagesArray.getString(currentUploadCount)), UPLOAD_IMAGE_REQUESTCODE);
+                }
             } else {
-                if (imagesArray.length() > 0) {
-                    textViewProgressDialogMessage.setText("Hang on. It's almost done.");
-                    uploadImageToServer();
+                if (imageArrayLength > 0) {
+                    textViewProgressDialogMessage.setText(R.string.hangon);
+                    uploadEditedDataToServer();
                 } else {
                     progressDialog.dismiss();
                     if (from != null && from.equalsIgnoreCase("PropertyDetailsSeller")) {
@@ -208,7 +249,6 @@ public class AddPropertyActivity extends AppCompatActivity {
                     }
                     Toast.makeText(this, "Property Created Successfully!", Toast.LENGTH_SHORT).show();
                     finish();
-
                 }
             }
         } catch (Exception e) {
@@ -216,10 +256,15 @@ public class AddPropertyActivity extends AppCompatActivity {
         }
     }
 
-    private void uploadImageToServer() {
-        Map<String, Object> params = new HashMap<>();
-        params.put("images", images);
-        addPropertyViewModel.makePatchRequest(MODIFY_PROPERTY + propertyId, params, UPDATE_PROPERTY_REQUESTCODE);
+    private void uploadEditedDataToServer() {
+        try {
+            if (images != null && updateProperty != null)
+                updateProperty.put("images", images);
+            addPropertyViewModel.makePatchRequest(MODIFY_PROPERTY + propertyId, updateProperty, UPDATE_PROPERTY_REQUESTCODE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private byte[] getImageInByte(String filePath) {
@@ -234,6 +279,117 @@ public class AddPropertyActivity extends AppCompatActivity {
         }
         return null;
     }
+
+
+    /*
+     *
+     *EVENT TO
+     * NOTIFY
+     * CHANGES ARE
+     * MADE ON CLIENT SIDE
+     *
+     * NEXT, CALL API
+     *
+     *
+     */
+
+
+    public void dataFromFragment() {
+        imagesArray = (JSONArray) updateProperty.get("images");
+        try {
+            renderProgressDialog(getString(R.string.property_data_upload));
+            if (imagesArray != null && imagesArray.length() > 0) {
+                imageArrayLength = imagesArray.length();
+                if (imageArrayLength > 0)
+                    images = new ArrayList<>();
+                currentUploadCount = 0;
+                uploadImage();
+            } else {
+                uploadEditedDataToServer();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void uploadData(JSONObject propertyJson, JSONArray imagesArray) {
+        if (Network.getConnection(AppController.getContext())) {
+            this.imagesArray = imagesArray;
+            imageArrayLength = imagesArray.length();
+            if (imageArrayLength > 0)
+                images = new ArrayList<>();
+            try {
+                Map<String, Object> property = new HashMap<>();
+                property.put("roomSize", propertyJson.getString("roomSize"));
+                property.put("roomtype", propertyJson.getString("roomtype"));
+                property.put("rent", propertyJson.getString("rent"));
+                property.put("availableFrom", propertyJson.getString("availableFrom"));
+                property.put("place", propertyJson.getString("place"));
+                property.put("furnishing", propertyJson.getBoolean("furnishing"));
+                property.put("tenants", propertyJson.getString("tenants"));
+                property.put("waterSupplyOther", propertyJson.getBoolean("waterSupplyOther"));
+                property.put("waterSupplyNwscc", propertyJson.getBoolean("waterSupplyNwscc"));
+                property.put("waterSupplyUnderground", propertyJson.getBoolean("waterSupplyUnderground"));
+                property.put("twoWheeler", propertyJson.getBoolean("twoWheeler"));
+                property.put("fourWheeler", propertyJson.getBoolean("fourWheeler"));
+                property.put("location", propertyJson.getJSONObject("location"));
+
+                renderProgressDialog(getString(R.string.property_data_upload));
+                addPropertyViewModel.makePostRequest(VERIFY_PROPERTY, property, VERIFYPROPERTY_REQUESTCODE);
+
+                Log.e(TAG, "============= ==== image final full new data: " + property.toString());
+//                currentUploadCount = 0;
+//                uploadImage();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+    /*
+     *
+     * END OF
+     *
+     *EVENT TO
+     * NOTIFY
+     * CHANGES ARE
+     * MADE ON CLIENT SIDE
+     *
+     * NEXT, CALL API
+     *
+     *
+     */
+
+
+    private void renderProgressDialog(String message) {
+        progressDialog = new Dialog(this);
+        progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        progressDialog.setCancelable(true);
+        progressDialog.setContentView(R.layout.dialog_progress);
+
+        textViewProgressDialogMessage = progressDialog.findViewById(R.id.textView_message);
+        textViewProgressDialogMessage.setText(message);
+
+        progressDialog.show();
+    }
+
+
+    /*
+     *
+     *
+     * FRAGMENT ONE
+     * DATA VERIFICATION
+     * INCLUDES
+     * RENT, AVAILABLE DATE,
+     * LOCATION, ROOM DETAILS
+     *
+     * & toast
+     *
+     *
+     */
 
     public void makeToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -259,83 +415,21 @@ public class AddPropertyActivity extends AppCompatActivity {
         this.location = location;
     }
 
-    public void uploadData(JSONObject propertyJson, JSONArray imagesArray) {
-        if (Network.getConnection(AppController.getContext())) {
-            this.imagesArray = imagesArray;
-            if (imagesArray.length() > 0)
-                images = new ArrayList<>();
-            try {
-                Map<String, Object> property = new HashMap<>();
-                property.put("roomSize", propertyJson.getString("roomSize"));
-                property.put("roomtype", propertyJson.getString("roomtype"));
-                property.put("rent", propertyJson.getString("rent"));
-                property.put("availableFrom", propertyJson.getString("availableFrom"));
-                property.put("place", propertyJson.getString("place"));
-                property.put("furnishing", propertyJson.getBoolean("furnishing"));
-                property.put("tenants", propertyJson.getString("tenants"));
-                property.put("waterSupplyOther", propertyJson.getBoolean("waterSupplyOther"));
-                property.put("waterSupplyNwscc", propertyJson.getBoolean("waterSupplyNwscc"));
-                property.put("waterSupplyUnderground", propertyJson.getBoolean("waterSupplyUnderground"));
-                property.put("twoWheeler", propertyJson.getBoolean("twoWheeler"));
-                property.put("fourWheeler", propertyJson.getBoolean("fourWheeler"));
-                property.put("location", propertyJson.getJSONObject("location"));
 
-                Log.e(TAG, "============= ==== Property data: " + property.toString());
-                Log.e(TAG, "============= ==== Property image: " + imagesArray.toString());
+    /*
+     *END OF
+     *
+     * FRAGMENT ONE
+     * DATA VERIFICATION
+     * INCLUDES
+     * RENT, AVAILABLE DATE,
+     * LOCATION, ROOM DETAILS
+     *
+     * & toast
+     *
+     *
+     */
 
-                progressDialog = new Dialog(this);
-                progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                progressDialog.setCancelable(false);
-                progressDialog.setContentView(R.layout.dialog_progress);
-
-                textViewProgressDialogMessage = (TextView) progressDialog.findViewById(R.id.textView_message);
-                textViewProgressDialogMessage.setText(R.string.property_data_upload);
-
-                progressDialog.show();
-                if (from != null && from.equalsIgnoreCase("PropertyDetailsSeller"))
-                    makeToast("Edit Feature Yet To Implement");
-//                    addPropertyViewModel.makePostRequest(VERIFY_PROPERTY, property, VERIFYPROPERTY_REQUESTCODE); //TODO change it to edit profile.
-                else
-                    addPropertyViewModel.makePostRequest(VERIFY_PROPERTY, property, VERIFYPROPERTY_REQUESTCODE);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-//
-//    public void updateFurnishing(String furnishing) {
-//        this.furnishing = furnishing;
-//    }
-//
-//    public void updateTenant(String tenants) {
-//        this.tenants = tenants;
-//    }
-
-//    public void updateParking(boolean twowheeler, boolean fourwheeler) { //Check for bug adding the logs
-//        if (twowheeler)
-//            parking = "2 Wheeler";
-//        else if (fourwheeler)
-//            parking = "4 Wheeler";
-//        else if (twowheeler && fourwheeler)
-//            parking = "Bike & Car";
-//        else
-//            parking = "Not Available";
-//    }
-//
-//    public void updateWater(boolean checked, boolean checked1, boolean checked2) {
-//        if (checked)
-//            waterSupply = "Nepal Water Supply Corp.";
-//        else if (checked1)
-//            waterSupply = "Underground";
-//        else if (checked2)
-//            waterSupply = "Others";
-//        else if (checked && checked1 || checked1 && checked2 || checked2 && checked)
-//            waterSupply = "Multiple Source";
-//        else
-//            waterSupply = "None";
-//    }
 
     @Override
     public void onBackPressed() {
@@ -344,4 +438,5 @@ public class AddPropertyActivity extends AppCompatActivity {
         } else
             super.onBackPressed();
     }
+
 }

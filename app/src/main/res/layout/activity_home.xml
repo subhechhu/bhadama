@@ -41,11 +41,8 @@
                     android:layout_gravity="end"
                     android:layout_marginHorizontal="30dp"
                     android:layout_marginVertical="30dp"
-                    android:background="@color/transparent"
                     android:contentDescription="@string/user"
-                    android:scaleType="fitCenter"
-
-                    android:src="@drawable/profile" />
+                    android:background="@drawable/profile" />
 
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -143,8 +140,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="30dp"
                         android:layout_marginTop="10dp"
-                        android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView_rooms">
@@ -212,9 +209,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="30dp"
                         android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:gravity="center_vertical"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -276,10 +273,27 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/rounded_corner_primary"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="@string/search"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white_secondary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="invisible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -294,7 +308,7 @@
             android:layout_margin="16dp"
             fab:menu_animationDelayPerItem="55"
             fab:menu_backgroundColor="@android:color/transparent"
-            fab:menu_colorNormal="@color/secondary"
+            fab:menu_colorNormal="@color/secondary_solid_light"
             fab:menu_colorPressed="@color/primary"
             fab:menu_colorRipple="#99d4d4d4"
             fab:menu_fab_size="normal"
@@ -308,9 +322,9 @@
                 android:src="@drawable/ic_baseline_home_24"
                 app:fab_colorNormal="@color/primary_solid"
                 app:fab_colorPressed="@color/primary"
-                fab:fab_label="Personal Property"
+                fab:fab_label="@string/myProperty"
                 fab:fab_size="mini"
-                fab:menu_backgroundColor="@android:color/transparent"/>
+                fab:menu_backgroundColor="@android:color/transparent" />
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/floating_icon_saved"
@@ -319,10 +333,9 @@
                 android:src="@drawable/ic_baseline_save_24"
                 app:fab_colorNormal="@color/primary_solid"
                 app:fab_colorPressed="@color/primary"
-                fab:fab_label="Saved Property"
+                fab:fab_label="@string/interestedproperty"
                 fab:fab_size="mini"
-                fab:menu_backgroundColor="@android:color/transparent"
-                />
+                fab:menu_backgroundColor="@android:color/transparent" />
         </com.github.clans.fab.FloatingActionMenu>
     </RelativeLayout>
 </RelativeLayout>
