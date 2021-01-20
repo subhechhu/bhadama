@@ -29,16 +29,22 @@ import com.subhechhu.bhadama.R;
 import com.subhechhu.bhadama.activity.MapActivity;
 import com.subhechhu.bhadama.activity.addProperty.AddPropertyActivity;
 import com.subhechhu.bhadama.activity.personalProperty.ModelPersonalProperty;
+import com.subhechhu.bhadama.util.Network;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class PageFour extends Fragment {
 
     private static final String TAG = PageFour.class.getSimpleName();
+
+    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
     TextView textView_rooms_count, textView_rooms_rent, textView_rooms_furnishing, textView_availabledate,
             textView_rooms_location, textView_rooms_parking, textView_rooms_tenant, textView_rooms_water,
@@ -50,9 +56,9 @@ public class PageFour extends Fragment {
 
     String latitude = "", longitude = "", location = "", city = "", roomsize = "", rent = "",
             availableDate = "", roomType = "";
+    String dateCal;
     String tenants = "";
     boolean furnishing;
-    String image_1 = "", image_2 = "", image_3 = "", image_4 = "", image_5 = "", image_6 = "";
 
     boolean wheel2, wheel4, nwsc, underground, others;
     JSONArray imageArray;
@@ -124,34 +130,106 @@ public class PageFour extends Fragment {
 
         button_verify_property.setOnClickListener(view1 ->
         {
-            try {
-                if (personalProperty != null) {
-                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).dataFromFragment();
-                } else {
-                    JSONObject mainObject = new JSONObject();
-                    mainObject.put("roomSize", roomsize);
-                    mainObject.put("roomtype", roomType);
-                    mainObject.put("rent", rent);
-                    mainObject.put("availableFrom", availableDate);
-                    mainObject.put("place", location);
-                    mainObject.put("furnishing", furnishing);
-                    mainObject.put("tenants", tenants);
-                    mainObject.put("waterSupplyOther", others);
-                    mainObject.put("waterSupplyNwscc", nwsc);
-                    mainObject.put("waterSupplyUnderground", underground);
-                    mainObject.put("twoWheeler", wheel2);
-                    mainObject.put("fourWheeler", wheel4);
-                    JSONArray locationArray = new JSONArray();
-                    locationArray.put(latitude);
-                    locationArray.put(longitude);
-                    mainObject.put("location", new JSONObject().put("coordinates", locationArray));
-                    Log.e(TAG, "final request body: " + mainObject.toString());
+            if (Network.getConnection(getActivity())) {
+                try {
+                    if (personalProperty != null) {
+                        JSONObject mainObject = new JSONObject();
+                        if (!personalProperty.getRoomSize().equalsIgnoreCase(roomsize))
+                            mainObject.put("roomSize", roomsize);
+                        if (!personalProperty.getRoomType().equalsIgnoreCase(roomType))
+                            mainObject.put("roomtype", roomType);
+                        if (!String.valueOf(personalProperty.getRent()).equalsIgnoreCase(rent))
+                            mainObject.put("rent", rent);
+                        if (!personalProperty.getPlace().equalsIgnoreCase(location))
+                            mainObject.put("place", location);
+                        if (!personalProperty.getCity().equalsIgnoreCase(city))
+                            mainObject.put("city", city);
+                        if (!personalProperty.getFurnishing().equalsIgnoreCase("" + furnishing))
+                            mainObject.put("furnishing", furnishing);
+                        if (!personalProperty.getTenants().equalsIgnoreCase(tenants))
+                            mainObject.put("tenants", tenants);
+                        if (personalProperty.isWaterSupplyNwscc() != nwsc)
+                            mainObject.put("waterSupplyNwscc", nwsc);
+                        if (personalProperty.isWaterSupplyOther() != others)
+                            mainObject.put("waterSupplyOther", others);
+                        if (personalProperty.isWaterSupplyUnderground() != underground)
+                            mainObject.put("waterSupplyUnderground", underground);
+                        if (personalProperty.isTwoWheeler() != wheel2)
+                            mainObject.put("twoWheeler", wheel2);
+                        if (personalProperty.isFourWheeler() != wheel4)
+                            mainObject.put("fourWheeler", wheel4);
 
-                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).uploadData(mainObject, imageArray);
+                        if (personalProperty.getImages().size() != imageArray.length()) {
+                            for (int i = 0; i < imageArray.length(); i++) {
+                                if (!imageArray.getString(i).startsWith("https://")) {
+                                    mainObject.put("images", imageArray);
+                                    break;
+                                }
+                            }
+                            mainObject.put("images", imageArray);
+                        }
+
+
+                        Date date = inputFormat.parse(personalProperty.getAvailableFrom());
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(date);
+
+                        int year = cal.get(Calendar.YEAR);
+                        int month = cal.get(Calendar.MONTH);
+                        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                        dateCal = year + "-" + (month + 1) + "-" + day;
+                        if (!dateCal.equalsIgnoreCase(availableDate))
+                            mainObject.put("availableFrom", availableDate);
+
+                        try {
+                            if (!personalProperty.getLocation().getCoordinates().get(0).equalsIgnoreCase(latitude) &&
+                                    !personalProperty.getLocation().getCoordinates().get(1).equalsIgnoreCase(longitude)) {
+                                JSONArray locationArray = new JSONArray();
+                                locationArray.put(latitude);
+                                locationArray.put(longitude);
+                                mainObject.put("location", new JSONObject().put("coordinates", locationArray));
+                            }
+
+                        } catch (Exception e) {
+                            JSONArray locationArray = new JSONArray();
+                            locationArray.put(latitude);
+                            locationArray.put(longitude);
+                            mainObject.put("location", new JSONObject().put("coordinates", locationArray));
+                        }
+                        Log.e(TAG, "final request body edit: " + mainObject.toString());
+                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).uploadData(mainObject);
+                    } else {
+                        JSONObject mainObject = new JSONObject();
+                        mainObject.put("roomSize", roomsize);
+                        mainObject.put("roomtype", roomType);
+                        mainObject.put("rent", rent);
+                        mainObject.put("availableFrom", availableDate);
+                        mainObject.put("place", location);
+                        mainObject.put("city", city);
+                        mainObject.put("furnishing", furnishing);
+                        mainObject.put("tenants", tenants);
+                        mainObject.put("waterSupplyOther", others);
+                        mainObject.put("waterSupplyNwscc", nwsc);
+                        mainObject.put("waterSupplyUnderground", underground);
+                        mainObject.put("twoWheeler", wheel2);
+                        mainObject.put("fourWheeler", wheel4);
+
+                        JSONArray locationArray = new JSONArray();
+                        locationArray.put(latitude);
+                        locationArray.put(longitude);
+                        mainObject.put("location", new JSONObject().put("coordinates", locationArray));
+
+                        if (imageArray.length() > 0)
+                            mainObject.put("images", imageArray);
+
+                        Log.e(TAG, "final request body new: " + mainObject.toString());
+                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).uploadData(mainObject);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         });
 
@@ -191,7 +269,6 @@ public class PageFour extends Fragment {
             Log.e(TAG, "Fragment Three: " + response);
             try {
                 imageArray = response.getJSONArray("imageArray");
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -294,5 +371,11 @@ public class PageFour extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e(TAG,"onDestroy() PageFour.java");
     }
 }

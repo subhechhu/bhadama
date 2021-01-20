@@ -18,4 +18,20 @@ public class ModelLocation {
 	public String getType(){
 		return type;
 	}
+
+	public void setCoordinates(List<String> coordinates) {
+		this.coordinates = coordinates;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "ModelLocation{" +
+				"coordinates=" + coordinates +
+				", type='" + type + '\'' +
+				'}';
+	}
 }

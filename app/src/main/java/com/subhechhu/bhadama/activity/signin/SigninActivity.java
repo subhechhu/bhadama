@@ -1,5 +1,6 @@
 package com.subhechhu.bhadama.activity.signin;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -88,6 +89,7 @@ public class SigninActivity extends AppCompatActivity {
                     Log.e(TAG, "accesstoken: " + responseBody.getString("accessToken"));
                     AppController.storePreferenceBoolean(AppController.getContext().getString(R.string.login_pref), true);
                     AppController.storePreferenceString(AppController.getContext().getString(R.string.at), responseBody.getString("accessToken"));
+                    AppController.storePreferenceString(AppController.getContext().getString(R.string.phone), editText_phone.getText().toString());
                     startActivity(new Intent(SigninActivity.this, HomeActivity.class));
                     finish();
                 } else {
@@ -263,7 +265,7 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     private void renderOTPDialog() {
-        View view = getLayoutInflater().inflate(R.layout.dialog_otp, null);
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.dialog_otp, null);
         otpDialog = new BottomSheetDialog(SigninActivity.this, R.style.dialogStyle);
         otpDialog.setContentView(view);
         otpDialog.setCancelable(false);
@@ -294,7 +296,7 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     private void renderNewPin() {
-        View view = getLayoutInflater().inflate(R.layout.dialog_newpin, null);
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.dialog_newpin, null);
         newPinDialog = new BottomSheetDialog(SigninActivity.this, R.style.dialogStyle);
         newPinDialog.setContentView(view);
         newPinDialog.setCancelable(false);

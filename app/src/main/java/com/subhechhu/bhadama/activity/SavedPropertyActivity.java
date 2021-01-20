@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.subhechhu.bhadama.activity.location.LocationModel;
-import com.subhechhu.bhadama.activity.propertyDetailsBuyer.PropertyDetailsBuyer;
+import com.subhechhu.bhadama.activity.propertyDetailsBuyer.PropertyDetailsBuyerActivity;
 import com.subhechhu.bhadama.adapter.SavedPropertyListAdapter;
 import com.subhechhu.bhadama.R;
 
@@ -74,7 +74,7 @@ public class SavedPropertyActivity extends AppCompatActivity implements SavedPro
 
     @Override
     public void onClick(LocationModel modelWord, ImageView imageView, int house) {
-        Intent intent = new Intent(SavedPropertyActivity.this, PropertyDetailsBuyer.class);
+        Intent intent = new Intent(SavedPropertyActivity.this, PropertyDetailsBuyerActivity.class);
         intent.putExtra("img", house);
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(SavedPropertyActivity.this, imageView, "backgroundImage");

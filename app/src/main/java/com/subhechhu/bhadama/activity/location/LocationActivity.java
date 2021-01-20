@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.subhechhu.bhadama.R;
 import com.subhechhu.bhadama.activity.addProperty.fragment.PageOne;
 import com.subhechhu.bhadama.util.GetConstants;
+import com.subhechhu.bhadama.util.Network;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -114,7 +115,8 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    locationViewModel.makeGetRequest(editable.toString(), GetConstants.LOGIN_REQUESTCODE);
+                                    if (Network.getConnection(LocationActivity.this))
+                                        locationViewModel.makeGetRequest(editable.toString(), GetConstants.LOGIN_REQUESTCODE);
                                 }
                             });
                         }
@@ -132,7 +134,6 @@ public class LocationActivity extends AppCompatActivity implements LocationAdapt
 
     @Override
     public void onClick(LocationModel modelWord) {
-//        Toast.makeText(LocationActivity.this, modelWord.getDisplayPlace(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
         intent.putExtra("locationObject", modelWord);
         intent.putExtra("city", modelWord.getAddress().getCity());

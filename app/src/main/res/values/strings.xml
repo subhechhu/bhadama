@@ -87,6 +87,7 @@
     <string name="at">AccessToken</string>
     <string name="view_map">View In Map</string>
     <string name="total_room">"%1$s %2$s"</string>
+    <string name="rent_amt">"%1$d"</string>
     <string name="rent_amount">"Rs %1$s"</string>
     <string name="rent_amount_int">"Rs %1$d"</string>
     <string name="bothParking"><![CDATA[2 & 4 Wheeler]]></string>
@@ -117,5 +118,9 @@
     <string name="disable_warning">Disable Property will hide it from the buyers. You can re-enable it later.\n\nAre you sure you want to proceed?</string>
     <string name="flatorhouse">Flat/House</string>
     <string name="hangon">Hang on. It\'s almost done.</string>
+    <string name="room_details">Room Details</string>
+    <string name="processing_image">Processing Image</string>
+    <string name="enter_new_pin">Enter new Pin</string>
+    <string name="all_fields_are_mandatory">All fields are mandatory</string>
 
 </resources>

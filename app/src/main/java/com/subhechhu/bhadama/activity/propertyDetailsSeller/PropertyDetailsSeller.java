@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -33,17 +32,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import me.relex.circleindicator.CircleIndicator3;
-
 import static com.subhechhu.bhadama.util.GetConstants.*;
 import static com.subhechhu.bhadama.util.GetUrl.*;
 
 public class PropertyDetailsSeller extends AppCompatActivity {
     private static final String TAG = PropertyDetailsSeller.class.getSimpleName();
     public static final int ADD_ACTIVITY = 12129;
-
-    ViewPager2 vpPager;
-    CircleIndicator3 indicator;
 
     TextView textView_rent, textView_date, textView_tenant, textView_furnishing, textView_parking,
             textView_watersupply, textview_postedDate, textview_approvalStatus, textView_room,
@@ -64,7 +58,6 @@ public class PropertyDetailsSeller extends AppCompatActivity {
     Gson gson;
 
     PropertyDetailsViewModel propertyDetailsViewModel;
-    ModelPersonalProperty personalProperty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,32 +84,12 @@ public class PropertyDetailsSeller extends AppCompatActivity {
         });
 
         gson = new Gson();
-        personalProperty = gson.fromJson(getIntent().getStringExtra("data"), ModelPersonalProperty.class);
+        ModelPersonalProperty personalProperty = gson.fromJson(getIntent().getStringExtra("data"), ModelPersonalProperty.class);
 
         ImageView imageView_property_image = findViewById(R.id.imageView_property_image);
         imageView_property_image.setImageResource(getIntent().getIntExtra("img", 0));
 
         cal = Calendar.getInstance();
-
-        try {
-            Date date = inputFormat.parse(personalProperty.getAvailableFrom());
-            cal.setTime(date);
-
-            posessionDay = cal.get(Calendar.DAY_OF_MONTH);
-            posessionMonth = cal.get(Calendar.MONTH);
-            posessionYear = cal.get(Calendar.YEAR);
-
-            date = inputFormat.parse(personalProperty.getCreatedAt());
-            cal.setTime(date);
-
-            postedDay = cal.get(Calendar.DAY_OF_MONTH);
-            postedMonth = cal.get(Calendar.MONTH);
-            postedYear = cal.get(Calendar.YEAR);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         textView_rent = findViewById(R.id.textView_rent);
         textView_date = findViewById(R.id.textView_date);
@@ -137,14 +110,38 @@ public class PropertyDetailsSeller extends AppCompatActivity {
         floating_disableButton = findViewById(R.id.floating_icon_disable);
         floating_editButton = findViewById(R.id.floating_icon_edit);
 
+        renderUI(personalProperty);
+    }
+
+    private void renderUI(ModelPersonalProperty personalProperty) {
+        try {
+            Date date = inputFormat.parse(personalProperty.getAvailableFrom());
+            cal.setTime(date);
+
+            posessionDay = cal.get(Calendar.DAY_OF_MONTH);
+            posessionMonth = cal.get(Calendar.MONTH);
+            posessionYear = cal.get(Calendar.YEAR);
+
+            date = inputFormat.parse(personalProperty.getCreatedAt());
+            cal.setTime(date);
+
+            postedDay = cal.get(Calendar.DAY_OF_MONTH);
+            postedMonth = cal.get(Calendar.MONTH);
+            postedYear = cal.get(Calendar.YEAR);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         floating_deleteButton.setOnClickListener(view -> {
             floating_icon.close(true);
-            renderActionDialog("delete");
+            renderActionDialog("delete", personalProperty);
         });
 
         floating_disableButton.setOnClickListener(view -> {
             floating_icon.close(true);
-            renderActionDialog("disable");
+            renderActionDialog("disable", personalProperty);
         });
 
         floating_editButton.setOnClickListener(view -> {
@@ -213,20 +210,10 @@ public class PropertyDetailsSeller extends AppCompatActivity {
 
         textview_approvalStatus.setCompoundDrawablePadding(25);
 
-//        vpPager = findViewById(R.id.vpPager);
-
-//        adapterViewPager = new PoiAdapter(this);
-//        vpPager.setAdapter(adapterViewPager);
-//
-//        indicator = findViewById(R.id.indicator);
-//        indicator.setViewPager(vpPager);
-//
-//        adapterViewPager.registerAdapterDataObserver(indicator.getAdapterDataObserver());
-
     }
 
-    public void renderActionDialog(String action) {
-        View view = getLayoutInflater().inflate(R.layout.dialog_action, null);
+    public void renderActionDialog(String action, ModelPersonalProperty personalProperty) {
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.dialog_action, null);
         actionDialog = new BottomSheetDialog(PropertyDetailsSeller.this, R.style.dialogStyle);
         actionDialog.setContentView(view);
         actionDialog.setCancelable(false);
@@ -249,7 +236,10 @@ public class PropertyDetailsSeller extends AppCompatActivity {
 
         button_proceed.setOnClickListener(view12 -> {
             if (isConnected()) {
-                propertyDetailsViewModel.makeDeleteRequest(MODIFY_PROPERTY + personalProperty.getId(), DELETE_PROPERTY_REQUESTCODE);
+                if (action.equalsIgnoreCase("delete"))
+                    propertyDetailsViewModel.makeDeleteRequest(MODIFY_PROPERTY + personalProperty.getId(), DELETE_PROPERTY_REQUESTCODE);
+                else
+                    Toast.makeText(PropertyDetailsSeller.this, "Coming Soon!!", Toast.LENGTH_SHORT).show();
                 progressBar_action.setVisibility(View.VISIBLE);
             }
         });
@@ -258,8 +248,12 @@ public class PropertyDetailsSeller extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == ADD_ACTIVITY)
-            finish();
+        if (resultCode == RESULT_OK && requestCode == ADD_ACTIVITY) {
+            ModelPersonalProperty pp = gson.fromJson(data.getStringExtra("data_new"), ModelPersonalProperty.class);
+
+            Log.e(TAG, "personal property activity for result: " + pp.toString());
+            renderUI(pp);
+        }
     }
 
     private boolean isConnected() {

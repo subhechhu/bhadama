@@ -36,6 +36,7 @@
         android:textAlignment="viewEnd"
         android:textColor="@color/primary"
         android:textSize="14sp"
+        android:visibility="invisible"
         app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="parent" />
 

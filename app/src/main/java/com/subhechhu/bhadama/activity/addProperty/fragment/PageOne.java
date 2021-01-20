@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
@@ -23,8 +24,8 @@ import com.subhechhu.bhadama.activity.location.LocationActivity;
 import com.subhechhu.bhadama.activity.location.LocationModel;
 import com.subhechhu.bhadama.R;
 import com.subhechhu.bhadama.activity.personalProperty.ModelPersonalProperty;
+import com.subhechhu.bhadama.util.Network;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,7 +50,6 @@ public class PageOne extends Fragment {
 
     RadioGroup radio_group_rooms, radio_group_rent_type;
 
-    boolean roomSelected = false;
     String rent = "", latitude = "", longitude = "", location = "", city = "", roomSize = "", roomType = "", availableDate = "";
     Timer timer;
 
@@ -75,6 +75,7 @@ public class PageOne extends Fragment {
             personalProperty = ((AddPropertyActivity) Objects.requireNonNull(getActivity())).getDataToEdit();
         }
         cal = Calendar.getInstance();
+        fieldObject = new JSONObject();
     }
 
     @Override
@@ -109,19 +110,9 @@ public class PageOne extends Fragment {
                     public void run() {
                         Log.e(TAG, "text changed");
                         try {
-                            if (fieldObject != null)
-                                fieldObject.put("rent", rent);
+                            fieldObject.put("rent", rent);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                        }
-                        if (getActivity() instanceof AddPropertyActivity) {
-                            if (personalProperty != null) {
-                                if (!rent.equalsIgnoreCase(String.valueOf(personalProperty.getRent())))
-                                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("rent", rent);
-                                else
-                                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("rent");
-                            } else
-                                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateRent(rent);
                         }
                     }
                 }, 1500);
@@ -137,32 +128,20 @@ public class PageOne extends Fragment {
                 roomSize = "2";
             else
                 roomSize = "2+";
-            if (fieldObject != null) {
-                try {
-                    fieldObject.put("roomsize", roomSize);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null) {
-                    if (!roomSize.equalsIgnoreCase(personalProperty.getRoomSize()))
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("roomSize", roomSize);
-                    else
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("roomSize");
-                } else
-                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateRoomSize(roomSize);
+            try {
+                fieldObject.put("roomsize", roomSize);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         });
 
         radio_group_rent_type.setOnCheckedChangeListener((radioGroup, i) -> {
             if (edittext_addprop_rent.hasFocus())
                 edittext_addprop_rent.clearFocus();
-            roomSelected = true;
+
             if (i == R.id.radio_flat)
                 roomType = "Flat";
-            else
+            else if (i == R.id.radio_house)
                 roomType = "House";
 
             if (fieldObject != null) {
@@ -171,15 +150,6 @@ public class PageOne extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
-            if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null) {
-                    if (roomType.equalsIgnoreCase(personalProperty.getRoomType()))
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("roomtype", roomType);
-                    else
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("roomType");
-                } else
-                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateRoomType(roomType);
             }
         });
 
@@ -193,22 +163,13 @@ public class PageOne extends Fragment {
             datepicker = new DatePickerDialog(getActivity(),
                     (view1, year1, monthOfYear, dayOfMonth) -> {
                         availableDate = year1 + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                        button_addprop_date.setText(getString(R.string.date, year1, monthOfYear + 1, dayOfMonth));
+                        button_addprop_date.setText(getString(R.string.date, year1, (monthOfYear + 1), dayOfMonth));
                         if (fieldObject != null) {
                             try {
                                 fieldObject.put("date", availableDate);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                        }
-                        if (getActivity() instanceof AddPropertyActivity) {
-                            if (personalProperty != null)
-                                if (!personalProperty.getAvailableFrom().equalsIgnoreCase(year1 + "-" + (monthOfYear + 1) + "-" + dayOfMonth))
-                                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("availableFrom", year1 + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-                                else
-                                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("availableFrom");
-                            else
-                                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateAvailableDate(year1 + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                         }
                     }, year, month, day);
             datepicker.show();
@@ -217,7 +178,8 @@ public class PageOne extends Fragment {
         button_addprop_location.setOnClickListener(view13 -> {
             if (edittext_addprop_rent.hasFocus())
                 edittext_addprop_rent.clearFocus();
-            startActivityForResult(new Intent(getActivity(), LocationActivity.class), LOCATION_ACTIVITY);
+            if (Network.getConnection(getActivity()))
+                startActivityForResult(new Intent(getActivity(), LocationActivity.class), LOCATION_ACTIVITY);
         });
         return view;
     }
@@ -239,11 +201,11 @@ public class PageOne extends Fragment {
             //Selecting Room Type
             if (personalProperty.getRoomType().equalsIgnoreCase("Flat"))
                 radio_group_rent_type.check(R.id.radio_flat);
-            else
+            else if (personalProperty.getRoomType().equalsIgnoreCase("House"))
                 radio_group_rent_type.check(R.id.radio_house);
 
             //Adding rent
-            edittext_addprop_rent.setText("" + personalProperty.getRent());
+            edittext_addprop_rent.setText(getString(R.string.rent_amt, personalProperty.getRent()));
 
             //Adding date
             try {
@@ -267,17 +229,11 @@ public class PageOne extends Fragment {
                 latitude = personalProperty.getLocation().getCoordinates().get(0);
                 longitude = personalProperty.getLocation().getCoordinates().get(1);
                 city = personalProperty.getCity();
-                availableDate = posessionYear + "-" + posessionMonth + 1 + "-" + posessionDay;
+                availableDate = posessionYear + "-" + (posessionMonth + 1) + "-" + posessionDay;
                 location = personalProperty.getPlace();
                 rent = "" + personalProperty.getRent();
                 roomSize = personalProperty.getRoomSize();
                 roomType = personalProperty.getRoomType();
-
-                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateRent(rent);
-                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateLocation(location, city, latitude, longitude);
-                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateAvailableDate(availableDate);
-                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateRoomSize(roomSize);
-                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateRoomType(roomType);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -309,35 +265,19 @@ public class PageOne extends Fragment {
                 }
             }
 
-            if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null) {
-                    try {
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("place", location);
-                        JSONArray locationArray = new JSONArray();
-                        locationArray.put(latitude);
-                        locationArray.put(longitude);
-
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("location", new JSONObject().put("coordinates", locationArray));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                } else
-                    ((AddPropertyActivity) Objects.requireNonNull(getActivity())).updateLocation(location, city, latitude, longitude);
-            }
             button_addprop_location.setText(location);
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
+    public boolean nextClickListener() {
         if (edittext_addprop_rent.hasFocus())
             edittext_addprop_rent.clearFocus();
-        if (fieldObject == null) {
+        if (rent.isEmpty() || availableDate.isEmpty() || location.isEmpty()) {
+            Toast.makeText(getActivity(), "Fields cannot be selected", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
             try {
                 Log.e(TAG, rent + "\n" + availableDate + "\n" + roomSize + "\n" + location + "\n" + city + "\n" + latitude + "\n" + longitude + "\n" + roomType);
-                fieldObject = new JSONObject();
                 fieldObject.put("rent", rent);
                 fieldObject.put("date", availableDate);
                 fieldObject.put("roomsize", roomSize);
@@ -350,8 +290,9 @@ public class PageOne extends Fragment {
                 Log.e(TAG, "exception: " + e.getMessage());
                 e.printStackTrace();
             }
+            Log.d(TAG, "fragment one on pause data" + fieldObject);
+            fragmentViewModel.postFragmentOneData(fieldObject);
+            return true;
         }
-        Log.d(TAG, "fragment one on pause data" + fieldObject);
-        fragmentViewModel.postFragmentOneData(fieldObject);
     }
 }

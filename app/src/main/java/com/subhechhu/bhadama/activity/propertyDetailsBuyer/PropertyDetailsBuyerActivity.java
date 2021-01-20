@@ -11,7 +11,7 @@ import com.subhechhu.bhadama.R;
 
 import me.relex.circleindicator.CircleIndicator3;
 
-public class PropertyDetailsBuyer extends AppCompatActivity {
+public class PropertyDetailsBuyerActivity extends AppCompatActivity {
     ViewPager2 vpPager;
     PoiAdapter adapterViewPager;
     CircleIndicator3 indicator;

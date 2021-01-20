@@ -5,14 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.subhechhu.bhadama.activity.location.LocationModel;
 import com.subhechhu.bhadama.R;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +32,6 @@ public class SavedPropertyListAdapter extends RecyclerView.Adapter<SavedProperty
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textView_location;
-        LinearLayout linear_locationCard;
-
         ImageView imageView_background, imageView_fav, imageView_call;
 
         MyViewHolder(View view) {
@@ -42,13 +39,11 @@ public class SavedPropertyListAdapter extends RecyclerView.Adapter<SavedProperty
             imageView_background = view.findViewById(R.id.imageView_property_image);
             imageView_fav = view.findViewById(R.id.imageView_fav);
             imageView_call = view.findViewById(R.id.imageView_call);
-//            textView_location = view.findViewById(R.id.address);
-//            linear_locationCard = view.findViewById(R.id.linear_locationCard);
         }
     }
 
     @Override
-    public SavedPropertyListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SavedPropertyListAdapter.@NotNull MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row_item_savedproperty, parent, false);
         return new MyViewHolder(itemView);

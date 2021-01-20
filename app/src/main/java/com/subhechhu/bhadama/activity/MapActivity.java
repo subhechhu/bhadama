@@ -2,7 +2,6 @@ package com.subhechhu.bhadama.activity;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -78,12 +77,7 @@ public class MapActivity extends AppCompatActivity {
         ImageView button_map_close = findViewById(R.id.button_map_close);
         TextView textview_map_textview = findViewById(R.id.textview_map_textview);
 
-        button_map_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        button_map_close.setOnClickListener(view -> finish());
 
         textview_map_textview.setText(location);
 
@@ -94,14 +88,11 @@ public class MapActivity extends AppCompatActivity {
                 .build();
 
 
-        floating_map_center.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mapboxMap != null) {
-                    mapboxMap.animateCamera(CameraUpdateFactory
-                            .newCameraPosition(position), 3000);
-                    mapboxMap.setCameraPosition(position);
-                }
+        floating_map_center.setOnClickListener(view -> {
+            if (mapboxMap != null) {
+                mapboxMap.animateCamera(CameraUpdateFactory
+                        .newCameraPosition(position), 3000);
+                mapboxMap.setCameraPosition(position);
             }
         });
 
@@ -111,7 +102,7 @@ public class MapActivity extends AppCompatActivity {
         mapView.getMapAsync(mapboxMap -> mapboxMap.setStyle(new Style.Builder().fromUri(Style.MAPBOX_STREETS)
                 .withImage(CIRCLE_CENTER_ICON_ID,
                         Objects.requireNonNull(BitmapUtils.getBitmapFromDrawable(
-                                ContextCompat.getDrawable(this, R.drawable.red_marker))))
+                                ContextCompat.getDrawable(this, R.drawable.marker_red))))
                 .withSource(new GeoJsonSource(CIRCLE_CENTER_SOURCE_ID,
                         Feature.fromGeometry(markerPoint)))
                 .withSource(new GeoJsonSource(TURF_CALCULATION_FILL_LAYER_GEOJSON_SOURCE_ID))

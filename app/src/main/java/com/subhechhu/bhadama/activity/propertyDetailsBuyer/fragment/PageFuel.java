@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.subhechhu.bhadama.R;
-import com.subhechhu.bhadama.activity.propertyDetailsBuyer.PropertyDetailsBuyer;
+import com.subhechhu.bhadama.activity.propertyDetailsBuyer.PropertyDetailsBuyerActivity;
 import com.subhechhu.bhadama.activity.propertyDetailsBuyer.map.POIMapActivity;
 import com.subhechhu.bhadama.util.GetUrl;
 
@@ -33,6 +33,7 @@ public class PageFuel extends Fragment {
     POIViewModel poiViewModel;
     String position;
     LatLng latLng;
+    TextView textView_viewInMap;
 
     JSONArray locationArray;
 
@@ -44,7 +45,7 @@ public class PageFuel extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        latLng = ((PropertyDetailsBuyer) Objects.requireNonNull(getActivity())).getLatLong();
+        latLng = ((PropertyDetailsBuyerActivity) Objects.requireNonNull(getActivity())).getLatLong();
         position = "&lat=" + latLng.getLatitude() + "&lon=" + latLng.getLongitude();
 
         poiViewModel = ViewModelProviders.of(this).get(POIViewModel.class);
@@ -53,7 +54,7 @@ public class PageFuel extends Fragment {
         locationArray = new JSONArray();
         try {
             JSONObject object = new JSONObject();
-            object.put("lat",latLng.getLatitude() );
+            object.put("lat", latLng.getLatitude());
             object.put("lon", latLng.getLongitude());
             object.put("name", "Interested Property");
             locationArray.put(object);
@@ -66,18 +67,17 @@ public class PageFuel extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         parentView = inflater.inflate(R.layout.fragment_poi, container, false);
-        parentView.findViewById(R.id.textView_viewinmap).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (locationArray.length() > 0) {
-                    Intent intent = new Intent(getActivity(), POIMapActivity.class);
-                    intent.putExtra("lat", latLng.getLatitude());
-                    intent.putExtra("lon", latLng.getLongitude());
-                    intent.putExtra("locationArray", locationArray.toString());
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "No Petrol Pump Nearby", Toast.LENGTH_SHORT).show();
-                }
+
+        textView_viewInMap = parentView.findViewById(R.id.textView_viewinmap);
+        textView_viewInMap.setOnClickListener(view -> {
+            if (locationArray.length() > 0) {
+                Intent intent = new Intent(getActivity(), POIMapActivity.class);
+                intent.putExtra("lat", latLng.getLatitude());
+                intent.putExtra("lon", latLng.getLongitude());
+                intent.putExtra("locationArray", locationArray.toString());
+                startActivity(intent);
+            } else {
+                Toast.makeText(getActivity(), "No Petrol Pump Nearby", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -93,6 +93,7 @@ public class PageFuel extends Fragment {
         poiViewModel.getPOIRepository().observe(this, response -> {
             progressBar.setVisibility(View.INVISIBLE);
             if (response != null) {
+                textView_viewInMap.setVisibility(View.VISIBLE);
                 for (int i = 0; i < response.size(); i++) {
                     if (i == 5)
                         break;

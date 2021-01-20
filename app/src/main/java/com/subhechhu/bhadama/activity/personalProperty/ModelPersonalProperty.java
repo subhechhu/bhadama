@@ -20,6 +20,110 @@ public class ModelPersonalProperty {
 	@SerializedName("rent")
 	private int rent;
 
+	public void setFurnishing(String furnishing) {
+		this.furnishing = furnishing;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setFacing(String facing) {
+		this.facing = facing;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
+
+	public void setRent(int rent) {
+		this.rent = rent;
+	}
+
+	public void setAvailableFrom(String availableFrom) {
+		this.availableFrom = availableFrom;
+	}
+
+	public void setAdvance(int advance) {
+		this.advance = advance;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
+
+	public void setRoomSize(String roomSize) {
+		this.roomSize = roomSize;
+	}
+
+	public void setV(int v) {
+		V = v;
+	}
+
+	public void setWaterSupplyOther(boolean waterSupplyOther) {
+		this.waterSupplyOther = waterSupplyOther;
+	}
+
+	public void setSqft(String sqft) {
+		this.sqft = sqft;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public void setRoomType(String roomType) {
+		this.roomType = roomType;
+	}
+
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public void setWaterSupplyUnderground(boolean waterSupplyUnderground) {
+		this.waterSupplyUnderground = waterSupplyUnderground;
+	}
+
+	public void setTenants(String tenants) {
+		this.tenants = tenants;
+	}
+
+	public void setImages(List<String> images) {
+		this.images = images;
+	}
+
+	public void setWaterSupplyNwscc(boolean waterSupplyNwscc) {
+		this.waterSupplyNwscc = waterSupplyNwscc;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public void setTwoWheeler(boolean twoWheeler) {
+		this.twoWheeler = twoWheeler;
+	}
+
+	public void setLocation(ModelLocation location) {
+		this.location = location;
+	}
+
+	public void setFourWheeler(boolean fourWheeler) {
+		this.fourWheeler = fourWheeler;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
 	@SerializedName("availableFrom")
 	private String availableFrom;
 

@@ -2,6 +2,7 @@ package com.subhechhu.bhadama.activity.addProperty.fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -9,11 +10,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,10 +32,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.subhechhu.bhadama.BuildConfig;
 import com.subhechhu.bhadama.R;
 import com.subhechhu.bhadama.activity.addProperty.AddPropertyActivity;
 import com.subhechhu.bhadama.activity.personalProperty.ModelPersonalProperty;
+import com.subhechhu.bhadama.util.ImageUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,11 +45,11 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -61,10 +67,13 @@ public class PageThree extends Fragment implements PageThreeImageAdapter.ClickLi
     View parentView;
 
     RecyclerView recyclerview_images;
-    AppCompatButton button_addImage;
-    int imageCount = 0;
+    FloatingActionButton button_addImage;
+
+    ExecutorService executor;
+    Handler handler;
 
     String currentPhotoPath;
+    boolean canAdd = true;
 
     PageThreeImageAdapter pageThreeImageAdapter;
     JSONArray imageList;
@@ -76,6 +85,7 @@ public class PageThree extends Fragment implements PageThreeImageAdapter.ClickLi
     ModelPersonalProperty personalProperty;
     JSONObject fieldObject;
     JSONArray imageJsonArray;
+    Dialog progressDialog;
 
     public static PageThree newInstance() {
         return new PageThree();
@@ -96,7 +106,7 @@ public class PageThree extends Fragment implements PageThreeImageAdapter.ClickLi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        parentView = inflater.inflate(R.layout.fragment_pagethree_new, container, false);
+        parentView = inflater.inflate(R.layout.fragment_pagethree, container, false);
         button_addImage = parentView.findViewById(R.id.button_addImage);
         recyclerview_images = parentView.findViewById(R.id.recyclerview_images);
 
@@ -107,7 +117,9 @@ public class PageThree extends Fragment implements PageThreeImageAdapter.ClickLi
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        button_addImage.setOnClickListener(view -> renderPickerDialog());
+        button_addImage.setOnClickListener(view -> {
+            renderPickerDialog();
+        });
 
         recyclerview_images.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerview_images.setHasFixedSize(true);
@@ -130,6 +142,7 @@ public class PageThree extends Fragment implements PageThreeImageAdapter.ClickLi
 
         AppCompatButton button_camera = view.findViewById(R.id.button_camera);
         AppCompatButton button_gallery = view.findViewById(R.id.button_gallery);
+        AppCompatButton button_whatsapp = view.findViewById(R.id.button_whatsapp);
 
         button_camera.setOnClickListener(viewCamera -> {
             cameraPicker = true;
@@ -162,6 +175,28 @@ public class PageThree extends Fragment implements PageThreeImageAdapter.ClickLi
                 }
             }
         });
+
+        button_whatsapp.setOnClickListener(view1 -> {
+            if (appInstalledOrNot()) {
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=+918892096825"));
+//                startActivity(intent);
+                makeToast("We will reach you via Whatsapp");
+                dialog.dismiss();
+            } else {
+                makeToast("Whatsapp not available");
+            }
+        });
+    }
+
+    private boolean appInstalledOrNot() {
+        PackageManager pm = requireActivity().getPackageManager();
+        try {
+            pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @SuppressLint("QueryPermissionsNeeded")
@@ -172,7 +207,7 @@ public class PageThree extends Fragment implements PageThreeImageAdapter.ClickLi
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-                Toast.makeText(getActivity(), "Check your camera and try again", Toast.LENGTH_SHORT).show();
+                makeToast("Check your camera and try again");
             }
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(getActivity(), "com.subhechhu.fileprovider", photoFile);
@@ -195,22 +230,68 @@ public class PageThree extends Fragment implements PageThreeImageAdapter.ClickLi
 
         if ((requestCode == REQUEST_IMAGE_CAPTURE || requestCode == REQUEST_IMAGE_GALLERY) && resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
+
+                renderProgressDialog();
+
                 Log.e(TAG, "current photo path from camera: " + currentPhotoPath);
+
+                File file = new File(currentPhotoPath);
+                int file_size = Integer.parseInt(String.valueOf(file.length() / 1024)); //in kb
+
+                Log.e(TAG, "image size from the camera: " + file_size);
+
+                executor = Executors.newSingleThreadExecutor();
+                handler = new Handler(Looper.getMainLooper());
+
+                executor.execute(() -> {
+                    currentPhotoPath = new ImageUtils().getCompressedBitmap(getActivity(), currentPhotoPath);
+                    handler.post(() -> {
+                        addImageToJsonArray(0, currentPhotoPath, imageList);
+                    });
+                });
             }
             if (requestCode == REQUEST_IMAGE_GALLERY) {
+
+                renderProgressDialog();
+
                 currentPhotoPath = getImagePath(data);
                 Log.e(TAG, "current photo path from gallery: " + getImagePath(data));
+
+                File file = new File(getImagePath(data));
+                int file_size = Integer.parseInt(String.valueOf(file.length() / 1024)); //in kb
+
+                Log.e(TAG, "image size from the gallery: " + file_size);
+
+                executor = Executors.newSingleThreadExecutor();
+                handler = new Handler(Looper.getMainLooper());
+
+                executor.execute(() -> {
+                    currentPhotoPath = new ImageUtils().getCompressedBitmap(getActivity(), currentPhotoPath);
+                    handler.post(() -> {
+                        addImageToJsonArray(0, currentPhotoPath, imageList);
+                    });
+                });
+
             }
-
-            imageList.put(currentPhotoPath);
-            Log.e(TAG, "imageList on adding: " + imageList);
-
-            if (personalProperty != null)
-                ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("images", imageList);
-
-            pageThreeImageAdapter.showList(imageList);
         }
     }
+
+    public void addImageToJsonArray(int pos, String imagePath, JSONArray jsonArr) {
+        try {
+            for (int i = jsonArr.length(); i > pos; i--) {
+                jsonArr.put(i, jsonArr.get(i - 1));
+            }
+            jsonArr.put(pos, imagePath);
+            Log.e(TAG, "imageList on adding: " + jsonArr);
+            if (jsonArr.length() == 6)
+                button_addImage.setVisibility(View.INVISIBLE);
+            pageThreeImageAdapter.showList(jsonArr);
+            progressDialog.dismiss();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private String getImagePath(Intent data) {
         if (data != null) {
@@ -234,7 +315,7 @@ public class PageThree extends Fragment implements PageThreeImageAdapter.ClickLi
 
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CANADA).format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        String imageFileName = "Bhadama_" + timeStamp + "_";
         File storageDir = Objects.requireNonNull(getActivity()).getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
@@ -324,9 +405,30 @@ public class PageThree extends Fragment implements PageThreeImageAdapter.ClickLi
         });
     }
 
+    private void renderProgressDialog() {
+        progressDialog = new Dialog(getActivity());
+        progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        progressDialog.setCancelable(false);
+        progressDialog.setContentView(R.layout.dialog_progress);
+
+        TextView textViewProgressDialogMessage = progressDialog.findViewById(R.id.textView_message);
+        textViewProgressDialogMessage.setText(R.string.processing_image);
+
+        progressDialog.show();
+    }
+
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onClick(JSONArray imageList) {
+        this.imageList = imageList;
+        if (imageList.length() <= 6)
+            button_addImage.setVisibility(View.VISIBLE);
+    }
+
+    public void makeToast(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void nextClickListener() {
         if (!cameraPicker && !galleryPicker) {
             imageJsonArray = new JSONArray();
             try {
@@ -337,18 +439,14 @@ public class PageThree extends Fragment implements PageThreeImageAdapter.ClickLi
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             Log.d(TAG, "fragment three on pause data" + fieldObject);
             fragmentViewModel.postFragmentThreeData(fieldObject);
         }
     }
 
     @Override
-    public void onClick(JSONArray imageList) {
-        this.imageList = imageList;
-        Log.e(TAG, "imageList on deleting: " + imageList);
-
-        if (personalProperty != null)
-            ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("images", imageList);
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e(TAG,"onDestroy() PageThree.java");
     }
 }

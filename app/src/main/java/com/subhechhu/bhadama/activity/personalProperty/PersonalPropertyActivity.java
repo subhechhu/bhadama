@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,8 +33,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.subhechhu.bhadama.activity.addProperty.AddPropertyActivity;
 import com.subhechhu.bhadama.R;
+import com.subhechhu.bhadama.activity.propertyDetailsSeller.PropertyDetailsSeller;
 import com.subhechhu.bhadama.util.GetConstants;
 import com.subhechhu.bhadama.util.GetUrl;
+import com.subhechhu.bhadama.util.Network;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -44,7 +47,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class PersonalPropertyActivity extends AppCompatActivity {
-    private static final String TAG = PersonalPropertyActivity.class.getSimpleName();
+//    private static final String TAG = PersonalPropertyActivity.class.getSimpleName();
 
     FloatingActionButton floating_personalprop_add;
     ImageView imageView_arrow;
@@ -111,7 +114,6 @@ public class PersonalPropertyActivity extends AppCompatActivity {
                     JSONArray data = bodyObject.getJSONArray("data");
 
                     if (data.length() == 0) {
-                        //TODO remove recycler view too, else it shows one item in case of deletion
                         textView_personalprop_message.setVisibility(View.VISIBLE);
                         textView_personalprop_message.setText(R.string.empty_property);
                         imageView_arrow.setVisibility(View.VISIBLE);
@@ -130,7 +132,6 @@ public class PersonalPropertyActivity extends AppCompatActivity {
                         personalPropertyListAdapter.showList(personalPropertyList);
                     }
                     floating_personalprop_add.setVisibility(View.VISIBLE);
-
                 } else {
                     textView_personalprop_message.setVisibility(View.VISIBLE);
                     textView_personalprop_message.setText(R.string.unable_to_fetch);
@@ -144,9 +145,22 @@ public class PersonalPropertyActivity extends AppCompatActivity {
         });
     }
 
+    public void propertyDetailView(ModelPersonalProperty modelPersonalProperty, ImageView imageView) {
+        Gson gson = new Gson();
+        String propertyJson = gson.toJson(modelPersonalProperty);
+        Intent intent = new Intent(this, PropertyDetailsSeller.class);
+        intent.putExtra("img", R.drawable.icon_main);
+        intent.putExtra("data", propertyJson);
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this, imageView, "backgroundImage");
+        startActivity(intent, options.toBundle());
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
-        personalPropertyViewModel.makeGetRequest(GetUrl.GET_PROPERTIES, GetConstants.GET_PROPERTIES_REQUESTCODE);
+        if (Network.getConnection(this))
+            personalPropertyViewModel.makeGetRequest(GetUrl.GET_PROPERTIES, GetConstants.GET_PROPERTIES_REQUESTCODE);
     }
 }

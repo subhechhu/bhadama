@@ -23,26 +23,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         app:elevation="5dp"
         android:src="@drawable/ic_outline_arrow_forward_ios_24"
         app:backgroundTint="@color/white_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/secondary" />
+        app:tint="@color/secondary_solid_light" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_personalprop_previous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         app:elevation="5dp"
         android:src="@drawable/ic_outline_arrow_back_ios_24"
         app:backgroundTint="@color/white_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:visibility="invisible"
-        app:tint="@color/secondary" />
+        app:tint="@color/secondary_solid_light" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

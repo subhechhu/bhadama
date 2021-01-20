@@ -158,30 +158,27 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        button_signup_proceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!edittext_signup_name.getText().toString().isEmpty() &&
-                        verifyEmail(edittext_signup_email) &&
-                        verifyReenterPin(edittext_signup_reenterpin, edittext_signup_pin) &&
-                        verifyPin(edittext_signup_pin, edittext_signup_reenterpin, button_signup_reenterpin_verify) &&
-                        verifyphone(edittext_signup_phone)) {
+        button_signup_proceed.setOnClickListener(view -> {
+            if (!edittext_signup_name.getText().toString().isEmpty() &&
+                    verifyEmail(edittext_signup_email) &&
+                    verifyReenterPin(edittext_signup_reenterpin, edittext_signup_pin) &&
+                    verifyPin(edittext_signup_pin, edittext_signup_reenterpin, button_signup_reenterpin_verify) &&
+                    verifyphone(edittext_signup_phone)) {
 
-                    if (Network.getConnection(AppController.getContext())) {
-                        progressBar_signup.setVisibility(View.VISIBLE);
-                        button_signup_proceed.setEnabled(false);
+                if (Network.getConnection(AppController.getContext())) {
+                    progressBar_signup.setVisibility(View.VISIBLE);
+                    button_signup_proceed.setEnabled(false);
 
-                        Map<String, Object> users = new HashMap<>();
-                        users.put("username", edittext_signup_name.getText().toString());
-                        users.put("phone_number", edittext_signup_phone.getText().toString());
-                        users.put("pin", edittext_signup_pin.getText().toString());
-                        users.put("email", edittext_signup_email.getText().toString());
+                    Map<String, Object> users = new HashMap<>();
+                    users.put("username", edittext_signup_name.getText().toString());
+                    users.put("phone_number", edittext_signup_phone.getText().toString());
+                    users.put("pin", edittext_signup_pin.getText().toString());
+                    users.put("email", edittext_signup_email.getText().toString());
 
-                        signupViewModel.getPostRequest(GetUrl.SIGNUP, users, GetConstants.SIGNUP_REQUESTCODE);
-                    }
-                } else {
-                    Toast.makeText(SignupActivity.this, "All fields must be entered", Toast.LENGTH_LONG).show();
+                    signupViewModel.getPostRequest(GetUrl.SIGNUP, users, GetConstants.SIGNUP_REQUESTCODE);
                 }
+            } else {
+                Toast.makeText(SignupActivity.this, "All fields must be entered", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -212,28 +209,19 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-    public void proceedSignup() {
-        View view = getLayoutInflater().inflate(R.layout.dialog_otp, null);
-        BottomSheetDialog dialog = new BottomSheetDialog(SignupActivity.this, R.style.dialogStyle);
-        dialog.setContentView(view);
-        dialog.setCancelable(false);
-        dialog.show();
-
-        EditText editText_otp = view.findViewById(R.id.edittext_otp_otp);
-        view.findViewById(R.id.button_otp_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        view.findViewById(R.id.button_otp_verify).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Toast.makeText(SignupActivity.this,"OTP entered is "+editText_otp.getText().toString(),Toast.LENGTH_SHORT).show();
-                Toast.makeText(SignupActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-                finish();
-            }
-        });
-    }
+//    public void proceedSignup() {
+//        View view = getLayoutInflater().inflate(R.layout.dialog_otp, null);
+//        BottomSheetDialog dialog = new BottomSheetDialog(SignupActivity.this, R.style.dialogStyle);
+//        dialog.setContentView(view);
+//        dialog.setCancelable(false);
+//        dialog.show();
+//
+////        EditText editText_otp = view.findViewById(R.id.edittext_otp_otp);
+//        view.findViewById(R.id.button_otp_close).setOnClickListener(view1 -> dialog.dismiss());
+//        view.findViewById(R.id.button_otp_verify).setOnClickListener(view12 -> {
+//            Toast.makeText(SignupActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+//            dialog.dismiss();
+//            finish();
+//        });
+//    }
 }

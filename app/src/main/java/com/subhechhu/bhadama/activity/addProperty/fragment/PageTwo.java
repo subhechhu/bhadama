@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -76,14 +77,6 @@ public class PageTwo extends Fragment {
             }
             twoWheeler = cbtwoWheeler.isChecked();
 
-            if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null)
-                    if (!personalProperty.isTwoWheeler() == twoWheeler)
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("twoWheeler", twoWheeler);
-                    else {
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("twoWheeler");
-                    }
-            }
         });
 
         cbfourWheeler.setOnClickListener(view12 -> {
@@ -95,14 +88,6 @@ public class PageTwo extends Fragment {
 
             fourWheeler = cbfourWheeler.isChecked();
 
-            if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null)
-                    if (!personalProperty.isFourWheeler() == fourWheeler)
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("fourWheeler", fourWheeler);
-                    else {
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("fourWheeler");
-                    }
-            }
         });
 
         cbnwsc.setOnClickListener(view14 -> {
@@ -112,14 +97,6 @@ public class PageTwo extends Fragment {
                 exception.printStackTrace();
             }
             nwsc = cbnwsc.isChecked();
-            if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null)
-                    if (!personalProperty.isWaterSupplyNwscc() == nwsc)
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("waterSupplyNwscc", nwsc);
-                    else {
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("waterSupplyNwscc");
-                    }
-            }
         });
 
         cbunderground.setOnClickListener(view13 -> {
@@ -129,14 +106,6 @@ public class PageTwo extends Fragment {
                 exception.printStackTrace();
             }
             underground = cbunderground.isChecked();
-            if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null)
-                    if (!personalProperty.isWaterSupplyUnderground() == underground)
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("waterSupplyUnderground", underground);
-                    else {
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("waterSupplyUnderground");
-                    }
-            }
         });
 
         cbother.setOnClickListener(view15 -> {
@@ -146,15 +115,6 @@ public class PageTwo extends Fragment {
                 exception.printStackTrace();
             }
             other = cbother.isChecked();
-
-            if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null)
-                    if (!personalProperty.isWaterSupplyOther() == other)
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("waterSupplyOther", other);
-                    else {
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("waterSupplyOther");
-                    }
-            }
         });
 
         radio_group_furnishing.setOnCheckedChangeListener((radioGroup, i) -> {
@@ -170,16 +130,6 @@ public class PageTwo extends Fragment {
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-            if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null) {
-                    if (!personalProperty.getFurnishing().equalsIgnoreCase("" + furnishingBool))
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("furnishing", furnishingBool);
-                    else {
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("furnishing");
-                    }
-                }
-            }
-
         });
 
         radio_group_rent_tenant.setOnCheckedChangeListener((radioGroup, i) -> {
@@ -193,15 +143,6 @@ public class PageTwo extends Fragment {
                 fieldObject.put("tenants", tenants);
             } catch (Exception exception) {
                 exception.printStackTrace();
-            }
-
-            if (getActivity() instanceof AddPropertyActivity) {
-                if (personalProperty != null)
-                    if (!personalProperty.getTenants().equalsIgnoreCase("" + tenants))
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).putDataToEdit("tenants", tenants);
-                    else {
-                        ((AddPropertyActivity) Objects.requireNonNull(getActivity())).removeDataToEdit("tenants");
-                    }
             }
         });
         return view;
@@ -250,9 +191,7 @@ public class PageTwo extends Fragment {
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
+    public void nextClickListener() {
         try {
             fieldObject.put("furnishing", furnishingBool);
             fieldObject.put("tenants", tenants);
@@ -265,7 +204,6 @@ public class PageTwo extends Fragment {
             Log.e(TAG, "exception: " + e.getMessage());
             e.printStackTrace();
         }
-        Log.d(TAG, "fragment two on pause data" + fieldObject);
         fragmentViewModel.postFragmentTwoData(fieldObject);
     }
 }

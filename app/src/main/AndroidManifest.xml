@@ -34,7 +34,7 @@
         </provider>
 
         <activity android:name=".activity.propertyDetailsSeller.PropertyDetailsSeller" />
-        <activity android:name=".activity.propertyDetailsBuyer.PropertyDetailsBuyer" />
+        <activity android:name=".activity.propertyDetailsBuyer.PropertyDetailsBuyerActivity" />
         <activity android:name=".activity.propertyDetailsBuyer.map.POIMapActivity" />
         <activity android:name=".activity.addProperty.AddPropertyActivity" />
         <activity android:name=".activity.SavedPropertyActivity" />

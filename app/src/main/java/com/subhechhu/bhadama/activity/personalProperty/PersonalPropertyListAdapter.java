@@ -1,23 +1,25 @@
 package com.subhechhu.bhadama.activity.personalProperty;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.subhechhu.bhadama.R;
-import com.subhechhu.bhadama.activity.propertyDetailsSeller.PropertyDetailsSeller;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,15 +40,20 @@ public class PersonalPropertyListAdapter extends RecyclerView.Adapter<PersonalPr
     static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView_background, imageView_verified;
         TextView textView_rent, textView_location;
+        ProgressBar progressBar_image;
         CardView parentlayout;
+
+        String imageUrl;
 
         MyViewHolder(View view) {
             super(view);
+            imageUrl = "";
             parentlayout = view.findViewById(R.id.parentlayout);
             imageView_background = view.findViewById(R.id.imageView_property_image);
             imageView_verified = view.findViewById(R.id.imageView_verified);
             textView_rent = view.findViewById(R.id.textView_rent);
             textView_location = view.findViewById(R.id.textView_location);
+            progressBar_image = view.findViewById(R.id.progressBar_image);
         }
     }
 
@@ -79,30 +86,35 @@ public class PersonalPropertyListAdapter extends RecyclerView.Adapter<PersonalPr
         } else {
             holder.imageView_verified.setImageResource(R.drawable.ic_baseline_report_24);
         }
-        if (propertyList.get(position).getImages().size() != 0) {
-            Glide
-                    .with(context)
-                    .asBitmap()
-                    .load(property.getImages().get(0))
-                    .error(R.drawable.background_image_2)
-                    .into(holder.imageView_background);
-            holder.imageView_background.setImageAlpha(100);
+
+        if (property.getImages().size() > 0) {
+            holder.imageUrl = property.getImages().get(0);
+        } else {
+            holder.imageUrl = "";
         }
-        else
-            holder.imageView_background.setImageAlpha(80);
+
+        Glide
+                .with(context)
+                .asBitmap()
+                .load(holder.imageUrl)
+                .error(R.drawable.background_image_2)
+                .listener(new RequestListener<Bitmap>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                        holder.progressBar_image.setVisibility(View.INVISIBLE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                        holder.progressBar_image.setVisibility(View.INVISIBLE);
+                        return false;
+                    }
+                })
+                .into(holder.imageView_background);
 
         holder.parentlayout.setOnClickListener(view -> {
-            Gson gson = new Gson();
-            String propertyJson = gson.toJson(propertyList.get(position));
-            Intent intent = new Intent(context, PropertyDetailsSeller.class);
-//            if (propertyList.get(position).getImages().size() != 0)
-            intent.putExtra("img", R.drawable.icon_main);
-//            else
-//                intent.putExtra("img", propertyList.get(position).getImages().get(0));
-            intent.putExtra("data", propertyJson);
-            ActivityOptionsCompat options = ActivityOptionsCompat.
-                    makeSceneTransitionAnimation((Activity) context, holder.imageView_background, "backgroundImage");
-            context.startActivity(intent, options.toBundle());
+            ((PersonalPropertyActivity)context).propertyDetailView(propertyList.get(position),holder.imageView_background);
         });
     }
 

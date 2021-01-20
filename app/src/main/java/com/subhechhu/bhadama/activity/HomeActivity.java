@@ -3,7 +3,6 @@ package com.subhechhu.bhadama.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +29,6 @@ public class HomeActivity extends AppCompatActivity {
     private static final int LOCATION_ACTIVITY = 4534;
 
     AppCompatButton button_home_search, button_home_location;
-//    LinearLayout linearButton_first, linearButton_second;
 
     FloatingActionButton floating_icon_personal, floating_icon_saved;
     FloatingActionMenu floating_icon;
@@ -64,52 +62,38 @@ public class HomeActivity extends AppCompatActivity {
         checkbox_entireFlat = findViewById(R.id.checkbox_flat);
         checkbox_entireHouse = findViewById(R.id.checkbox_house);
 
-        textView_view_in_map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Network.getConnection(HomeActivity.this)) {
-                    if (button_home_location.getText().equals("Add Location")) {
-                        Toast.makeText(HomeActivity.this, "Add location to view in maps", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Intent intent = new Intent(HomeActivity.this, MapActivity.class);
-                        intent.putExtra("lat", latitude);
-                        intent.putExtra("lon", longitude);
-                        intent.putExtra("location", location);
-                        startActivity(intent);
-                    }
+        textView_view_in_map.setOnClickListener(view -> {
+            if (hasInternet()) {
+                if (button_home_location.getText().equals("Add Location")) {
+                    Toast.makeText(HomeActivity.this, "Add location to view in maps", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(HomeActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HomeActivity.this, MapActivity.class);
+                    intent.putExtra("lat", latitude);
+                    intent.putExtra("lon", longitude);
+                    intent.putExtra("location", location);
+                    startActivity(intent);
                 }
             }
         });
 
-        button_home_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Network.getConnection(HomeActivity.this)) {
-                    startActivityForResult(new Intent(HomeActivity.this, LocationActivity.class), LOCATION_ACTIVITY);
-                } else {
-                    Toast.makeText(HomeActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
-                }
+        button_home_location.setOnClickListener(view -> {
+            if (hasInternet()) {
+                startActivityForResult(new Intent(HomeActivity.this, LocationActivity.class), LOCATION_ACTIVITY);
             }
         });
 
 
-        floating_icon_personal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                floating_icon.close(true);
+        floating_icon_personal.setOnClickListener(view -> {
+            floating_icon.close(true);
+            if (hasInternet()) {
                 Intent intent = new Intent(HomeActivity.this, PersonalPropertyActivity.class);
-                intent.putExtra("Message", "You Have Not Added Property");
-                intent.putExtra("from", "personal");
                 startActivity(intent);
             }
         });
 
-        floating_icon_saved.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                floating_icon.close(true);
+        floating_icon_saved.setOnClickListener(view -> {
+            floating_icon.close(true);
+            if (hasInternet()) {
                 Intent intent = new Intent(HomeActivity.this, SavedPropertyActivity.class);
                 intent.putExtra("Message", "");
                 intent.putExtra("from", "saved");
@@ -117,37 +101,34 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        button_home_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        button_home_search.setOnClickListener(view -> {
 //                if (button_home_location.getText().equals("Add Location")) {
 //                    Toast.makeText(HomeActivity.this, "Add location to search", Toast.LENGTH_SHORT).show();
 //                } else {
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("lat", latitude);
-                    jsonObject.put("long", longitude);
-                    jsonObject.put("city", city);
-                    jsonObject.put("maxAmount", minAmount);
-                    jsonObject.put("minAmount", minAmount);
-                    jsonObject.put("room1", checkbox_room1.isChecked());
-                    jsonObject.put("room2", checkbox_room2.isChecked());
-                    jsonObject.put("room3", checkbox_room3.isChecked());
-                    jsonObject.put("entireFlat", checkbox_entireFlat.isChecked());
-                    jsonObject.put("entireHouse", checkbox_entireHouse.isChecked());
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("lat", latitude);
+                jsonObject.put("long", longitude);
+                jsonObject.put("city", city);
+                jsonObject.put("maxAmount", minAmount);
+                jsonObject.put("minAmount", minAmount);
+                jsonObject.put("room1", checkbox_room1.isChecked());
+                jsonObject.put("room2", checkbox_room2.isChecked());
+                jsonObject.put("room3", checkbox_room3.isChecked());
+                jsonObject.put("entireFlat", checkbox_entireFlat.isChecked());
+                jsonObject.put("entireHouse", checkbox_entireHouse.isChecked());
 
-                    Log.e(TAG, "json to server: " + jsonObject.toString());
+                Log.e(TAG, "json to server: " + jsonObject.toString());
 
-                    Intent intent = new Intent(HomeActivity.this, SavedPropertyActivity.class);
-                    intent.putExtra("Message", "");
-                    intent.putExtra("from", "saved");
-                    startActivity(intent);
+                Intent intent = new Intent(HomeActivity.this, SavedPropertyActivity.class);
+                intent.putExtra("Message", "");
+                intent.putExtra("from", "saved");
+                startActivity(intent);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-//                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+//                }
         });
 
         DoubleValueSeekBarView rangeSeekbar = findViewById(R.id.home_range_seekbar);
@@ -171,7 +152,10 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    public boolean hasInternet() {
+        return Network.getConnection(this);
     }
 
     @Override
@@ -180,7 +164,6 @@ public class HomeActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == LOCATION_ACTIVITY) {
             LocationModel locationObject = data.getExtras().getParcelable("locationObject");
             Log.e(TAG, "homemodel word: " + locationObject.toString());
-//            Log.e(TAG,"homemodel city: "+data.getStringExtra("city"));
             city = data.getStringExtra("city");
             if (data.getStringExtra("city") == null) {
                 city = "Nepal";

@@ -48,7 +48,7 @@
                     android:id="@+id/edittext_home_location"
                     android:layout_width="0dp"
                     android:layout_height="?actionBarSize"
-                    android:layout_weight="0.95"
+                    android:layout_weight="0.9"
                     android:autofillHints="Mobile number"
                     android:background="@drawable/rounded_corner"
                     android:hint="@string/phone"
@@ -64,8 +64,8 @@
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_weight="0.05"
-                    android:background="@drawable/ic_baseline_invalid_24"
+                    android:layout_weight="0.055"
+                    android:background="@drawable/ic_baseline_error_24"
                     android:visibility="invisible" />
             </LinearLayout>
 
@@ -81,7 +81,7 @@
                     android:id="@+id/edittext_login_pin"
                     android:layout_width="0dp"
                     android:layout_height="?actionBarSize"
-                    android:layout_weight="0.95"
+                    android:layout_weight="0.9"
                     android:autofillHints="Mobile number"
                     android:background="@drawable/rounded_corner"
                     android:hint="@string/pin"
@@ -97,8 +97,8 @@
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_weight="0.05"
-                    android:background="@drawable/ic_baseline_invalid_24"
+                    android:layout_weight="0.055"
+                    android:background="@drawable/ic_baseline_error_24"
                     android:visibility="invisible" />
             </LinearLayout>
 
